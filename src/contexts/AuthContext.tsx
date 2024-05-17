@@ -3,6 +3,7 @@ import { AuthContextType } from '../@types/authContext';
 
 export const AuthContext: React.Context<AuthContextType | null> =
   createContext<AuthContextType | null>(null);
+
 export function AuthContextProvider({
   children,
 }: {
