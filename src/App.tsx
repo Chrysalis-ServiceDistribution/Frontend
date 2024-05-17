@@ -1,10 +1,19 @@
-import './App.css';
+import { Theme } from '@radix-ui/themes';
 import Router from './pages/Router/Router';
+import { AuthContextProvider } from './contexts/AuthContext';
+
+import './reset.css';
+import '@radix-ui/themes/styles.css';
+import './index.css';
 
 function App() {
   return (
     <>
-      <Router />
+      <Theme accentColor="mint" appearance="dark" className="background">
+        <AuthContextProvider>
+          <Router />
+        </AuthContextProvider>
+      </Theme>
     </>
   );
 }

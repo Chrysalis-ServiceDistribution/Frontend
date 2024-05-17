@@ -1,3 +1,9 @@
+import { Box } from '@radix-ui/themes';
+
 export default function Search() {
-  return <>Search</>;
+  return (
+    <Box width="512px">
+      Search
+    </Box>
+  )
 }
