@@ -13,7 +13,7 @@ export default function CreateService() {
 
   function setFormField(index: number, field: FormFieldType) {
     setFormFields((prevFormFields) => {
-      let next = [...prevFormFields];
+      const next = [...prevFormFields];
       next.splice(index, 1, field);
       return next;
     });
@@ -39,7 +39,7 @@ export default function CreateService() {
 
   function deleteField(index: number) {
     setFormFields((prevFormFields) => {
-      let next = [...prevFormFields];
+      const next = [...prevFormFields];
       next.splice(index, 1);
       return next;
     });
@@ -52,7 +52,7 @@ export default function CreateService() {
     const curr = formFields[index];
     const above = formFields[index - 1];
     setFormFields((prevFormFields) => {
-      let next = [...prevFormFields];
+      const next = [...prevFormFields];
       next.splice(index - 1, 2, curr, above);
       return next;
     });
@@ -65,7 +65,7 @@ export default function CreateService() {
     const curr = formFields[index];
     const below = formFields[index + 1];
     setFormFields((prevFormFields) => {
-      let next = [...prevFormFields];
+      const next = [...prevFormFields];
       next.splice(index, 2, below, curr);
       return next;
     });

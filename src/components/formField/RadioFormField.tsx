@@ -1,7 +1,6 @@
-import { Box, Flex, TextField, Button } from '@radix-ui/themes';
+import { Flex, TextField, Button } from '@radix-ui/themes';
 import { RadioField, FormFieldType } from './formField';
 import React from 'react';
-import { RadioGroup, RadioGroupIndicator } from '@radix-ui/react-radio-group';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
 
@@ -30,6 +29,10 @@ export default function RadioFormField(props: {
 
   function deleteChoice(index: number) {
     return () => {
+      // If there is only one choice, do not delete it
+      if (props.field.choices.length === 1) {
+        return;
+      }
       const newChoices = [...props.field.choices];
       newChoices.splice(index, 1);
       const newField = new RadioField(props.field.prompt, newChoices);
@@ -38,10 +41,10 @@ export default function RadioFormField(props: {
   }
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" gap="2">
       {props.field.choices.map((choice, idx) => {
         return (
-          <Flex gap="2">
+          <Flex gap="2" align="center">
             <NoOutlineIconButton onClick={deleteChoice(idx)}>
               <Cross1Icon />
             </NoOutlineIconButton>
