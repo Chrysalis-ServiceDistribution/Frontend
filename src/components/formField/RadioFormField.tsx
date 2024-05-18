@@ -44,7 +44,7 @@ export default function RadioFormField(props: {
     <Flex direction="column" gap="2">
       {props.field.choices.map((choice, idx) => {
         return (
-          <Flex gap="2" align="center">
+          <Flex gap="2" align="center" key={idx}>
             <NoOutlineIconButton onClick={deleteChoice(idx)}>
               <Cross1Icon />
             </NoOutlineIconButton>

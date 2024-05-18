@@ -1,5 +1,5 @@
 export class TextField {
-  type: 'text' = 'text';
+  type = 'text' as const;
   prompt: string;
 
   constructor(prompt: string) {
@@ -8,7 +8,7 @@ export class TextField {
 }
 
 export class RadioField {
-  type: 'radio' = 'radio';
+  type = 'radio' as const;
   prompt: string;
   choices: string[];
 
@@ -19,7 +19,7 @@ export class RadioField {
 }
 
 export class CheckboxField {
-  type: 'checkbox' = 'checkbox';
+  type = 'checkbox' as const;
   prompt: string;
   choices: string[];
 
@@ -30,3 +30,9 @@ export class CheckboxField {
 }
 
 export type FormFieldType = TextField | RadioField | CheckboxField;
+
+export type CreateServiceFormData = {
+  name: string;
+  description: string;
+  fields: FormFieldType[];
+};
