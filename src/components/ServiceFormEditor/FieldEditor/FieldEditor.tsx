@@ -14,7 +14,7 @@ import { FormFieldType } from '../../../classes/service/formField';
 import { ChevronUpIcon, Cross1Icon } from '@radix-ui/react-icons';
 import ChangeServiceTypeDropdown from './ChangeServiceTypeDropdown';
 
-export default function FormFieldEditor(props: {
+export default function FieldEditor(props: {
   field: FormFieldType;
   onChange: (field: FormFieldType) => void | undefined;
   onMoveUp: () => void | undefined;

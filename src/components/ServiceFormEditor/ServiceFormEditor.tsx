@@ -18,7 +18,7 @@ import {
   Text,
   TextArea,
 } from '@radix-ui/themes';
-import FormFieldEditor from '../../../components/ServiceFormEditor/FieldEditor';
+import FieldEditor from './FieldEditor/FieldEditor';
 
 export default function ServiceFormEditor(props: {
   onCommit: (service: ServiceForm) => void;
@@ -203,7 +203,7 @@ export default function ServiceFormEditor(props: {
         <Separator size="4" />
         <Text as="label">Form Fields</Text>
         {formData.fields.map((field, idx) => (
-          <FormFieldEditor
+          <FieldEditor
             key={idx}
             field={field}
             onChange={setFormField(idx)}
