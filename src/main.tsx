@@ -7,7 +7,6 @@ import { Theme } from '@radix-ui/themes';
 import './index.css';
 import '@radix-ui/themes/styles.css';
 
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Theme accentColor="mint" appearance="dark" className="background">
