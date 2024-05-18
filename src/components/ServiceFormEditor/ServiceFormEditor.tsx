@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import {
   CheckboxField,
-  CreateServiceFormData,
+  ServiceForm,
   FormFieldType,
   RadioField,
   TextField,
   sanitize,
   validate,
-} from '../../components/ServiceFormEditor/formField';
+} from '../../classes/service/formField';
 import {
   Dialog,
   Box,
@@ -18,12 +18,12 @@ import {
   Text,
   TextArea,
 } from '@radix-ui/themes';
-import FormFieldEditor from '../../components/ServiceFormEditor/FieldEditor';
+import FormFieldEditor from '../../../components/ServiceFormEditor/FieldEditor';
 
 export default function ServiceFormEditor(props: {
-  onCommit: (service: CreateServiceFormData) => void;
+  onCommit: (service: ServiceForm) => void;
 }) {
-  const [formData, setFormData] = useState<CreateServiceFormData>({
+  const [formData, setFormData] = useState<ServiceForm>({
     name: '',
     description: '',
     fields: [],

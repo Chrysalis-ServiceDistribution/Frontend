@@ -1,5 +1,5 @@
 import { Box } from '@radix-ui/themes';
-import { TextField, FormFieldType } from './formField';
+import { TextField, FormFieldType } from '../../../classes/service/formField';
 
 export default function TextFormField(props: {
   field: TextField;

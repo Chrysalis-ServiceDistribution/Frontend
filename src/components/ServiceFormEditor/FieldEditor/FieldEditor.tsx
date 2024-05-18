@@ -10,7 +10,7 @@ import NoOutlineIconButton from './NoOutlineIconButton';
 import CheckboxFieldEditor from './CheckboxFieldEditor';
 import RadioFieldEditor from './RadioFieldEditor';
 import TextFieldEditor from './TextFieldEditor';
-import { FormFieldType } from './formField';
+import { FormFieldType } from '../../../classes/service/formField';
 import { ChevronUpIcon, Cross1Icon } from '@radix-ui/react-icons';
 import ChangeServiceTypeDropdown from './ChangeServiceTypeDropdown';
 
