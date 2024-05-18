@@ -1,5 +1,8 @@
 import { Button, Flex, TextField } from '@radix-ui/themes';
-import { CheckboxField, FormFieldType } from '../../../classes/service/formField';
+import {
+  CheckboxField,
+  FormFieldType,
+} from '../../../classes/service/formField';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
 
