@@ -46,24 +46,28 @@ export default function CreateService() {
   }
 
   function moveFieldUp(index: number) {
-    if (index === 0) { return }
-    const curr = formFields[index]
-    const above = formFields[index-1]
+    if (index === 0) {
+      return;
+    }
+    const curr = formFields[index];
+    const above = formFields[index - 1];
     setFormFields((prevFormFields) => {
-      let next = [...prevFormFields]
-      next.splice(index-1, 2, curr, above)
-      return next
+      let next = [...prevFormFields];
+      next.splice(index - 1, 2, curr, above);
+      return next;
     });
   }
 
   function moveFieldDown(index: number) {
-    if (index === formFields.length-1) { return }
-    const curr = formFields[index]
-    const below = formFields[index+1]
+    if (index === formFields.length - 1) {
+      return;
+    }
+    const curr = formFields[index];
+    const below = formFields[index + 1];
     setFormFields((prevFormFields) => {
-      let next = [...prevFormFields]
-      next.splice(index, 2, below, curr)
-      return next
+      let next = [...prevFormFields];
+      next.splice(index, 2, below, curr);
+      return next;
     });
   }
 

@@ -1,4 +1,14 @@
-import { Flex, Box, Card, Text, TextField as RadixTextField, Button, ChevronDownIcon, IconButton } from '@radix-ui/themes';
+import {
+  Flex,
+  Box,
+  Card,
+  Text,
+  TextField as RadixTextField,
+  Button,
+  ChevronDownIcon,
+  IconButton,
+} from '@radix-ui/themes';
+import NoOutlineIconButton from './NoOutlineIconButton';
 import CheckboxFormField from './CheckboxFormField';
 import RadioFormField from './RadioFormField';
 import TextFormField from './TextFormField';
@@ -40,17 +50,17 @@ export default function FormField(props: {
 
   return (
     <Card>
-      <Flex gap="3"> 
+      <Flex gap="3">
         <Flex direction="column" justify="center" align="center" gap="2">
-          <IconButton onClick={props.onMoveUp} size="1" variant="ghost">
+          <NoOutlineIconButton onClick={props.onMoveUp}>
             <ChevronUpIcon />
-          </IconButton>
-          <IconButton onClick={props.onDelete} size="1" variant="ghost">
+          </NoOutlineIconButton>
+          <NoOutlineIconButton onClick={props.onDelete}>
             <Cross1Icon />
-          </IconButton>
-          <IconButton onClick={props.onMoveDown} size="1" variant="ghost">
+          </NoOutlineIconButton>
+          <NoOutlineIconButton onClick={props.onMoveDown}>
             <ChevronDownIcon />
-          </IconButton>
+          </NoOutlineIconButton>
         </Flex>
         <Flex direction="column">
           <Text as="p" size="5">
