@@ -5,13 +5,5 @@ export default function RadioFormField(props: {
   field: RadioField;
   onChange: (field: FormFieldType) => void | undefined;
 }) {
-  return (
-    <Box>
-      Radio Field
-      {props.field.prompt}
-      {props.field.choices.map((choice) => {
-        return <>{choice}</>;
-      })}
-    </Box>
-  );
+  return <Box></Box>;
 }
