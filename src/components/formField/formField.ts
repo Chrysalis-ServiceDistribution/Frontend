@@ -38,3 +38,31 @@ export type CreateServiceFormData = {
   description: string;
   fields: FormFieldType[];
 };
+
+export function sanitize(form: CreateServiceFormData): CreateServiceFormData {
+  return {
+    name: form.name.trim(),
+    description: form.description.trim(),
+    fields: form.fields.map((field) => {
+      switch (field.type) {
+        case 'text':
+          return {
+            type: 'text',
+            prompt: field.prompt.trim(),
+          };
+        case 'radio':
+          return {
+            type: 'radio',
+            prompt: field.prompt.trim(),
+            choices: field.choices.map((choice) => choice.trim()),
+          };
+        case 'checkbox':
+          return {
+            type: 'checkbox',
+            prompt: field.prompt.trim(),
+            choices: field.choices.map((choice) => choice.trim()),
+          };
+      }
+    }),
+  };
+}

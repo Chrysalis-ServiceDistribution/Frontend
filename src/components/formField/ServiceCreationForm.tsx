@@ -5,6 +5,7 @@ import {
   FormFieldType,
   RadioField,
   TextField,
+  sanitize,
 } from '../../components/formField/formField';
 import {
   Box,
@@ -157,11 +158,11 @@ export default function ServiceCreationForm(props: {
           fields: nextFields,
         };
       });
-    }
+    };
   }
 
   function onSubmit() {
-    props.onCommit(formData);
+    props.onCommit(sanitize(formData));
   }
 
   return (
