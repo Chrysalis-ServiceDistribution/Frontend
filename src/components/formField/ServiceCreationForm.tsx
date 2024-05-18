@@ -39,15 +39,17 @@ export default function ServiceCreationForm(props: {
     });
   }
 
-  function setFormField(index: number, field: FormFieldType) {
-    setFormData((prevFormData) => {
-      const nextFields = [...prevFormData.fields];
-      nextFields.splice(index, 1, field);
-      return {
-        ...prevFormData,
-        fields: nextFields,
-      };
-    });
+  function setFormField(index: number) {
+    return (field: FormFieldType) => {
+      setFormData((prevFormData) => {
+        const nextFields = [...prevFormData.fields];
+        nextFields.splice(index, 1, field);
+        return {
+          ...prevFormData,
+          fields: nextFields,
+        };
+      });
+    };
   }
 
   function createTextField() {
@@ -81,46 +83,81 @@ export default function ServiceCreationForm(props: {
   }
 
   function deleteField(index: number) {
-    setFormData((prevFormData) => {
-      const nextFields = [...prevFormData.fields];
-      nextFields.splice(index, 1);
-      return {
-        ...prevFormData,
-        fields: nextFields,
-      };
-    });
+    return () => {
+      setFormData((prevFormData) => {
+        const nextFields = [...prevFormData.fields];
+        nextFields.splice(index, 1);
+        return {
+          ...prevFormData,
+          fields: nextFields,
+        };
+      });
+    };
   }
 
   function moveFieldUp(index: number) {
-    if (index === 0) {
-      return;
-    }
-    const curr = formData.fields[index];
-    const above = formData.fields[index - 1];
-    setFormData((prevFormData) => {
-      const nextFields = [...prevFormData.fields];
-      nextFields.splice(index - 1, 2, curr, above);
-      return {
-        ...prevFormData,
-        fields: nextFields,
-      };
-    });
+    return () => {
+      if (index === 0) {
+        return;
+      }
+      const curr = formData.fields[index];
+      const above = formData.fields[index - 1];
+      setFormData((prevFormData) => {
+        const nextFields = [...prevFormData.fields];
+        nextFields.splice(index - 1, 2, curr, above);
+        return {
+          ...prevFormData,
+          fields: nextFields,
+        };
+      });
+    };
   }
 
   function moveFieldDown(index: number) {
-    if (index === formData.fields.length - 1) {
-      return;
+    return () => {
+      if (index === formData.fields.length - 1) {
+        return;
+      }
+      const curr = formData.fields[index];
+      const below = formData.fields[index + 1];
+      setFormData((prevFormData) => {
+        const nextFields = [...prevFormData.fields];
+        nextFields.splice(index, 2, below, curr);
+        return {
+          ...prevFormData,
+          fields: nextFields,
+        };
+      });
+    };
+  }
+
+  function replaceField(index: number) {
+    const oldField = formData.fields[index];
+    return (type: string) => {
+      let newField: FormFieldType;
+      switch (type) {
+        case 'text':
+          newField = new TextField(oldField.prompt);
+          break;
+        case 'radio':
+          newField = new RadioField(oldField.prompt, ['Choice 1']);
+          break;
+        case 'checkbox':
+          newField = new CheckboxField(oldField.prompt, ['Choice 1']);
+          break;
+        default:
+          return;
+      }
+
+      setFormData((prevFormData) => {
+        const nextFields = [...prevFormData.fields];
+        nextFields.splice(index, 1, newField);
+        return {
+          ...prevFormData,
+          fields: nextFields,
+        };
+      });
     }
-    const curr = formData.fields[index];
-    const below = formData.fields[index + 1];
-    setFormData((prevFormData) => {
-      const nextFields = [...prevFormData.fields];
-      nextFields.splice(index - 1, 2, below, curr);
-      return {
-        ...prevFormData,
-        fields: nextFields,
-      };
-    });
   }
 
   function onSubmit() {
@@ -152,10 +189,11 @@ export default function ServiceCreationForm(props: {
           <FormField
             key={idx}
             field={field}
-            onChange={(f) => setFormField(idx, f)}
-            onMoveUp={() => moveFieldUp(idx)}
-            onMoveDown={() => moveFieldDown(idx)}
-            onDelete={() => deleteField(idx)}
+            onChange={setFormField(idx)}
+            onMoveUp={moveFieldUp(idx)}
+            onMoveDown={moveFieldDown(idx)}
+            onDelete={deleteField(idx)}
+            onReplace={replaceField(idx)}
           />
         ))}
         <Button onClick={createTextField}>Create Text Field</Button>

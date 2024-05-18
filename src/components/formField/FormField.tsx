@@ -1,12 +1,9 @@
 import {
   Flex,
-  Box,
   Card,
   Text,
   TextField as RadixTextField,
-  Button,
   ChevronDownIcon,
-  IconButton,
 } from '@radix-ui/themes';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import CheckboxFormField from './CheckboxFormField';
@@ -14,6 +11,7 @@ import RadioFormField from './RadioFormField';
 import TextFormField from './TextFormField';
 import { FormFieldType } from './formField';
 import { ChevronUpIcon, Cross1Icon } from '@radix-ui/react-icons';
+import ChangeServiceTypeDropdown from './ChangeServiceTypeDropdown';
 
 export default function FormField(props: {
   field: FormFieldType;
@@ -21,6 +19,7 @@ export default function FormField(props: {
   onMoveUp: () => void | undefined;
   onMoveDown: () => void | undefined;
   onDelete: () => void | undefined;
+  onReplace: (type: string) => void;
 }) {
   let theField: React.ReactNode;
   switch (props.field.type) {
@@ -49,7 +48,7 @@ export default function FormField(props: {
   }
 
   return (
-    <Card>
+    <Card style={{ position: 'relative' }}>
       <Flex gap="3">
         <Flex direction="column" justify="center" align="center" gap="2">
           <NoOutlineIconButton onClick={props.onMoveUp}>
@@ -63,9 +62,10 @@ export default function FormField(props: {
           </NoOutlineIconButton>
         </Flex>
         <Flex direction="column">
-          <Text as="p" size="5">
-            Field Type: {props.field.type}
-          </Text>
+          <ChangeServiceTypeDropdown
+            field={props.field}
+            onSelect={props.onReplace}
+          />
           <Text as="p" size="4">
             Prompt
           </Text>

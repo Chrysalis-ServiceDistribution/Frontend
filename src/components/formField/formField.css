@@ -1,0 +1,9 @@
+.no-outline-icon-button {
+  box-shadow: unset !important;
+}
+
+.change-service-type {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+}

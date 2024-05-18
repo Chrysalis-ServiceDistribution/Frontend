@@ -1,3 +1,5 @@
+export const formFieldTypes = ['text', 'radio', 'checkbox'];
+
 export class TextField {
   type = 'text' as const;
   prompt: string;
