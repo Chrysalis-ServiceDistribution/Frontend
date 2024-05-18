@@ -6,18 +6,21 @@ import {
   RadioField,
   TextField,
   sanitize,
-} from '../../components/formField/formField';
+  validate,
+} from '../../components/ServiceFormEditor/formField';
 import {
+  Dialog,
   Box,
   Button,
   Flex,
   TextField as RadixTextField,
+  Separator,
   Text,
   TextArea,
 } from '@radix-ui/themes';
-import FormField from '../../components/formField/FormField';
+import FormFieldEditor from '../../components/ServiceFormEditor/FieldEditor';
 
-export default function ServiceCreationForm(props: {
+export default function ServiceFormEditor(props: {
   onCommit: (service: CreateServiceFormData) => void;
 }) {
   const [formData, setFormData] = useState<CreateServiceFormData>({
@@ -25,6 +28,9 @@ export default function ServiceCreationForm(props: {
     description: '',
     fields: [],
   });
+
+  const [showFormErrors, setShowFormErrors] = useState<boolean>(false);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
 
   function setServiceName(evt: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -162,11 +168,19 @@ export default function ServiceCreationForm(props: {
   }
 
   function onSubmit() {
+    const sanitized = sanitize(formData);
+    const errors = validate(sanitized);
+    if (errors.length > 0) {
+      setShowFormErrors(true);
+      setFormErrors(errors);
+      return;
+    }
+
     props.onCommit(sanitize(formData));
   }
 
   return (
-    <Box width="512px" p="3">
+    <Box p="3">
       <Flex direction="column" gap="2">
         <Box>
           <Text as="label">Service Name</Text>
@@ -186,8 +200,10 @@ export default function ServiceCreationForm(props: {
             onChange={setServiceDescription}
           ></TextArea>
         </Box>
+        <Separator size="4" />
+        <Text as="label">Form Fields</Text>
         {formData.fields.map((field, idx) => (
-          <FormField
+          <FormFieldEditor
             key={idx}
             field={field}
             onChange={setFormField(idx)}
@@ -202,6 +218,20 @@ export default function ServiceCreationForm(props: {
         <Button onClick={createCheckboxField}>Create Checkbox Field</Button>
         <Button onClick={onSubmit}>Create Service</Button>
       </Flex>
+      <Dialog.Root open={showFormErrors}>
+        <Dialog.Content>
+          <Dialog.Title>Error</Dialog.Title>
+          <Dialog.Description size="2">
+            The service form has the following errors. Please fix them.
+          </Dialog.Description>
+          <ul>
+            {formErrors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <Button onClick={() => setShowFormErrors(false)}>OK</Button>
+        </Dialog.Content>
+      </Dialog.Root>
     </Box>
   );
 }

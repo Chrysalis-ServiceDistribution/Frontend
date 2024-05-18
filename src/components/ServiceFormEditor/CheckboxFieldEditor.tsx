@@ -3,7 +3,7 @@ import { CheckboxField, FormFieldType } from './formField';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
 
-export default function CheckboxFormField(props: {
+export default function CheckboxFieldEditor(props: {
   field: CheckboxField;
   onChange: (field: FormFieldType) => void | undefined;
 }) {

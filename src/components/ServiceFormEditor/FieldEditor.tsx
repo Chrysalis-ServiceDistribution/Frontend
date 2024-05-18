@@ -1,19 +1,20 @@
 import {
   Flex,
+  Grid,
   Card,
   Text,
   TextField as RadixTextField,
   ChevronDownIcon,
 } from '@radix-ui/themes';
 import NoOutlineIconButton from './NoOutlineIconButton';
-import CheckboxFormField from './CheckboxFormField';
-import RadioFormField from './RadioFormField';
-import TextFormField from './TextFormField';
+import CheckboxFieldEditor from './CheckboxFieldEditor';
+import RadioFieldEditor from './RadioFieldEditor';
+import TextFieldEditor from './TextFieldEditor';
 import { FormFieldType } from './formField';
 import { ChevronUpIcon, Cross1Icon } from '@radix-ui/react-icons';
 import ChangeServiceTypeDropdown from './ChangeServiceTypeDropdown';
 
-export default function FormField(props: {
+export default function FormFieldEditor(props: {
   field: FormFieldType;
   onChange: (field: FormFieldType) => void | undefined;
   onMoveUp: () => void | undefined;
@@ -25,17 +26,17 @@ export default function FormField(props: {
   switch (props.field.type) {
     case 'text':
       theField = (
-        <TextFormField field={props.field} onChange={props.onChange} />
+        <TextFieldEditor field={props.field} onChange={props.onChange} />
       );
       break;
     case 'radio':
       theField = (
-        <RadioFormField field={props.field} onChange={props.onChange} />
+        <RadioFieldEditor field={props.field} onChange={props.onChange} />
       );
       break;
     case 'checkbox':
       theField = (
-        <CheckboxFormField field={props.field} onChange={props.onChange} />
+        <CheckboxFieldEditor field={props.field} onChange={props.onChange} />
       );
       break;
   }
@@ -48,8 +49,8 @@ export default function FormField(props: {
   }
 
   return (
-    <Card style={{ position: 'relative' }}>
-      <Flex gap="3">
+    <Card>
+      <Grid gap="3" columns="var(--space-5) 1fr">
         <Flex direction="column" justify="center" align="center" gap="2">
           <NoOutlineIconButton onClick={props.onMoveUp}>
             <ChevronUpIcon />
@@ -61,7 +62,7 @@ export default function FormField(props: {
             <ChevronDownIcon />
           </NoOutlineIconButton>
         </Flex>
-        <Flex direction="column">
+        <Flex direction="column" gap="2">
           <ChangeServiceTypeDropdown
             field={props.field}
             onSelect={props.onReplace}
@@ -77,7 +78,7 @@ export default function FormField(props: {
           ></RadixTextField.Root>
           {theField}
         </Flex>
-      </Flex>
+      </Grid>
     </Card>
   );
 }
