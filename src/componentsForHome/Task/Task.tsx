@@ -14,13 +14,14 @@ const Task: React.FC<taskInterface> = (Task) => {
   };
 
   // Define the badge color based on the status
-  const statusToBadge: { [key: string]: string } = {
-    pending: 'gray',
-    accepted: 'blue',
-    'in progress': 'gold',
-    done: 'green',
-    rejected: 'red',
+  const statusToBadge = {
+    pending: 'gray' as const,
+    accepted: 'blue' as const,
+    'in progress': 'gold' as const,
+    done: 'green' as const,
+    rejected: 'red' as const,
   };
+
   return (
     <Flex
       justify="between"

@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Task as taskInterface } from '../../@types/task';
 import Task from '../Task/Task';
@@ -6,7 +6,6 @@ import Task from '../Task/Task';
 import { Button, Box, Flex, Text } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { useState, useEffect } from 'react';
-
 
 //!! This is a mock data, replace it with the actual data from state/context
 const exmpleTasks: taskInterface[] = [
@@ -48,19 +47,24 @@ const exmpleTasks: taskInterface[] = [
 ];
 
 const ClientTabDashboard = () => {
-
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<taskInterface[]>([]);
   useEffect(() => {
     setTasks(exmpleTasks);
-  })
-  return(
-  <Flex direction="column" gap="2">
-    <Text size="6">Outbound Tasks and Status</Text>
-    <Button onClick={() => {navigate('/search')}}>Search for a new service</Button>
+  });
+  return (
+    <Flex direction="column" gap="2">
+      <Text size="6">Outbound Tasks and Status</Text>
+      <Button
+        onClick={() => {
+          navigate('/search');
+        }}
+      >
+        Search for a new service
+      </Button>
 
-    {/* //TODO: Change button to be icon, text needs to be dynamic, hide? if there is nothing to show */}
-    <Collapsible.Root>
+      {/* //TODO: Change button to be icon, text needs to be dynamic, hide? if there is nothing to show */}
+      <Collapsible.Root>
         <Text> Outgoing Tasks </Text>
         <Collapsible.Trigger asChild>
           <Button>see</Button>
@@ -76,11 +80,9 @@ const ClientTabDashboard = () => {
         </Collapsible.Content>
       </Collapsible.Root>
 
-    <Box>
-      
-    </Box>
-  </Flex>
-  )
+      <Box></Box>
+    </Flex>
+  );
 };
 
 export default ClientTabDashboard;
