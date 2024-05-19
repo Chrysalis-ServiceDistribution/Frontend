@@ -1,6 +1,5 @@
 import * as Select from '@radix-ui/react-select';
 import React from 'react';
-import classnames from 'classnames';
 import './ServiceSelect.css';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon} from '@radix-ui/react-icons';
 
@@ -31,7 +30,7 @@ const ServiceSelect: React.FC<ServiceSelectProps> = ({services, setServiceView})
             <SelectItem className="SelectItem" value="Show All">Show All</SelectItem>
             {
               services.map((service, index) => {
-                return <SelectItem key={index+1} value={service}>{service}</SelectItem>
+                return <SelectItem key={index+1} value={service} className="SelectItem">{service}</SelectItem>
               })
             }
           </Select.Group>
@@ -45,9 +44,10 @@ const ServiceSelect: React.FC<ServiceSelectProps> = ({services, setServiceView})
   );
 };
 
-const SelectItem = React.forwardRef(({ children, className, value }:{children: React.ReactNode, className: string, value: string}, forwardedRef: React.Ref<HTMLLIElement> | null) => {
+const SelectItem = React.forwardRef<HTMLDivElement, {className: string; children: string; value: string;}>((props, forwardRef) => {
+  const { children, value, className } = props;
   return (
-    <Select.Item className={classnames('SelectItem', className)} value={value} ref={forwardedRef}>
+    <Select.Item className={className} value={value} ref={forwardRef}>
       <Select.ItemText>{children}</Select.ItemText>
       <Select.ItemIndicator className="SelectItemIndicator">
         <CheckIcon />
