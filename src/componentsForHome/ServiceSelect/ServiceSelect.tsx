@@ -45,9 +45,9 @@ const ServiceSelect: React.FC<ServiceSelectProps> = ({services, setServiceView})
   );
 };
 
-const SelectItem = React.forwardRef(({ children, className, ...props }: React.PropsWithChildren<any>, forwardedRef) => {
+const SelectItem = React.forwardRef(({ children, className, value }:{children: React.ReactNode, className: string, value: string}, forwardedRef: React.Ref<HTMLLIElement> | null) => {
   return (
-    <Select.Item className={classnames('SelectItem', className)} {...props} ref={forwardedRef}>
+    <Select.Item className={classnames('SelectItem', className)} value={value} ref={forwardedRef}>
       <Select.ItemText>{children}</Select.ItemText>
       <Select.ItemIndicator className="SelectItemIndicator">
         <CheckIcon />
