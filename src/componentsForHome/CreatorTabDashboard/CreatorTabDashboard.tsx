@@ -47,32 +47,28 @@ const CreatorTabDashboard = () => {
   //sort tasks into pending and rejected, and then the rest
   //display the pending and rejected in the first collapsable
   //display the rest in the second collapsable
-  const [pendingAndRejectedTasks, setPendingAndRejectedTasks] = React.useState<
-    taskInterface[]
-  >(
-    exmpleTasks.filter(
-      (task) => task.status === 'pending' || task.status === 'rejected',
-    ),
-  );
-  const [otherTasks, setOtherTasks] = React.useState<taskInterface[]>(
-    exmpleTasks.filter(
-      (task) => task.status !== 'pending' && task.status !== 'rejected',
-    ),
-  );
   const [services, setServices] = React.useState<string[]>(
     exmpleTasks.map((task) => task.Service),
   );
+  const [serviceView, setServiceView] = React.useState<string>('Show All');
+
   return (
     <Flex direction="column" gap="2">
       <Text size="5">Your reqests and task status'</Text>
       <Button>View your services</Button>
-      <ServiceSelect services={services} />
+      <ServiceSelect services={services} setServiceView={setServiceView} />
       <Box>
         {
           <Flex direction="column" gap="1">
-            {pendingAndRejectedTasks.map((task: taskInterface) => {
-              return <Task key={task.taskID} {...task} />;
-            }, 0)}
+            {  // pending and rejected tasks
+            exmpleTasks
+            .filter(
+              (task) => serviceView !== 'Show All' ? task.Service === serviceView : task,)
+            .filter(
+              (task) => task.status === 'pending' || task.status === 'rejected',)
+            .map((task: taskInterface) => {
+                return <Task key={task.taskID} {...task} />;
+            },)}
           </Flex>
           //map over the tasks based on the users tasks and display them
           //find all tasks by wtih FK userID
@@ -80,11 +76,16 @@ const CreatorTabDashboard = () => {
       </Box>
 
       <Box>
-        {
+        { // other tasks
           <Flex direction="column" gap="1">
-            {otherTasks.map((task: taskInterface) => {
+            {exmpleTasks
+            .filter(
+              (task) => serviceView !== 'Show All' ? task.Service === serviceView : task,)
+            .filter(
+              (task) => task.status !== 'pending' && task.status !== 'rejected',)
+            .map((task: taskInterface) => {
               return <Task key={task.taskID} {...task} />;
-            }, 0)}
+            },)}
           </Flex>
           //map over the tasks based on the users tasks and display them
           //find all tasks by wtih FK userID
