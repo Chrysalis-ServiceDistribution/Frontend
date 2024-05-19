@@ -1,14 +1,5 @@
 .task-count {
   width: 100%;
   text-align: center;
-  border: 1px solid var(--accent-6);
   background-color: var(--accent-3);
-}
-
-.task-count:first-child {
-  border-bottom-left-radius: var(--radius-4);
-}
-
-.task-count:last-child {
-  border-bottom-right-radius: var(--radius-4);
 }

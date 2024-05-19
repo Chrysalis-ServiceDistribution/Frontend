@@ -1,75 +1,78 @@
-import './ServiceCard.css'
-import { Card, Flex, Heading, Inset, Box, Theme } from "@radix-ui/themes";
-import { Service, Task } from "../../classes/service/service";
-import { useMemo } from "react";
+import './ServiceCard.css';
+import { Card, Flex, Heading, Inset, Box, Theme } from '@radix-ui/themes';
+import { Service, Task } from '../../classes/service/service';
+import { useMemo } from 'react';
 
 const taskColors = {
-  "pending": "gray" as const,
-  "approved": "blue" as const,
-  "rejected": "red" as const,
-  "inProgress": "yellow" as const,
-  "done": "green" as const,
-}
+  pending: 'gray' as const,
+  accepted: 'blue' as const,
+  rejected: 'red' as const,
+  inProgress: 'yellow' as const,
+  done: 'green' as const,
+};
 
-export default function ServiceCard(props: {
-  service: Service
-}) {
+export default function ServiceCard(props: { service: Service }) {
   const sortedTasks = useMemo(() => {
     const sorted: {
-      pending: Task[],
-      approved: Task[],
-      inProgress: Task[],
-      done: Task[],
-      rejected: Task[],
+      pending: Task[];
+      accepted: Task[];
+      inProgress: Task[];
+      done: Task[];
+      rejected: Task[];
     } = {
       pending: [],
-      approved: [],
+      accepted: [],
       inProgress: [],
       done: [],
       rejected: [],
-    }
+    };
 
     for (const task of props.service.tasks) {
-      switch(task.status) {
-        case "pending":
+      switch (task.status) {
+        case 'pending':
           sorted.pending.push(task);
           break;
-        case "accepted":
-          sorted.approved.push(task); 
+        case 'accepted':
+          sorted.accepted.push(task);
           break;
-        case "in progress":
-          sorted.inProgress.push(task); 
+        case 'in progress':
+          sorted.inProgress.push(task);
           break;
-        case "rejected":
-          sorted.rejected.push(task); 
+        case 'rejected':
+          sorted.rejected.push(task);
           break;
-        case "done":
-          sorted.done.push(task); 
+        case 'done':
+          sorted.done.push(task);
           break;
       }
     }
 
-    return sorted
-  }, [props.service.tasks])
+    return sorted;
+  }, [props.service.tasks]);
 
   const taskCounts = useMemo(() => {
-    const res: { type: "pending" | "approved" | "inProgress" | "done" |
-    "rejected", count: number }[] = []
+    const res: {
+      type: 'pending' | 'accepted' | 'inProgress' | 'done' | 'rejected';
+      count: number;
+    }[] = [];
     for (const tag of [
-      "pending", "approved", "inProgress", "done", "rejected"
+      'pending',
+      'accepted',
+      'inProgress',
+      'done',
+      'rejected',
     ] as const) {
       if (sortedTasks[tag].length > 0) {
         res.push({
           type: tag,
-          count: sortedTasks[tag].length
+          count: sortedTasks[tag].length,
         });
       }
-
     }
     return res;
   }, [sortedTasks]);
 
-  console.log(taskCounts)
+  console.log(taskCounts);
 
   return (
     <Card>
@@ -80,7 +83,11 @@ export default function ServiceCard(props: {
         <Inset clip="padding-box" side="bottom" pb="0">
           <Flex>
             {taskCounts?.map((taskCount, idx) => (
-              <Theme asChild={true} key={idx} accentColor={taskColors[taskCount.type]}>
+              <Theme
+                asChild={true}
+                key={idx}
+                accentColor={taskColors[taskCount.type]}
+              >
                 <Box className="task-count">{taskCount.count}</Box>
               </Theme>
             ))}
@@ -88,5 +95,5 @@ export default function ServiceCard(props: {
         </Inset>
       </Flex>
     </Card>
-  )
+  );
 }

@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   // FIXME: Page to show all the services
   {
     path: '/:userID/services',
-    element: <UserServices />
+    element: <UserServices />,
   },
   // FIXME
   {
