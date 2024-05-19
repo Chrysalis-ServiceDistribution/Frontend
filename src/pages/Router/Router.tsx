@@ -4,6 +4,7 @@ import Authentication from '../Authentication/Authentication';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import Search from '../Search/Search';
 import CreateService from '../CreateService/CreateService';
+import UserServices from '../UserServices/UserServices';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
   // FIXME: Page to show all the services
   {
     path: '/:userID/services',
-    element: <div>Services</div>,
+    element: <UserServices />
   },
   // FIXME
   {
