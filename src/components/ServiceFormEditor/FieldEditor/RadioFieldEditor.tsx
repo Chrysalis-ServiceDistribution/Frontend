@@ -49,6 +49,7 @@ export default function RadioFormField(props: {
               <Cross1Icon />
             </NoOutlineIconButton>
             <TextField.Root
+              style={{width: "100%"}}
               placeholder="Choice text..."
               value={choice}
               onChange={editChoice(idx)}
