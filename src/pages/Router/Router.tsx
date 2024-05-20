@@ -4,6 +4,8 @@ import Authentication from '../Authentication/Authentication';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import Search from '../Search/Search';
 import CreateService from '../CreateService/CreateService';
+import UserServices from '../UserServices/UserServices';
+import SubmitTask from '../SubmitTask/SubmitTask';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
   // FIXME: Page to show all the services
   {
     path: '/:userID/services',
-    element: <div>Services</div>,
+    element: <UserServices />,
   },
   // FIXME
   {
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
   // FIXME
   {
     path: '/:userID/services/:servID/submit-task',
-    element: <div>Create Task</div>,
+    element: <SubmitTask />,
   },
   // FIXME
   {
