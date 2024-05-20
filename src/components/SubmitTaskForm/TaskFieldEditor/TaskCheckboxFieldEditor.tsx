@@ -1,13 +1,13 @@
 import { CheckboxGroup } from '@radix-ui/themes';
 import { CheckboxField } from '../../../classes/service/formField';
 import {
-  FilledCheckboxField,
+  CheckboxRequestField,
   RequestField,
 } from '../../../classes/service/service';
 
 export default function TaskCheckboxFieldEditor(props: {
   field: CheckboxField;
-  currentRequestField: FilledCheckboxField;
+  currentRequestField: CheckboxRequestField;
   onUpdate: (req: RequestField) => void;
 }) {
   function handleChange(value: string[]) {

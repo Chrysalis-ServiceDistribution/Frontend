@@ -1,6 +1,6 @@
 export const formFieldTypes = ['text', 'radio', 'checkbox'];
 
-export class TextField {
+export class ServiceTextField {
   type = 'text' as const;
   prompt: string;
 
@@ -9,7 +9,7 @@ export class TextField {
   }
 }
 
-export class RadioField {
+export class ServiceRadioField {
   type = 'radio' as const;
   prompt: string;
   choices: string[];
@@ -20,7 +20,7 @@ export class RadioField {
   }
 }
 
-export class CheckboxField {
+export class ServiceCheckboxField {
   type = 'checkbox' as const;
   prompt: string;
   choices: string[];
@@ -31,12 +31,12 @@ export class CheckboxField {
   }
 }
 
-export type FormFieldType = TextField | RadioField | CheckboxField;
+export type ServiceField = ServiceTextField | ServiceRadioField | ServiceCheckboxField;
 
 export type ServiceForm = {
   name: string;
   description: string;
-  fields: FormFieldType[];
+  fields: ServiceField[];
 };
 
 /**

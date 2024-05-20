@@ -1,26 +1,26 @@
-import { FormFieldType } from './formField';
+import { ServiceField } from './formField';
 
 export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
 
-export type FilledTextField = {
+export type RequestTextField = {
   type: 'text';
   value: string;
 };
 
-export type FilledRadioField = {
+export type RequestRadioField = {
   type: 'radio';
   selection: number;
 };
 
-export type FilledCheckboxField = {
+export type RequestCheckboxField = {
   type: 'checkbox';
   selection: number[];
 };
 
 export type RequestField =
-  | FilledRadioField
-  | FilledCheckboxField
-  | FilledTextField;
+  | RequestRadioField
+  | RequestCheckboxField
+  | RequestTextField;
 
 export interface Task {
   client: string;
@@ -31,11 +31,11 @@ export interface Task {
 export interface Service {
   name: string;
   description: string;
-  fields: FormFieldType[];
+  fields: ServiceField[];
   tasks: Task[];
 }
 
-export function createFieldDefault(formField: FormFieldType): RequestField {
+export function createDefaultField(formField: ServiceField): RequestField {
   switch (formField.type) {
     case 'text':
       return {

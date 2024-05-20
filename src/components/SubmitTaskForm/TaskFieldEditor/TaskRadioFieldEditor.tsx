@@ -1,13 +1,13 @@
 import { RadioGroup } from '@radix-ui/themes';
 import { FormFieldType, RadioField } from '../../../classes/service/formField';
 import {
-  FilledRadioField,
+  RadioRequestField,
   RequestField,
 } from '../../../classes/service/service';
 
 export default function TaskRadioFieldEditor(props: {
   field: RadioField;
-  currentRequestField: FilledRadioField;
+  currentRequestField: RadioRequestField;
   onUpdate: (req: RequestField) => void;
 }) {
   function handleChange(value: string) {
