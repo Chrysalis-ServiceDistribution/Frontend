@@ -6,7 +6,7 @@ import Task from '../Task/Task';
 import { Flex, Text, Button, Box } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-const CreatorTabDashboard:React.FC<DashboardProps> = ({ tasks }) => {
+const CreatorTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
   const navigate = useNavigate();
 
   const [services, setServices] = React.useState<string[]>([]);

@@ -5,8 +5,7 @@ import DashboardProps from '../../../@types/dashboard';
 import { Button, Flex, Text } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-const ClientTabDashboard:React.FC<DashboardProps> = ( {tasks} ) => {
-
+const ClientTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
   const navigate = useNavigate();
 
   return (
@@ -21,23 +20,23 @@ const ClientTabDashboard:React.FC<DashboardProps> = ( {tasks} ) => {
       </Button>
 
       {/* //TODO: Change button to be icon, text needs to be dynamic*/}
-      {tasks.length > 0 &&
-      <Collapsible.Root>
-        <Text> Outgoing Tasks </Text>
-        <Collapsible.Trigger asChild>
-          <Button>see</Button>
-        </Collapsible.Trigger>
-        <Collapsible.Content>
-          {
-            <Flex direction="column" gap="1">
-              {tasks.map((task) => {
-                return <Task key={task.taskID} {...task} />;
-              }, 0)}
-            </Flex>
-          }
-        </Collapsible.Content>
-      </Collapsible.Root>
-      }
+      {tasks.length > 0 && (
+        <Collapsible.Root>
+          <Text> Outgoing Tasks </Text>
+          <Collapsible.Trigger asChild>
+            <Button>see</Button>
+          </Collapsible.Trigger>
+          <Collapsible.Content>
+            {
+              <Flex direction="column" gap="1">
+                {tasks.map((task) => {
+                  return <Task key={task.taskID} {...task} />;
+                }, 0)}
+              </Flex>
+            }
+          </Collapsible.Content>
+        </Collapsible.Root>
+      )}
     </Flex>
   );
 };

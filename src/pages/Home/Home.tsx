@@ -79,11 +79,9 @@ const exampleCreatorTasks: taskInterface[] = [
     requestField: 'requestField 5',
     status: 'pending',
   },
-
 ];
 
 export default function Home() {
-
   const [tasksClient, setTasks] = React.useState<taskInterface[]>([]);
   const [tasksCreator, setTasksCreator] = React.useState<taskInterface[]>([]);
 
@@ -94,12 +92,7 @@ export default function Home() {
   }, []);
 
   return (
-    <Flex
-      direction="column"
-      justify="center"
-      align="center"
-      gap="2"
-    >
+    <Flex direction="column" justify="center" align="center" gap="2">
       <Text size="8"> Welcome </Text>
       <Tabs.Root className="TabsRoot" defaultValue="client">
         <Tabs.List className="TabsList" aria-label="Tabs">
@@ -113,11 +106,11 @@ export default function Home() {
         </Tabs.List>
         <Tabs.Content className="TabsContent" value="client">
           {/* //TODO: change filter to only pass in tasks by the user */}
-          <ClientTabDashboard tasks={tasksClient.filter(task => task)} />
+          <ClientTabDashboard tasks={tasksClient.filter((task) => task)} />
         </Tabs.Content>
         <Tabs.Content className="TabsContent" value="creator">
           {/* //TODO: change filter to only pass in tasks from the user */}
-          <CreatorTabDashboard tasks={tasksCreator.filter(task=> task)} />
+          <CreatorTabDashboard tasks={tasksCreator.filter((task) => task)} />
         </Tabs.Content>
       </Tabs.Root>
     </Flex>
