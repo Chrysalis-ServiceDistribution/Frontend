@@ -1,5 +1,6 @@
 import { TextField, Flex } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import * as dummyData from '../UserServices/services.ts';
 import { Service, Task } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import { useState, useEffect } from 'react';
@@ -9,6 +10,7 @@ export default function Search() {
   //get all services on pageload
   useEffect(() => {
     console.log('grabbing services on pageload');
+    setServices(dummyData);
 
   }, []);
 
