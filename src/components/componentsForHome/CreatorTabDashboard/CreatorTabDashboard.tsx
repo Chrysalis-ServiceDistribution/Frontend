@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import DashboardProps from '../../@types/dashboard';
+import DashboardProps from '../../../@types/dashboard';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
 import { Flex, Text, Button, Box } from '@radix-ui/themes';

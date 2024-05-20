@@ -2,8 +2,8 @@ import * as Tabs from '@radix-ui/react-tabs';
 import React from 'react';
 import taskInterface from '../../@types/task';
 import { Flex, Text } from '@radix-ui/themes';
-import ClientTabDashboard from '../../componentsForHome/ClientTabDashboard/ClientTabDashboard';
-import CreatorTabDashboard from '../../componentsForHome/CreatorTabDashboard/CreatorTabDashboard';
+import ClientTabDashboard from '../../components/componentsForHome/ClientTabDashboard/ClientTabDashboard';
+import CreatorTabDashboard from '../../components/componentsForHome/CreatorTabDashboard/CreatorTabDashboard';
 import './Home.css';
 
 export default function Home() {

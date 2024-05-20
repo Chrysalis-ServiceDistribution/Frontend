@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import Task from '../Task/Task';
-import DashboardProps from '../../@types/dashboard';
+import DashboardProps from '../../../@types/dashboard';
 import { Button, Flex, Text } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 

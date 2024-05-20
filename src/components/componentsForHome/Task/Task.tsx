@@ -1,5 +1,5 @@
 import React from 'react';
-import taskInterface from '../../@types/task';
+import taskInterface from '../../../@types/task';
 import { Badge, Flex, Text } from '@radix-ui/themes';
 
 const Task: React.FC<taskInterface> = (task) => {
