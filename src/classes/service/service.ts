@@ -34,21 +34,21 @@ export interface Service {
 }
 
 export function createFieldDefault(formField: FormFieldType): RequestField {
-  switch(formField.type) {
+  switch (formField.type) {
     case 'text':
       return {
         type: 'text',
         value: '',
-      }
+      };
     case 'radio':
       return {
         type: 'radio',
         selection: 0,
-      }
+      };
     case 'checkbox':
       return {
         type: 'checkbox',
         selection: [],
-      }
+      };
   }
 }

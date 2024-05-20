@@ -1,35 +1,53 @@
-import { Card, Flex, Text } from "@radix-ui/themes";
-import { FormFieldType } from "../../../classes/service/formField";
-import { RequestField } from "../../../classes/service/service";
-import TaskTextFieldEditor from "./TaskTextFieldEditor";
-import TaskRadioFieldEditor from "./TaskRadioFieldEditor";
-import TaskCheckboxFieldEditor from "./TaskCheckboxFieldEditor";
+import { Card, Flex, Text } from '@radix-ui/themes';
+import { FormFieldType } from '../../../classes/service/formField';
+import { RequestField } from '../../../classes/service/service';
+import TaskTextFieldEditor from './TaskTextFieldEditor';
+import TaskRadioFieldEditor from './TaskRadioFieldEditor';
+import TaskCheckboxFieldEditor from './TaskCheckboxFieldEditor';
 
 export default function TaskFieldEditor(props: {
-  field: FormFieldType
-  currentRequestField: RequestField
+  field: FormFieldType;
+  currentRequestField: RequestField;
+  onUpdate: (req: RequestField) => void;
 }) {
-
-  let editor: React.ReactNode
-  switch(props.field.type) {
-    case "text":
+  let editor: React.ReactNode;
+  switch (props.field.type) {
+    case 'text':
       if (props.field.type !== props.currentRequestField.type) {
-        throw new Error('non-matching types')
+        throw new Error('non-matching types');
       }
-      editor = <TaskTextFieldEditor field={props.field} currentRequestField={props.currentRequestField} />
-    break;
-    case "radio":
+      editor = (
+        <TaskTextFieldEditor
+          field={props.field}
+          currentRequestField={props.currentRequestField}
+          onUpdate={props.onUpdate}
+        />
+      );
+      break;
+    case 'radio':
       if (props.field.type !== props.currentRequestField.type) {
-        throw new Error('non-matching types')
+        throw new Error('non-matching types');
       }
-      editor = <TaskRadioFieldEditor field={props.field} currentRequestField={props.currentRequestField} />
-    break;
-    case "checkbox":
+      editor = (
+        <TaskRadioFieldEditor
+          field={props.field}
+          currentRequestField={props.currentRequestField}
+          onUpdate={props.onUpdate}
+        />
+      );
+      break;
+    case 'checkbox':
       if (props.field.type !== props.currentRequestField.type) {
-        throw new Error('non-matching types')
+        throw new Error('non-matching types');
       }
-      editor = <TaskCheckboxFieldEditor field={props.field} currentRequestField={props.currentRequestField} />
-    break;
+      editor = (
+        <TaskCheckboxFieldEditor
+          field={props.field}
+          currentRequestField={props.currentRequestField}
+          onUpdate={props.onUpdate}
+        />
+      );
+      break;
   }
   return (
     <Card>
@@ -38,5 +56,5 @@ export default function TaskFieldEditor(props: {
         {editor}
       </Flex>
     </Card>
-  )
+  );
 }

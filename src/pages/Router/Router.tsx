@@ -42,7 +42,7 @@ const router = createBrowserRouter([
   // FIXME
   {
     path: '/:userID/services/:servID/submit-task',
-    element: <SubmitTask />
+    element: <SubmitTask />,
   },
   // FIXME
   {

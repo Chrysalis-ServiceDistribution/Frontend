@@ -12,7 +12,7 @@ const statuses = [
   'inProgress' as const,
   'rejected' as const,
   'done' as const,
-]
+];
 
 export default function ServiceDetail() {
   const { userID, servID } = useParams();
@@ -97,9 +97,7 @@ export default function ServiceDetail() {
         Tasks
       </Heading>
       {statuses.map((tag, idx) => {
-        return (
-          <TaskList key={idx} tasks={sortedTasks[tag]} />
-        )
+        return <TaskList key={idx} tasks={sortedTasks[tag]} />;
       })}
     </Flex>
   );
