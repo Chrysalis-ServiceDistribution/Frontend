@@ -3,6 +3,7 @@ import Home from '../Home/Home';
 import Authentication from '../Authentication/Authentication';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import Search from '../Search/Search';
+import CreateService from '../CreateService/CreateService';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
   // FIXME
   {
     path: '/:userID/services/create',
-    element: <div>Create Service</div>,
+    element: <CreateService />,
   },
   {
     path: '/:userID/services/:servID',
