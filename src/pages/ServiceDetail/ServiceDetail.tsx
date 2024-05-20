@@ -94,7 +94,7 @@ export default function ServiceDetail() {
       </Heading>
       <Separator size="4" />
       <Heading as="h2" size="4">
-        Tasks what the fuck
+        Tasks
       </Heading>
       {statuses.map((tag, idx) => {
         return (
