@@ -1,4 +1,4 @@
-export interface Task {
+export default interface taskInterface {
   taskID: number;
   Service: string;
   ClientForeinKey: number;
