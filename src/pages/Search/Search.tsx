@@ -1,5 +1,17 @@
-import { Box } from '@radix-ui/themes';
+import { Box, Flex } from '@radix-ui/themes';
+import ServiceCard from '../../components/ServiceCard/ServiceCard';
+import { useEffect } from 'react';
 
 export default function Search() {
-  return <Box width="512px">Search</Box>;
+
+  //get all services on pageload
+  useEffect(() => {
+    console.log('search');
+  }
+  , []);
+  return(
+    <Flex>
+      <Box>Search</Box>
+    </Flex>
+  )
 }
