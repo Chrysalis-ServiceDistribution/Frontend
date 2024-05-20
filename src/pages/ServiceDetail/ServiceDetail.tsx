@@ -4,7 +4,13 @@ import { Grid, Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
 import { useEffect, useMemo, useState } from 'react';
 import { Service, Task } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
-import { CheckIcon, ClockIcon, Cross1Icon, EnvelopeClosedIcon, RocketIcon } from '@radix-ui/react-icons';
+import {
+  CheckIcon,
+  ClockIcon,
+  Cross1Icon,
+  EnvelopeClosedIcon,
+  RocketIcon,
+} from '@radix-ui/react-icons';
 import StatusTab from '../../components/StatusTab/StatusTab';
 
 type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
@@ -40,7 +46,7 @@ export default function ServiceDetail() {
     }
 
     for (const task of service.tasks) {
-      sorted[task.status].push(task)
+      sorted[task.status].push(task);
     }
 
     return sorted;

@@ -1,16 +1,13 @@
-import { api } from './api'
+import { api } from './api';
 
-export async function login(payload: {
-  username: string,
-  password: string,
-}) {
-  return await api.post('/auth/login', payload)
+export async function loginUser(payload: { username: string; password: string }) {
+  return await api.post('/auth/login', payload);
 }
 
-export async function register(payload: {
-  username: string,
-  email: string,
-  password: string,
+export async function registerUser(payload: {
+  username: string;
+  email: string;
+  password: string;
 }) {
-  return await api.post('/auth/register', payload)
+  return await api.post('/auth/register', payload);
 }

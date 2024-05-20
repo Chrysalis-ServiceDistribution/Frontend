@@ -28,7 +28,7 @@ export default function SubmitTaskForm() {
     console.log({
       service_id: servID,
       fields: filledFields,
-    })
+    });
   }
 
   return (

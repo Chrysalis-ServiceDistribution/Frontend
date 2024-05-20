@@ -1,6 +1,11 @@
 import { ServiceField } from './formField';
 
-export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
+export type TaskStatus =
+  | 'pending'
+  | 'accepted'
+  | 'inProgress'
+  | 'rejected'
+  | 'done';
 
 export type RequestTextField = {
   type: 'text';

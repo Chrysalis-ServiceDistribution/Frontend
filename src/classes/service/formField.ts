@@ -31,7 +31,10 @@ export class ServiceCheckboxField {
   }
 }
 
-export type ServiceField = ServiceTextField | ServiceRadioField | ServiceCheckboxField;
+export type ServiceField =
+  | ServiceTextField
+  | ServiceRadioField
+  | ServiceCheckboxField;
 
 export type ServiceCreationFormData = {
   name: string;
@@ -46,7 +49,9 @@ export type ServiceCreationFormData = {
  * @returns {ServiceCreationFormData} A service form with all of its fields
  * trimmed of leading and trailing whitespace.
  */
-export function sanitize(form: ServiceCreationFormData): ServiceCreationFormData {
+export function sanitize(
+  form: ServiceCreationFormData,
+): ServiceCreationFormData {
   return {
     name: form.name.trim(),
     description: form.description.trim(),
