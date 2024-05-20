@@ -41,7 +41,7 @@ const services: Service[] = [
       },
       {
         client: 'Client 2',
-        status: 'in progress',
+        status: 'inProgress',
         requestFields: [
           {
             type: 'text',
@@ -153,7 +153,7 @@ const services: Service[] = [
       },
       {
         client: 'Client 2',
-        status: 'in progress',
+        status: 'inProgress',
         requestFields: [
           {
             type: 'text',
@@ -265,7 +265,7 @@ const services: Service[] = [
       },
       {
         client: 'Client 2',
-        status: 'in progress',
+        status: 'inProgress',
         requestFields: [
           {
             type: 'text',
@@ -377,7 +377,7 @@ const services: Service[] = [
       },
       {
         client: 'Client 2',
-        status: 'in progress',
+        status: 'inProgress',
         requestFields: [
           {
             type: 'text',

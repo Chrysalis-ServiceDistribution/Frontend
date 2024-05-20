@@ -40,23 +40,7 @@ export default function ServiceDetail() {
     }
 
     for (const task of service.tasks) {
-      switch (task.status) {
-        case 'pending':
-          sorted.pending.push(task);
-          break;
-        case 'accepted':
-          sorted.accepted.push(task);
-          break;
-        case 'in progress':
-          sorted.inProgress.push(task);
-          break;
-        case 'rejected':
-          sorted.rejected.push(task);
-          break;
-        case 'done':
-          sorted.done.push(task);
-          break;
-      }
+      sorted[task.status].push(task)
     }
 
     return sorted;
