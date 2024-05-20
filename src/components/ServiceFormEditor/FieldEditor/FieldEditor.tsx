@@ -10,13 +10,13 @@ import NoOutlineIconButton from './NoOutlineIconButton';
 import CheckboxFieldEditor from './CheckboxFieldEditor';
 import RadioFieldEditor from './RadioFieldEditor';
 import TextFieldEditor from './TextFieldEditor';
-import { FormFieldType } from '../../../classes/service/formField';
+import { ServiceField } from '../../../classes/service/formField';
 import { ChevronUpIcon, Cross1Icon } from '@radix-ui/react-icons';
 import ChangeServiceTypeDropdown from './ChangeServiceTypeDropdown';
 
 export default function FieldEditor(props: {
-  field: FormFieldType;
-  onChange: (field: FormFieldType) => void | undefined;
+  field: ServiceField;
+  onChange: (field: ServiceField) => void | undefined;
   onMoveUp: () => void | undefined;
   onMoveDown: () => void | undefined;
   onDelete: () => void | undefined;

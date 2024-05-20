@@ -1,12 +1,12 @@
 import { Card, Flex, Text } from '@radix-ui/themes';
-import { FormFieldType } from '../../../classes/service/formField';
+import { ServiceField } from '../../../classes/service/formField';
 import { RequestField } from '../../../classes/service/service';
 import TaskTextFieldEditor from './TaskTextFieldEditor';
 import TaskRadioFieldEditor from './TaskRadioFieldEditor';
 import TaskCheckboxFieldEditor from './TaskCheckboxFieldEditor';
 
 export default function TaskFieldEditor(props: {
-  field: FormFieldType;
+  field: ServiceField;
   currentRequestField: RequestField;
   onUpdate: (req: RequestField) => void;
 }) {

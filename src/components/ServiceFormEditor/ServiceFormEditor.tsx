@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {
-  CheckboxField,
-  ServiceForm,
-  FormFieldType,
-  RadioField,
-  TextField,
+  ServiceCheckboxField,
+  ServiceCreationFormData,
+  ServiceField,
+  ServiceRadioField,
+  ServiceTextField,
   sanitize,
   validate,
 } from '../../classes/service/formField';
@@ -21,9 +21,9 @@ import {
 import FieldEditor from './FieldEditor/FieldEditor';
 
 export default function ServiceFormEditor(props: {
-  onCommit: (service: ServiceForm) => void;
+  onCommit: (service: ServiceCreationFormData) => void;
 }) {
-  const [formData, setFormData] = useState<ServiceForm>({
+  const [formData, setFormData] = useState<ServiceCreationFormData>({
     name: '',
     description: '',
     fields: [],
@@ -47,7 +47,7 @@ export default function ServiceFormEditor(props: {
   }
 
   function setFormField(index: number) {
-    return (field: FormFieldType) => {
+    return (field: ServiceField) => {
       setFormData((prevFormData) => {
         const nextFields = [...prevFormData.fields];
         nextFields.splice(index, 1, field);
@@ -64,7 +64,7 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new TextField(`Text field prompt goes here`),
+        new ServiceTextField(`Text field prompt goes here`),
       ],
     });
   }
@@ -74,7 +74,7 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new RadioField(`Radio field prompt goes here`, ['Choice 1']),
+        new ServiceRadioField(`Radio field prompt goes here`, ['Choice 1']),
       ],
     });
   }
@@ -84,7 +84,7 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new CheckboxField(`Checkbox field prompt goes here`, ['Choice 1']),
+        new ServiceCheckboxField(`Checkbox field prompt goes here`, ['Choice 1']),
       ],
     });
   }
@@ -141,16 +141,16 @@ export default function ServiceFormEditor(props: {
   function replaceField(index: number) {
     const oldField = formData.fields[index];
     return (type: string) => {
-      let newField: FormFieldType;
+      let newField: ServiceField;
       switch (type) {
         case 'text':
-          newField = new TextField(oldField.prompt);
+          newField = new ServiceTextField(oldField.prompt);
           break;
         case 'radio':
-          newField = new RadioField(oldField.prompt, ['Choice 1']);
+          newField = new ServiceRadioField(oldField.prompt, ['Choice 1']);
           break;
         case 'checkbox':
-          newField = new CheckboxField(oldField.prompt, ['Choice 1']);
+          newField = new ServiceCheckboxField(oldField.prompt, ['Choice 1']);
           break;
         default:
           return;

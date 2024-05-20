@@ -33,7 +33,7 @@ export class ServiceCheckboxField {
 
 export type ServiceField = ServiceTextField | ServiceRadioField | ServiceCheckboxField;
 
-export type ServiceForm = {
+export type ServiceCreationFormData = {
   name: string;
   description: string;
   fields: ServiceField[];
@@ -42,11 +42,11 @@ export type ServiceForm = {
 /**
  * Removes all leading and trailing whitespace from all form fields.
  *
- * @param {ServiceForm} form - A service form.
- * @returns {ServiceForm} A service form with all of its fields
+ * @param {ServiceCreationFormData} form - A service form.
+ * @returns {ServiceCreationFormData} A service form with all of its fields
  * trimmed of leading and trailing whitespace.
  */
-export function sanitize(form: ServiceForm): ServiceForm {
+export function sanitize(form: ServiceCreationFormData): ServiceCreationFormData {
   return {
     name: form.name.trim(),
     description: form.description.trim(),
@@ -78,10 +78,10 @@ export function sanitize(form: ServiceForm): ServiceForm {
  * Returns all formatting errors inside of a service form: empty fields,
  *
  *
- * @param {ServiceForm} form - A service form.
+ * @param {ServiceCreationFormData} form - A service form.
  * @returns {string[]} A string of errors found inside the form.
  */
-export function validate(form: ServiceForm): string[] {
+export function validate(form: ServiceCreationFormData): string[] {
   const errors: string[] = [];
 
   if (form.name === '') {

@@ -4,16 +4,21 @@ export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'd
 
 export type RequestTextField = {
   type: 'text';
+  prompt: string;
   value: string;
 };
 
 export type RequestRadioField = {
   type: 'radio';
+  prompt: string;
+  choices: string[];
   selection: number;
 };
 
 export type RequestCheckboxField = {
   type: 'checkbox';
+  prompt: string;
+  choices: string[];
   selection: number[];
 };
 
@@ -39,17 +44,17 @@ export function createDefaultField(formField: ServiceField): RequestField {
   switch (formField.type) {
     case 'text':
       return {
-        type: 'text',
+        ...formField,
         value: '',
       };
     case 'radio':
       return {
-        type: 'radio',
+        ...formField,
         selection: 0,
       };
     case 'checkbox':
       return {
-        type: 'checkbox',
+        ...formField,
         selection: [],
       };
   }

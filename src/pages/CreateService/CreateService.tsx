@@ -1,8 +1,8 @@
 import ServiceCreationForm from '../../components/ServiceFormEditor/ServiceFormEditor';
-import { ServiceForm } from '../../classes/service/formField';
+import { ServiceCreationFormData } from '../../classes/service/formField';
 
 export default function CreateService() {
-  function onCommit(serviceForm: ServiceForm) {
+  function onCommit(serviceForm: ServiceCreationFormData) {
     console.log(serviceForm);
   }
   return <ServiceCreationForm onCommit={onCommit} />;

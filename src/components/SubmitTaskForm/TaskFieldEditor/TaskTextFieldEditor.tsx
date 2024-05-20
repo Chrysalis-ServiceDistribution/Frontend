@@ -1,13 +1,13 @@
 import { TextArea } from '@radix-ui/themes';
-import { FormFieldType } from '../../../classes/service/formField';
+import { ServiceField } from '../../../classes/service/formField';
 import {
-  TextRequestField,
+  RequestTextField,
   RequestField,
 } from '../../../classes/service/service';
 
 export default function TaskTextFieldEditor(props: {
-  field: FormFieldType;
-  currentRequestField: TextRequestField;
+  field: ServiceField;
+  currentRequestField: RequestTextField;
   onUpdate: (req: RequestField) => void;
 }) {
   function handleChange(evt: React.ChangeEvent<HTMLTextAreaElement>) {
