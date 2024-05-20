@@ -2,6 +2,14 @@ import { ServiceField } from './formField';
 
 export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
 
+export const TaskStatuses = [
+  'rejected' as const,
+  'pending' as const,
+  'accepted' as const,
+  'inProgress' as const,
+  'done' as const,
+]
+
 export type RequestTextField = {
   type: 'text';
   prompt: string;
