@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Heading, Separator } from '@radix-ui/themes';
+import { Text, Box, Flex, Heading, Separator, Button } from '@radix-ui/themes';
 import {
   RequestField,
   Service,
@@ -10,7 +10,7 @@ import TaskFieldEditor from './TaskFieldEditor/TaskFieldEditor';
 import { useState } from 'react';
 
 export default function SubmitTaskForm() {
-  const { userID } = useParams();
+  const { userID, servID } = useParams();
   const service: Service = dummyServices[0];
   const [filledFields, setFilledFields] = useState(
     service.fields.map((field) => createFieldDefault(field)),
@@ -22,6 +22,13 @@ export default function SubmitTaskForm() {
         prevFields.map((f, i) => (i === idx ? req : f)),
       );
     };
+  }
+
+  function commit() {
+    console.log({
+      service_id: servID,
+      fields: filledFields,
+    })
   }
 
   return (
@@ -46,6 +53,7 @@ export default function SubmitTaskForm() {
           onUpdate={updateField(idx)}
         />
       ))}
+      <Button onClick={commit}>Submit Task</Button>
     </Flex>
   );
 }

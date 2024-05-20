@@ -1,5 +1,7 @@
 import { FormFieldType } from './formField';
 
+export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
+
 export type FilledTextField = {
   type: 'text';
   value: string;
@@ -22,7 +24,7 @@ export type RequestField =
 
 export interface Task {
   client: string;
-  status: string;
+  status: TaskStatus;
   requestFields: RequestField[];
 }
 
