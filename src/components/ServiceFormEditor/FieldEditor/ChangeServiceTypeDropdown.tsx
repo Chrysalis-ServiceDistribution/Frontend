@@ -1,12 +1,12 @@
 import { Select } from '@radix-ui/themes';
 import {
-  FormFieldType,
+  ServiceField,
   formFieldTypes,
 } from '../../../classes/service/formField';
 import ServiceType from './ServiceType';
 
 export default function ChangeServiceTypeDropdown(props: {
-  field: FormFieldType;
+  field: ServiceField;
   onSelect: (type: string) => void;
 }) {
   return (

@@ -1,20 +1,20 @@
 import { Button, Flex, TextField } from '@radix-ui/themes';
 import {
-  CheckboxField,
-  FormFieldType,
+  ServiceCheckboxField,
+  ServiceField,
 } from '../../../classes/service/formField';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
 
 export default function CheckboxFieldEditor(props: {
-  field: CheckboxField;
-  onChange: (field: FormFieldType) => void | undefined;
+  field: ServiceCheckboxField;
+  onChange: (field: ServiceField) => void | undefined;
 }) {
   function editChoice(index: number) {
     return (evt: React.ChangeEvent<HTMLInputElement>) => {
       const newChoices = [...props.field.choices];
       newChoices.splice(index, 1, evt.currentTarget.value);
-      const newField = new CheckboxField(props.field.prompt, newChoices);
+      const newField = new ServiceCheckboxField(props.field.prompt, newChoices);
       props.onChange(newField);
     };
   }
@@ -25,7 +25,7 @@ export default function CheckboxFieldEditor(props: {
       `Choice ${props.field.choices.length + 1}`,
     ];
 
-    const newField = new CheckboxField(props.field.prompt, newChoices);
+    const newField = new ServiceCheckboxField(props.field.prompt, newChoices);
     props.onChange(newField);
   }
 
@@ -37,7 +37,7 @@ export default function CheckboxFieldEditor(props: {
       }
       const newChoices = [...props.field.choices];
       newChoices.splice(index, 1);
-      const newField = new CheckboxField(props.field.prompt, newChoices);
+      const newField = new ServiceCheckboxField(props.field.prompt, newChoices);
       props.onChange(newField);
     };
   }
