@@ -3,7 +3,6 @@ import { Task as taskInterface } from '../../classes/service/service';
 import { Flex, Text, Tabs as Tabs } from '@radix-ui/themes';
 import ClientTabDashboard from '../../components/ClientTabDashboard/ClientTabDashboard';
 import CreatorTabDashboard from '../../components/CreatorTabDashboard/CreatorTabDashboard';
-import './Home.css';
 
 const exampleClientTasks: taskInterface[] = [
   {

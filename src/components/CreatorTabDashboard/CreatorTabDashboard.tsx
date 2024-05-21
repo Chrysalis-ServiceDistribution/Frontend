@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
-import { Flex, Text, Button, Box } from '@radix-ui/themes';
+import { Flex, Text, Button, Box, Link} from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 const CreatorTabDashboard = (props: { tasks : taskInterface[]}) => {
   const { tasks } = props;
-  const navigate = useNavigate();
 
   const [services, setServices] = React.useState<string[]>([]);
   const [serviceView, setServiceView] = React.useState<string>('Show All');
@@ -22,13 +20,11 @@ const CreatorTabDashboard = (props: { tasks : taskInterface[]}) => {
     <Flex direction="column" gap="2">
       {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
       <Text size="5">Your reqests and task status'</Text>
-      <Button
-        onClick={() => {
-          navigate('/:userID/services');
-        }}
-      >
-        View your services
-      </Button>
+      <Link href='/:userID/services'>
+        <Button>
+          View your services
+        </Button>
+      </Link>
       <ServiceSelect services={services} setServiceView={setServiceView} />
       {tasks?.filter(
         (task) => task.status === 'pending' || task.status === 'rejected',
