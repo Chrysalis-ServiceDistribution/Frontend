@@ -207,5 +207,29 @@ export function loadRequestField(field: any): RequestField {
   }
 }
 
+export function loadStatus(status: any): TaskStatus {
+  switch(status) {
+    case 'P':
+      return 'pending'
+    case 'A':
+      return 'accepted'
+    case 'IP':
+      return 'inProgress'
+    case 'C':
+      return 'done'
+    case 'X':
+      return 'rejected'
+    default:
+      throw new Error('invalid status')
+  }
+}
+
 export function loadTask(task: any): Task {
+  return {
+    taskID: task.id,
+    service: task.service,
+    client: task.client,
+    status: loadStatus(task.status),
+    requestFields: task['request_fields'].map(loadRequestField),
+  }
 }
