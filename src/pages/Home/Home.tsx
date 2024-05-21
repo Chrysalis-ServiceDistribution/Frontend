@@ -1,6 +1,6 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import React from 'react';
-import taskInterface from '../../@types/task';
+import {Task as taskInterface} from '../../classes/service/service';
 import { Flex, Text } from '@radix-ui/themes';
 import ClientTabDashboard from '../../components/componentsForHome/ClientTabDashboard/ClientTabDashboard';
 import CreatorTabDashboard from '../../components/componentsForHome/CreatorTabDashboard/CreatorTabDashboard';
@@ -9,74 +9,55 @@ import './Home.css';
 const exampleClientTasks: taskInterface[] = [
   {
     taskID: 1,
-    Service: 'Service 1',
-    ClientForeinKey: 1,
-    requestField: 'requestField 1',
-    status: 'accepted',
-  },
-  {
-    taskID: 2,
-    Service: 'Service 2',
-    ClientForeinKey: 176840,
-    requestField: 'requestField 2',
-    status: 'rejected',
-  },
-  {
-    taskID: 3,
-    Service: 'Service 3',
-    ClientForeinKey: 3434321,
-    requestField: 'requestField 3',
-    status: 'pending',
-  },
-  {
-    taskID: 4,
-    Service: 'Service 4',
-    ClientForeinKey: 343242,
-    requestField: 'requestField 4',
-    status: 'done',
-  },
-  {
-    taskID: 5,
-    Service: 'Service 5',
-    ClientForeinKey: 1432423,
-    requestField: 'requestField 5',
+    service: 'Service Name',
+    client: 'Client',
+    requestFields: [
+      {
+        prompt: 'Field Prompt',
+        type: 'text',
+        value: 'Field Value',
+      },
+      {
+        prompt: 'Field Prompt',
+        type: 'radio',
+        choices: ['Choice 1', 'Choice 2'],
+        selection: 0,
+      },
+      {
+        prompt: 'Field Prompt',
+        type: 'checkbox',
+        choices: ['Choice 1', 'Choice 2'],
+        selection: [0],
+      },
+    ],
     status: 'pending',
   },
 ];
+
 const exampleCreatorTasks: taskInterface[] = [
   {
     taskID: 1,
-    Service: 'Service 1',
-    ClientForeinKey: 1,
-    requestField: 'requestField 1',
-    status: 'accepted',
-  },
-  {
-    taskID: 2,
-    Service: 'Service 2',
-    ClientForeinKey: 176840,
-    requestField: 'requestField 2',
-    status: 'rejected',
-  },
-  {
-    taskID: 3,
-    Service: 'Service 3',
-    ClientForeinKey: 3434321,
-    requestField: 'requestField 3',
-    status: 'pending',
-  },
-  {
-    taskID: 4,
-    Service: 'Service 4',
-    ClientForeinKey: 343242,
-    requestField: 'requestField 4',
-    status: 'done',
-  },
-  {
-    taskID: 5,
-    Service: 'Service 5',
-    ClientForeinKey: 1432423,
-    requestField: 'requestField 5',
+    service: 'Service Name',
+    client: 'Client',
+    requestFields: [
+      {
+        prompt: 'Field Prompt',
+        type: 'text',
+        value: 'Field Value',
+      },
+      {
+        prompt: 'Field Prompt',
+        type: 'radio',
+        choices: ['Choice 1', 'Choice 2'],
+        selection: 0,
+      },
+      {
+        prompt: 'Field Prompt',
+        type: 'checkbox',
+        choices: ['Choice 1', 'Choice 2'],
+        selection: [0],
+      },
+    ],
     status: 'pending',
   },
 ];

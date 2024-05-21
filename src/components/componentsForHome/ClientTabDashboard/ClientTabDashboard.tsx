@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
 import Task from '../Task/Task';
-import DashboardProps from '../../../@types/dashboard';
+import {Task as taskInterface} from '../../../classes/service/service';
 import { Button, Flex, Text } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-const ClientTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
+const ClientTabDashboard = (props: { tasks : taskInterface[]}) => {
+  const { tasks } = props;
+  
   const navigate = useNavigate();
 
   return (

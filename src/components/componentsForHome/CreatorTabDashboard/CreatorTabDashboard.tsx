@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import DashboardProps from '../../../@types/dashboard';
+import { Task as taskInterface } from '../../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
 import { Flex, Text, Button, Box } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-const CreatorTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
+const CreatorTabDashboard = (props: { tasks : taskInterface[]}) => {
+  const { tasks } = props;
   const navigate = useNavigate();
 
   const [services, setServices] = React.useState<string[]>([]);
@@ -14,7 +15,7 @@ const CreatorTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
 
   useEffect(() => {
     //TODO: Change this to get the services from the user context
-    setServices([...new Set(tasks.map((task) => task.Service))]);
+    setServices([...new Set(tasks.map((task) => task.service))]);
   }, [tasks]);
 
   return (
@@ -45,7 +46,7 @@ const CreatorTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
                   tasks
                     .filter((task) =>
                       serviceView !== 'Show All'
-                        ? task.Service === serviceView
+                        ? task.service === serviceView
                         : task,
                     )
                     .filter(
@@ -79,7 +80,7 @@ const CreatorTabDashboard: React.FC<DashboardProps> = ({ tasks }) => {
                     {tasks
                       .filter((task) =>
                         serviceView !== 'Show All'
-                          ? task.Service === serviceView
+                          ? task.service === serviceView
                           : task,
                       )
                       .filter(

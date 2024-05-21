@@ -1,5 +1,5 @@
 import React from 'react';
-import taskInterface from '../../../@types/task';
+import {Task as taskInterface} from '../../../classes/service/service';
 import { Badge, Flex, Text } from '@radix-ui/themes';
 
 const Task: React.FC<taskInterface> = (task) => {
@@ -17,7 +17,7 @@ const Task: React.FC<taskInterface> = (task) => {
   const statusToBadge = {
     pending: 'gray' as const,
     accepted: 'blue' as const,
-    'in progress': 'gold' as const,
+    inProgress: 'gold' as const,
     done: 'green' as const,
     rejected: 'red' as const,
   };
@@ -32,8 +32,8 @@ const Task: React.FC<taskInterface> = (task) => {
       }}
     >
       <Flex direction="column" justify="between">
-        <Text size="3">{task.Service}</Text>
-        <Text size="2">{task.ClientForeinKey}</Text>
+        <Text size="3">{task.service}</Text>
+        <Text size="2">{task.client}</Text>
       </Flex>
       <Text size="1">
         <Badge color={statusToBadge[task.status]}>{task.status}</Badge>

@@ -36,11 +36,85 @@ export type RequestField =
   | RequestTextField;
 
 export interface Task {
+  taskID: number;
+  service: string;
   client: string;
-  status: TaskStatus;
   requestFields: RequestField[];
+  status: TaskStatus;
 }
 
+/**
+ * A service is a collection of tasks that can be requested by clients.
+ * Each service has a name, description, fields, and tasks.
+ * Task's have the following properties:
+ * - taskID: a unique identifier for the task
+ * - service: the name of the service
+ * - client: the name of the client
+ * - requestFields: an array of fields that the client must fill out to request the service
+ * -- each field has a prompt and a value
+ * - status: the status of the task (pending, accepted, inProgress, rejected, done)
+ * Services have the following properties:
+ * - name: the name of the service
+ * - description: a description of the service
+ * - fields: an array of fields that the client must fill out to request the service
+ * -- each field has a prompt and a type (text, radio, checkbox)
+ * - tasks: an array of tasks that have been requested for the service
+ * -- each task has a taskID, service, client, requestFields, and status
+ * @param name the name of the service
+ * @param description a description of the service
+ * @param fields an array of fields that the client must fill out to request the service
+ * @param tasks an array of tasks that have been requested for the service
+ * @returns a service object
+ * @example
+ * const service: Service = {
+ *  name: 'Service Name',
+ * description: 'Service Description',
+ * fields: [
+ * {
+ * prompt: 'Field Prompt',
+ * type: 'text',
+ * },
+ * {
+ * prompt: 'Field Prompt',
+ * type: 'radio',
+ * choices: ['Choice 1', 'Choice 2'],
+ * },
+ * {
+ * prompt: 'Field Prompt',
+ * type: 'checkbox',
+ * choices: ['Choice 1', 'Choice 2'],
+ * },
+ * ],
+ * tasks: [
+ * {
+ * taskID: 1,
+ * service: 'Service Name',
+ * client: 'Client
+ * requestFields: [
+ * {
+ * prompt: 'Field Prompt',
+ * type: 'text',
+ * value: 'Field Value',
+ * },
+ * {
+ * prompt: 'Field Prompt',
+ * type: 'radio',
+ * choices: ['Choice 1', 'Choice 2'],
+ * selection: 0,
+ * },
+ * {
+ * prompt: 'Field Prompt',
+ * type: 'checkbox',
+ * choices: ['Choice 1', 'Choice 2'],
+ * selection: [0],
+ * },
+ * ],
+ * status: 'pending',
+ * },
+ * ],
+ * };
+ * 
+ */
 export interface Service {
   name: string;
   description: string;
