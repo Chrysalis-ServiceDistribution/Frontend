@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import Task from '../Task/Task';
 import {Task as taskInterface} from '../../classes/service/service';
 import { Button, Flex, Text } from '@radix-ui/themes';
@@ -7,19 +5,10 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 const ClientTabDashboard = (props: { tasks : taskInterface[]}) => {
   const { tasks } = props;
-  
-  const navigate = useNavigate();
 
   return (
     <Flex direction="column" gap="2">
       <Text size="6">Outbound Tasks and Status</Text>
-      <Button
-        onClick={() => {
-          navigate('/search');
-        }}
-      >
-        Search for a new service
-      </Button>
 
       {/* //TODO: Change button to be icon, text needs to be dynamic*/}
       {tasks.length > 0 && (
