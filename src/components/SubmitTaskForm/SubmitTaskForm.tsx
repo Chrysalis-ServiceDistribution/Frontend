@@ -7,19 +7,34 @@ import {
 import dummyServices from '../../pages/UserServices/services';
 import { useParams } from 'react-router';
 import TaskFieldEditor from './TaskFieldEditor/TaskFieldEditor';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getUserServiceById } from '../../services/apiServices';
 
 export default function SubmitTaskForm() {
   const { userID, servID } = useParams();
-  const service: Service = dummyServices[0];
+  const [service, setService] = useState<Service | null>(null);
   const [filledFields, setFilledFields] = useState(
-    service.fields.map((field) => createDefaultField(field)),
+    service?.fields.map((field) => createDefaultField(field)),
   );
+
+  useEffect(() => {
+    const runner = async () => {
+      if (userID === undefined || servID === undefined) {
+        return;
+      }
+      const service = await getUserServiceById(Number(servID));
+      setService(service);
+      setFilledFields(service.fields.map((field) => createDefaultField(field)));
+    };
+    runner();
+  }, [userID, servID]);
+
+  if (service === null) return <></>;
 
   function updateField(idx: number) {
     return (req: RequestField) => {
       setFilledFields((prevFields) =>
-        prevFields.map((f, i) => (i === idx ? req : f)),
+        prevFields?.map((f, i) => (i === idx ? req : f)),
       );
     };
   }
@@ -45,14 +60,15 @@ export default function SubmitTaskForm() {
         <Text as="p">{service.description}</Text>
       </Box>
       <Separator size="4" />
-      {service.fields.map((field, idx) => (
-        <TaskFieldEditor
-          key={idx}
-          field={field}
-          currentRequestField={filledFields[idx]}
-          onUpdate={updateField(idx)}
-        />
-      ))}
+      {filledFields !== undefined &&
+        service.fields.map((field, idx) => (
+          <TaskFieldEditor
+            key={idx}
+            field={field}
+            currentRequestField={filledFields[idx]}
+            onUpdate={updateField(idx)}
+          />
+        ))}
       <Button onClick={commit}>Submit Task</Button>
     </Flex>
   );

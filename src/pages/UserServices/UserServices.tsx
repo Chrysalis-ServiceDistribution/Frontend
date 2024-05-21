@@ -4,15 +4,19 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Service } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
+import { getUserServices } from '../../services/apiServices';
 
 export default function UserServices() {
   const { userID } = useParams();
   const [services, setServices] = useState<Service[] | null>(null);
 
   useEffect(() => {
-    // :(
-    setServices(dummyServices);
-  }, []);
+    const runner = async () => {
+      const services = await getUserServices(Number(userID));
+      setServices(services);
+    };
+    runner();
+  }, [userID]);
 
   return (
     <Flex p="3" gap="3" direction="column">

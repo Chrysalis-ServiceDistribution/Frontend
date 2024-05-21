@@ -13,7 +13,7 @@ export const TaskStatuses = [
   'accepted' as const,
   'inProgress' as const,
   'done' as const,
-]
+];
 
 export type RequestTextField = {
   type: 'text';
@@ -118,7 +118,7 @@ export interface Task {
  * },
  * ],
  * };
- * 
+ *
  */
 export interface Service {
   name: string;
@@ -153,74 +153,74 @@ export function loadService(service: any): Service {
     description: service.description,
     fields: service['form_fields'].map(loadServiceField),
     tasks: service['tasks'].map(loadTask),
-  }
+  };
 }
 
 export function loadServiceField(field: any): ServiceField {
-  switch(field.type) {
+  switch (field.type) {
     case 'text':
       return {
         type: 'text',
         prompt: field.prompt,
-      }
+      };
     case 'radio':
       return {
         type: 'radio',
         prompt: field.prompt,
         choices: field.choices,
-      }
+      };
     case 'checkbox':
       return {
         type: 'checkbox',
         prompt: field.prompt,
         choices: field.choices,
-      }
+      };
     default:
-      throw new Error('invalid type')
+      throw new Error('invalid type');
   }
 }
 
 export function loadRequestField(field: any): RequestField {
-  switch(field.type) {
+  switch (field.type) {
     case 'text':
       return {
         type: 'text',
         prompt: field.prompt,
         value: field.value,
-      }
+      };
     case 'radio':
       return {
         type: 'radio',
         prompt: field.prompt,
         choices: field.choices,
         selection: field.options,
-      }
+      };
     case 'checkbox':
       return {
         type: 'checkbox',
         prompt: field.prompt,
         choices: field.choices,
         selection: field.options,
-      }
+      };
     default:
-      throw new Error('invalid type')
+      throw new Error('invalid type');
   }
 }
 
 export function loadStatus(status: any): TaskStatus {
-  switch(status) {
+  switch (status) {
     case 'P':
-      return 'pending'
+      return 'pending';
     case 'A':
-      return 'accepted'
+      return 'accepted';
     case 'IP':
-      return 'inProgress'
+      return 'inProgress';
     case 'C':
-      return 'done'
+      return 'done';
     case 'X':
-      return 'rejected'
+      return 'rejected';
     default:
-      throw new Error('invalid status')
+      throw new Error('invalid status');
   }
 }
 
@@ -231,5 +231,5 @@ export function loadTask(task: any): Task {
     client: task.client,
     status: loadStatus(task.status),
     requestFields: task['request_fields'].map(loadRequestField),
-  }
+  };
 }

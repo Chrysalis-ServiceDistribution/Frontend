@@ -14,7 +14,7 @@ const NavbarWrapper = () => (
     <Navbar />
     <Outlet />
   </Flex>
-)
+);
 
 const router = createBrowserRouter([
   {

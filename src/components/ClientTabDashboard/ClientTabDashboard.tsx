@@ -1,9 +1,9 @@
 import Task from '../Task/Task';
-import {Task as taskInterface} from '../../classes/service/service';
+import { Task as taskInterface } from '../../classes/service/service';
 import { Button, Flex, Text } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-const ClientTabDashboard = (props: { tasks : taskInterface[]}) => {
+const ClientTabDashboard = (props: { tasks: taskInterface[] }) => {
   const { tasks } = props;
 
   return (

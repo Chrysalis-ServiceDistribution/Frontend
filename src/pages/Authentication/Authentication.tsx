@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Authentication() {
-  const { login, register } = useContext(AuthContext)!
+  const { login, register } = useContext(AuthContext)!;
   const navigate = useNavigate();
   const [signupMode, setSignupMode] = useState(false);
 
@@ -20,7 +20,7 @@ export default function Authentication() {
       .getElementsByTagName('input')[0].value;
     //TODO: pass username, email, and password to the auth context and handle the signup
     console.log('Signing up:', username, email, password);
-    register({username, email, password})
+    register({ username, email, password });
 
     //On api okay, login, wait, if good and redirect to home, if not switch to login page, display error message
     //throwing this here so it is part of flow, logic required to implemnt correctly
@@ -37,7 +37,7 @@ export default function Authentication() {
       .getElementsByTagName('input')[0].value;
     // TODO: pass email and password to the auth context and handle the login
     console.log('Logging in:', username, password);
-    login({username, password})
+    login({ username, password });
     //On api okay, login, wait, if good and redirect to home
 
     //throwing this here so it is part of flow, logic required to implemnt correctly
@@ -48,9 +48,9 @@ export default function Authentication() {
     <>
       <Flex direction="column" gap="3" justify="center" align="center">
         <Text> Welcome to Chrysalis</Text>
-          <Box maxWidth="200px" className="Username">
-            <TextField.Root size="3" placeholder="Username" />
-          </Box>
+        <Box maxWidth="200px" className="Username">
+          <TextField.Root size="3" placeholder="Username" />
+        </Box>
         {signupMode && (
           <Box maxWidth="200px" className="Email">
             <TextField.Root size="3" placeholder="Email" />

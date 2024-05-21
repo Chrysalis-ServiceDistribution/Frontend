@@ -9,5 +9,5 @@ export default function TaskList(props: { tasks: Task[] }) {
         <TaskCard task={task} key={idx} />
       ))}
     </Flex>
-  )
+  );
 }
