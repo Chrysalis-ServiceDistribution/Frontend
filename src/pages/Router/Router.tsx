@@ -10,7 +10,10 @@ import Navbar from '../../components/Navbar/Navbar';
 import { Flex } from '@radix-ui/themes';
 
 const NavbarWrapper = () => (
-  <Flex direction="column" justify="center" gap="2">
+  <Flex
+  direction="column"
+  justify="center"
+  gap="4">
     <Navbar />
     <Outlet />
   </Flex>

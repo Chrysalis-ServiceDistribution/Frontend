@@ -25,12 +25,20 @@ export default function Navbar() {
     dynamicText = 'Add me as an elseif statement for this page';
   }
 
+  if (location.pathname === '/auth') {
+    return null;
+  }
+
   return (
     <Flex
       justify="between"
       gap="2"
       align="center"
-      style={{ background: 'darkgrey'}}
+      style={{
+        padding: '1rem',
+        borderBottom: '1px solid rgba(255,255,255, .8)',
+      
+      }}
     >
       <Flex gap="1">
         {/* Search */}

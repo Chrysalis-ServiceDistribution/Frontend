@@ -1,32 +1,27 @@
 import Task from '../Task/Task';
 import {Task as taskInterface} from '../../classes/service/service';
-import { Button, Flex, Text } from '@radix-ui/themes';
-import * as Collapsible from '@radix-ui/react-collapsible';
+import { Flex, Text, Card } from '@radix-ui/themes';
 
 const ClientTabDashboard = (props: { tasks : taskInterface[]}) => {
   const { tasks } = props;
 
   return (
-    <Flex direction="column" gap="2">
-      <Text size="6">Outbound Tasks and Status</Text>
+    <Flex
+    direction="column"
+    gap="4">
+      <Card>
+        <Text size="6">Outbound Tasks and Status</Text>
+      </Card>
 
       {/* //TODO: Change button to be icon, text needs to be dynamic*/}
       {tasks.length > 0 && (
-        <Collapsible.Root>
-          <Text> Outgoing Tasks </Text>
-          <Collapsible.Trigger asChild>
-            <Button>see</Button>
-          </Collapsible.Trigger>
-          <Collapsible.Content>
-            {
-              <Flex direction="column" gap="1">
-                {tasks.map((task) => {
-                  return <Task key={task.taskID} {...task} />;
-                }, 0)}
-              </Flex>
-            }
-          </Collapsible.Content>
-        </Collapsible.Root>
+          <Flex
+          direction="column"
+          gap="1">
+            {tasks.map((task) => {
+              return <Task key={task.taskID} {...task} />;
+            }, 0)}
+          </Flex>
       )}
     </Flex>
   );

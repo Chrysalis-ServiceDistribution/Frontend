@@ -42,21 +42,22 @@ export default function Authentication() {
   };
   return (
     <>
-      <Flex direction="column" gap="3" justify="center" align="center">
-        <Text> Welcome to Chrysalis</Text>
+      <Flex direction="column" gap="5" justify="center" align="center">
+        <Text size="9">Chrysalis</Text>
         {signupMode && (
-          <Box maxWidth="200px" className="Username">
-            <TextField.Root size="3" placeholder="Username" />
+          <Box>
+            <TextField.Root size="3" placeholder="Username" color="jade" />
           </Box>
         )}
-        <Box maxWidth="200px" className="Email">
+        <Box>
           <TextField.Root size="3" placeholder="Email" />
         </Box>
-        <Box maxWidth="200px" className="Password">
+        <Box>
           <TextField.Root size="3" placeholder="Password" type="password" />
         </Box>
         {!signupMode && (
           <Button
+            color='jade'
             onClick={(e) => {
               handleLogin(e);
             }}
@@ -66,6 +67,7 @@ export default function Authentication() {
         )}
         {signupMode && (
           <Button
+            color='jade'
             onClick={(e) => {
               handleSignUp(e);
             }}
