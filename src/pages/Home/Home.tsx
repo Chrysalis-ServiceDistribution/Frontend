@@ -2,8 +2,8 @@ import * as Tabs from '@radix-ui/react-tabs';
 import React from 'react';
 import {Task as taskInterface} from '../../classes/service/service';
 import { Flex, Text } from '@radix-ui/themes';
-import ClientTabDashboard from '../../components/componentsForHome/ClientTabDashboard/ClientTabDashboard';
-import CreatorTabDashboard from '../../components/componentsForHome/CreatorTabDashboard/CreatorTabDashboard';
+import ClientTabDashboard from '../../components/ClientTabDashboard/ClientTabDashboard';
+import CreatorTabDashboard from '../../components/CreatorTabDashboard/CreatorTabDashboard';
 import './Home.css';
 
 const exampleClientTasks: taskInterface[] = [

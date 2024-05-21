@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { Task as taskInterface } from '../../../classes/service/service';
+import { Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
 import { Flex, Text, Button, Box } from '@radix-ui/themes';
