@@ -1,19 +1,11 @@
 import { useParams } from 'react-router';
 import dummyServices from '../UserServices/services';
-import { Grid, Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
+import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
 import { useEffect, useMemo, useState } from 'react';
 import { Service, Task } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
-import {
-  CheckIcon,
-  ClockIcon,
-  Cross1Icon,
-  EnvelopeClosedIcon,
-  RocketIcon,
-} from '@radix-ui/react-icons';
 import StatusTab from '../../components/StatusTab/StatusTab';
 
-type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
 const statuses = [
   'pending' as const,
   'accepted' as const,
@@ -89,17 +81,19 @@ export default function ServiceDetail() {
         Tasks
       </Heading>
       <Tabs.Root defaultValue="inProgress">
-        <Tabs.List justify="center">
+        <Tabs.List justify="center" m="3">
           {statuses.map((status, idx) => (
-            <Tabs.Trigger value={status}>
-              <StatusTab key={idx} status={status} />
+            <Tabs.Trigger key={idx} value={status}>
+              <StatusTab status={status} />
             </Tabs.Trigger>
           ))}
         </Tabs.List>
+        {statuses.map((tag, idx) => (
+          <Tabs.Content key={idx} value={tag}>
+            <TaskList tasks={sortedTasks[tag]} />
+          </Tabs.Content>
+        ))}
       </Tabs.Root>
-      {statuses.map((tag, idx) => {
-        return <TaskList key={idx} tasks={sortedTasks[tag]} />;
-      })}
     </Flex>
   );
 }

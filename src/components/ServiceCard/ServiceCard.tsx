@@ -56,7 +56,7 @@ export default function ServiceCard(props: { service: Service }) {
     return res;
   }, [sortedTasks]);
 
-  console.log(taskCounts);
+  // console.log(taskCounts);
 
   return (
     <Card>

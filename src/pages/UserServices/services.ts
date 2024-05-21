@@ -1,551 +1,312 @@
 import { Service } from '../../classes/service/service';
 
+// Helper function to generate a random string
+function getRandomString(length: number): string {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+  return result;
+}
+
+// Helper function to shuffle an array
+function shuffleArray<T>(array: T[]): T[] {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
 const services: Service[] = [
+  // Service 1
   {
-    name: 'Service 1',
+    name: getRandomString(10),
     description: 'Service Description',
     fields: [
       {
+        prompt: 'Field Prompt',
         type: 'text',
-        prompt: 'Text Prompt',
       },
       {
+        prompt: 'Field Prompt',
         type: 'radio',
-        prompt: 'Radio Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
       {
+        prompt: 'Field Prompt',
         type: 'checkbox',
-        prompt: 'Checkbox Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
     ],
     tasks: [
       {
-        client: 'Client 1',
-        status: 'pending',
+        taskID: 1,
+        service: 'Service Name',
+        client: 'Client',
         requestFields: [
           {
+            prompt: 'Field Prompt',
             type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
+            value: 'Field Value',
           },
           {
+            prompt: 'Field Prompt',
             type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: Math.floor(Math.random() * 2),
           },
           {
+            prompt: 'Field Prompt',
             type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: [Math.floor(Math.random() * 2)],
           },
         ],
-      },
-      {
-        client: 'Client 2',
-        status: 'inProgress',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 3',
-        status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 4',
-        status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 5',
-        status: 'done',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
+        status: 'rejected',
       },
     ],
   },
+  // Service 2
   {
-    name: 'Service 1',
-    description: 'Service Description',
+    name: getRandomString(10),
+    description: 'Service Description 2',
     fields: [
       {
+        prompt: 'Field Prompt 2',
         type: 'text',
-        prompt: 'Text Prompt',
       },
       {
+        prompt: 'Field Prompt 2',
         type: 'radio',
-        prompt: 'Radio Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
       {
+        prompt: 'Field Prompt 2',
         type: 'checkbox',
-        prompt: 'Checkbox Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
     ],
     tasks: [
       {
-        client: 'Client 1',
-        status: 'pending',
+        taskID: 1,
+        service: 'Service Name 2',
+        client: 'Client',
         requestFields: [
           {
+            prompt: 'Field Prompt 2',
             type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
+            value: 'Field Value',
           },
           {
+            prompt: 'Field Prompt 2',
             type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: Math.floor(Math.random() * 2),
           },
           {
+            prompt: 'Field Prompt 2',
             type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: [Math.floor(Math.random() * 2)],
           },
         ],
-      },
-      {
-        client: 'Client 2',
-        status: 'inProgress',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 3',
         status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 4',
-        status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 5',
-        status: 'done',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
       },
     ],
   },
+  // Service 3
   {
-    name: 'Service 1',
-    description: 'Service Description',
+    name: getRandomString(10),
+    description: 'Service Description 3',
     fields: [
       {
+        prompt: 'Field Prompt 3',
         type: 'text',
-        prompt: 'Text Prompt',
       },
       {
+        prompt: 'Field Prompt 3',
         type: 'radio',
-        prompt: 'Radio Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
       {
+        prompt: 'Field Prompt 3',
         type: 'checkbox',
-        prompt: 'Checkbox Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
     ],
     tasks: [
       {
-        client: 'Client 1',
+        taskID: 1,
+        service: 'Service Name 3',
+        client: 'Client',
+        requestFields: [
+          {
+            prompt: 'Field Prompt 3',
+            type: 'text',
+            value: 'Field Value',
+          },
+          {
+            prompt: 'Field Prompt 3',
+            type: 'radio',
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: Math.floor(Math.random() * 2),
+          },
+          {
+            prompt: 'Field Prompt 3',
+            type: 'checkbox',
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: [Math.floor(Math.random() * 2)],
+          },
+        ],
         status: 'pending',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 2',
-        status: 'inProgress',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 3',
-        status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 4',
-        status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 5',
-        status: 'done',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
       },
     ],
   },
+  // Service 4
   {
-    name: 'Service 1',
-    description: 'Service Description',
+    name: getRandomString(10),
+    description: 'Service Description 4',
     fields: [
       {
+        prompt: 'Field Prompt 4',
         type: 'text',
-        prompt: 'Text Prompt',
       },
       {
+        prompt: 'Field Prompt 4',
         type: 'radio',
-        prompt: 'Radio Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
       {
+        prompt: 'Field Prompt 4',
         type: 'checkbox',
-        prompt: 'Checkbox Prompt',
-        choices: ['Choice 1', 'Choice 2', 'Choice 3'],
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
     ],
     tasks: [
       {
-        client: 'Client 1',
+        taskID: 1,
+        service: 'Service Name 4',
+        client: 'Client',
+        requestFields: [
+          {
+            prompt: 'Field Prompt 4',
+            type: 'text',
+            value: 'Field Value',
+          },
+          {
+            prompt: 'Field Prompt 4',
+            type: 'radio',
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: Math.floor(Math.random() * 2),
+          },
+          {
+            prompt: 'Field Prompt 4',
+            type: 'checkbox',
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: [Math.floor(Math.random() * 2)],
+          },
+        ],
         status: 'pending',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
+      },
+    ],
+  },
+  // Service 5
+  {
+    name: getRandomString(10),
+    description: 'Service Description 5',
+    fields: [
+      {
+        prompt: 'Field Prompt 5',
+        type: 'text',
       },
       {
-        client: 'Client 2',
-        status: 'inProgress',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
+        prompt: 'Field Prompt 5',
+        type: 'radio',
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
       },
       {
-        client: 'Client 3',
-        status: 'accepted',
+        prompt: 'Field Prompt 5',
+        type: 'checkbox',
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
+      },
+    ],
+    tasks: [
+      {
+        taskID: 1,
+        service: 'Service Name 5',
+        client: 'Client',
         requestFields: [
           {
+            prompt: 'Field Prompt 5',
             type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
+            value: 'Field Value',
           },
           {
+            prompt: 'Field Prompt 5',
             type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: Math.floor(Math.random() * 2),
           },
           {
+            prompt: 'Field Prompt 5',
             type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: [Math.floor(Math.random() * 2)],
           },
         ],
-      },
-      {
-        client: 'Client 4',
-        status: 'accepted',
-        requestFields: [
-          {
-            type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
-          },
-          {
-            type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
-          },
-          {
-            type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
-          },
-        ],
-      },
-      {
-        client: 'Client 5',
         status: 'done',
+      },
+    ],
+  },
+  // Service 6
+  {
+    name: getRandomString(10),
+    description: 'Service Description 6',
+    fields: [
+      {
+        prompt: 'Field Prompt 6',
+        type: 'text',
+      },
+      {
+        prompt: 'Field Prompt 6',
+        type: 'radio',
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
+      },
+      {
+        prompt: 'Field Prompt 6',
+        type: 'checkbox',
+        choices: shuffleArray(['Choice 1', 'Choice 2']),
+      },
+    ],
+    tasks: [
+      {
+        taskID: 1,
+        service: 'Service Name 6',
+        client: 'Client',
         requestFields: [
           {
+            prompt: 'Field Prompt 6',
             type: 'text',
-            prompt: 'Text Prompt',
-            value: 'Text Value',
+            value: 'Field Value',
           },
           {
+            prompt: 'Field Prompt 6',
             type: 'radio',
-            prompt: 'Radio Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: 0,
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: Math.floor(Math.random() * 2),
           },
           {
+            prompt: 'Field Prompt 6',
             type: 'checkbox',
-            prompt: 'Checkbox Prompt',
-            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
-            selection: [0, 1],
+            choices: shuffleArray(['Choice 1', 'Choice 2']),
+            selection: [Math.floor(Math.random() * 2)],
           },
         ],
+        status: 'inProgress',
       },
     ],
   },
