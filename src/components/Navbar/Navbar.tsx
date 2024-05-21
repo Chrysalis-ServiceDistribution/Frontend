@@ -18,10 +18,21 @@ export default function Navbar() {
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
   }
+  else if (location.pathname === '/profile') {
+    dynamicText = 'Profile';
+  }
+  else {
+    dynamicText = 'Add me as an elseif statement for this page';
+  }
 
   return (
-    <Flex justify="between" gap="2" align="center">
-      <Flex gap='1'>
+    <Flex
+      justify="between"
+      gap="2"
+      align="center"
+      style={{ background: 'darkgrey'}}
+    >
+      <Flex gap="1">
         {/* Search */}
         <Link to="/search">
           <IconButton>
@@ -43,7 +54,6 @@ export default function Navbar() {
           <PersonIcon />
         </IconButton>
       </Link>
-      
     </Flex>
   );
 }
