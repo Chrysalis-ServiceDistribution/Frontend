@@ -9,7 +9,7 @@ export default function CreateService() {
   const navigate = useNavigate()
 
   if (!isLoggedIn || loggedInUserID === null) {
-    navigate('/auth')
+    return navigate('/auth')
   }
 
   function onCommit(serviceForm: ServiceCreationFormData) {
