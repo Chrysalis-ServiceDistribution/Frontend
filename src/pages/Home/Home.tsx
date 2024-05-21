@@ -1,10 +1,8 @@
-import * as Tabs from '@radix-ui/react-tabs';
 import React from 'react';
-import {Task as taskInterface} from '../../classes/service/service';
-import { Flex, Text } from '@radix-ui/themes';
+import { Task as taskInterface } from '../../classes/service/service';
+import { Flex, Text, Tabs as Tabs } from '@radix-ui/themes';
 import ClientTabDashboard from '../../components/ClientTabDashboard/ClientTabDashboard';
 import CreatorTabDashboard from '../../components/CreatorTabDashboard/CreatorTabDashboard';
-import './Home.css';
 
 const exampleClientTasks: taskInterface[] = [
   {
@@ -33,7 +31,6 @@ const exampleClientTasks: taskInterface[] = [
     status: 'pending',
   },
 ];
-
 const exampleCreatorTasks: taskInterface[] = [
   {
     taskID: 1,
@@ -75,21 +72,17 @@ export default function Home() {
   return (
     <Flex direction="column" justify="center" align="center" gap="2">
       <Text size="8"> Welcome </Text>
-      <Tabs.Root className="TabsRoot" defaultValue="client">
-        <Tabs.List className="TabsList" aria-label="Tabs">
+      <Tabs.Root defaultValue="client">
+        <Tabs.List>
           {/* //TODO?: Add logic to hide? tabs when the user doesn't have any relevant tasks */}
-          <Tabs.Trigger className="TabsTrigger" value="client">
-            Client
-          </Tabs.Trigger>
-          <Tabs.Trigger className="TabsTrigger" value="creator">
-            Creator
-          </Tabs.Trigger>
+          <Tabs.Trigger value="client">Client</Tabs.Trigger>
+          <Tabs.Trigger value="creator">Creator</Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className="TabsContent" value="client">
+        <Tabs.Content value="client">
           {/* //TODO: change filter to only pass in tasks by the user */}
           <ClientTabDashboard tasks={tasksClient.filter((task) => task)} />
         </Tabs.Content>
-        <Tabs.Content className="TabsContent" value="creator">
+        <Tabs.Content value="creator">
           {/* //TODO: change filter to only pass in tasks from the user */}
           <CreatorTabDashboard tasks={tasksCreator.filter((task) => task)} />
         </Tabs.Content>
