@@ -8,7 +8,7 @@ import dummyServices from '../../pages/UserServices/services';
 import { useParams } from 'react-router';
 import TaskFieldEditor from './TaskFieldEditor/TaskFieldEditor';
 import { useEffect, useState } from 'react';
-import { getUserServiceById } from '../../services/apiServices';
+import { createTask, getUserServiceById } from '../../services/apiServices';
 
 export default function SubmitTaskForm() {
   const { userID, servID } = useParams();
@@ -40,10 +40,8 @@ export default function SubmitTaskForm() {
   }
 
   function commit() {
-    console.log({
-      service_id: servID,
-      fields: filledFields,
-    });
+    if (servID === undefined || filledFields === undefined) { return }
+    createTask(Number(servID), filledFields);
   }
 
   return (

@@ -121,6 +121,7 @@ export interface Task {
  *
  */
 export interface Service {
+  id: number,
   name: string;
   description: string;
   fields: ServiceField[];
@@ -149,10 +150,11 @@ export function createDefaultField(formField: ServiceField): RequestField {
 
 export function loadService(service: any): Service {
   return {
+    id: service.id,
     name: service.name,
     description: service.description,
     fields: service['form_fields'].map(loadServiceField),
-    tasks: service['tasks'].map(loadTask),
+    tasks: service['tasks']?.map(loadTask) || [],
   };
 }
 

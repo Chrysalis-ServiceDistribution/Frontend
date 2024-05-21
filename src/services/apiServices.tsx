@@ -3,6 +3,7 @@ import {
   ServiceField,
 } from '../classes/service/formField';
 import {
+    RequestField,
   Service,
   Task,
   TaskStatus,
@@ -57,12 +58,40 @@ export async function createService(service: ServiceCreationFormData) {
   return await api.post('/api/services/', {
     name: service.name,
     description: service.description,
-    fields,
+    form_fields: fields,
   });
 }
 
-export async function createTask(serviceID: number, task: Task) {
-  return await api.post(`/api/services/${serviceID}/task`, task);
+export async function createTask(serviceID: number, fields: RequestField[]) {
+  const newFields = fields.map((field, idx) => {
+    switch(field.type) {
+      case 'text':
+        return {
+          type: 'text',
+          index: idx,
+          value: field.value,
+          options: null,
+        }
+      case 'radio':
+        return {
+          type: 'text',
+          index: idx,
+          value: '',
+          options: field.selection,
+        }
+      case 'checkbox':
+        return {
+          type: 'text',
+          index: idx,
+          value: '',
+          options: field.selection,
+        }
+    }
+  });
+
+  return await api.post(`/api/services/${serviceID}/submit_request/`, {
+    'form_fields': newFields,
+  });
 }
 
 export async function getUserServices(userID: number) {
@@ -122,7 +151,7 @@ export async function getUserInfo(userID: number): Promise<{
     userID: data.user.id,
     user: data.user.username,
     profile: data.user.profile,
-    services: data.services.map(loadService),
-    tasks: data.tasks.map(loadTask),
+    services: data.services?.map(loadService) || [],
+    tasks: data.tasks?.map(loadTask) || []
   }
 }

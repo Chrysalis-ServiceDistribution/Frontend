@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { Service } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import { getUserServices } from '../../services/apiServices';
+import { Link } from 'react-router-dom';
 
 export default function UserServices() {
   const { userID } = useParams();
@@ -29,7 +30,9 @@ export default function UserServices() {
       </Heading>
       <Grid gap="3" columns="3">
         {services?.map((service, idx) => (
-          <ServiceCard key={idx} service={service} />
+          <Link key={idx} to={`/${userID}/services/${service.id}`}>
+            <ServiceCard service={service} />
+          </Link>
         ))}
       </Grid>
     </Flex>

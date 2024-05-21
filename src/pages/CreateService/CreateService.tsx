@@ -3,6 +3,7 @@ import { ServiceCreationFormData } from '../../classes/service/formField';
 import { useNavigate } from 'react-router';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import { createService } from '../../services/apiServices';
 
 export default function CreateService() {
   const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
@@ -12,7 +13,8 @@ export default function CreateService() {
     return navigate('/auth')
   }
 
-  function onCommit(serviceForm: ServiceCreationFormData) {
+  async function onCommit(serviceForm: ServiceCreationFormData) {
+    await createService(serviceForm); 
     navigate(`/${loggedInUserID}/services/`)   
   }
 
