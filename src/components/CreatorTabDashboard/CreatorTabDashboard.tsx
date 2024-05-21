@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
-import { Flex, Text, Button, Box, Link} from '@radix-ui/themes';
+import { Flex, Text, Button, IconButton, Link, Card } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
+import { EyeOpenIcon } from '@radix-ui/react-icons';
 
-const CreatorTabDashboard = (props: { tasks : taskInterface[]}) => {
+const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
   const { tasks } = props;
 
   const [services, setServices] = React.useState<string[]>([]);
@@ -19,61 +20,26 @@ const CreatorTabDashboard = (props: { tasks : taskInterface[]}) => {
   return (
     <Flex direction="column" gap="2">
       {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
-      <Text size="5">Your reqests and task status'</Text>
-      <Link href='/:userID/services'>
-        <Button>
-          View your services
-        </Button>
-      </Link>
       <ServiceSelect services={services} setServiceView={setServiceView} />
       {tasks?.filter(
         (task) => task.status === 'pending' || task.status === 'rejected',
       ).length > 0 && (
         <Collapsible.Root>
-          <Text> Pending Tasks </Text>
-          <Collapsible.Trigger asChild>
-            <Button>See</Button>
-          </Collapsible.Trigger>
-          <Collapsible.Content>
-            {
-              <Flex direction="column" gap="1">
-                {
-                  // pending and rejected tasks
-                  tasks
-                    .filter((task) =>
-                      serviceView !== 'Show All'
-                        ? task.service === serviceView
-                        : task,
-                    )
-                    .filter(
-                      (task) =>
-                        task.status === 'pending' || task.status === 'rejected',
-                    )
-                    .map((task) => {
-                      return <Task key={task.taskID} {...task} />;
-                    })
-                }
+          <Flex direction="column" justify="center" gap="2">
+            <Card>
+              <Flex justify="between">
+                <Text> Pending Tasks </Text>
+                <Collapsible.Trigger asChild>
+                  <IconButton><EyeOpenIcon /></IconButton>
+                </Collapsible.Trigger>
               </Flex>
-            }
-          </Collapsible.Content>
-        </Collapsible.Root>
-      )}
-      {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
-      {tasks.filter(
-        (task) => task.status !== 'pending' && task.status !== 'rejected',
-      ).length > 0 && (
-        <Collapsible.Root>
-          <Text> Accepted Tasks </Text>
-          <Collapsible.Trigger asChild>
-            <Button>See</Button>
-          </Collapsible.Trigger>
-          <Collapsible.Content>
-            {
-              <Flex direction="column" gap="1">
-                {
-                  // other tasks
-                  <Flex direction="column" gap="1">
-                    {tasks
+            </Card>
+            <Collapsible.Content>
+              {
+                <Flex direction="column" gap="1">
+                  {
+                    // pending and rejected tasks
+                    tasks
                       .filter((task) =>
                         serviceView !== 'Show All'
                           ? task.service === serviceView
@@ -81,20 +47,64 @@ const CreatorTabDashboard = (props: { tasks : taskInterface[]}) => {
                       )
                       .filter(
                         (task) =>
-                          task.status !== 'pending' &&
-                          task.status !== 'rejected',
+                          task.status === 'pending' ||
+                          task.status === 'rejected',
                       )
                       .map((task) => {
                         return <Task key={task.taskID} {...task} />;
-                      })}
-                  </Flex>
-                }
-              </Flex>
-            }
-          </Collapsible.Content>
+                      })
+                  }
+                </Flex>
+              }
+            </Collapsible.Content>
+          </Flex>
         </Collapsible.Root>
       )}
-      <Box></Box>
+      {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
+      {tasks.filter(
+        (task) => task.status !== 'pending' && task.status !== 'rejected',
+      ).length > 0 && (
+        <Collapsible.Root>
+          <Flex direction="column" justify="center" gap="2">
+            <Card>
+              <Flex justify="between">
+                <Text> Accepted Tasks </Text>
+                <Collapsible.Trigger asChild>
+                  <IconButton><EyeOpenIcon /></IconButton>
+                </Collapsible.Trigger>
+              </Flex>
+            </Card>
+            <Collapsible.Content>
+              {
+                <Flex direction="column" gap="1">
+                  {
+                    // other tasks
+                    <Flex direction="column" gap="1">
+                      {tasks
+                        .filter((task) =>
+                          serviceView !== 'Show All'
+                            ? task.service === serviceView
+                            : task,
+                        )
+                        .filter(
+                          (task) =>
+                            task.status !== 'pending' &&
+                            task.status !== 'rejected',
+                        )
+                        .map((task) => {
+                          return <Task key={task.taskID} {...task} />;
+                        })}
+                    </Flex>
+                  }
+                </Flex>
+              }
+            </Collapsible.Content>
+          </Flex>
+        </Collapsible.Root>
+      )}
+      <Link href="/:userID/services">
+        <Button>View your services</Button>
+      </Link>
     </Flex>
   );
 };

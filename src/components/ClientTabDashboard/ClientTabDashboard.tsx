@@ -10,7 +10,7 @@ const ClientTabDashboard = (props: { tasks : taskInterface[]}) => {
     direction="column"
     gap="4">
       <Card>
-        <Text size="6">Outbound Tasks and Status</Text>
+        <Text size="5">Outbound Tasks and Status</Text>
       </Card>
 
       {/* //TODO: Change button to be icon, text needs to be dynamic*/}
