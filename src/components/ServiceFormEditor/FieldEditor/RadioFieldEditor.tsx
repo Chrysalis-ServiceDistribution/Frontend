@@ -1,18 +1,18 @@
 import { Flex, TextField, Button } from '@radix-ui/themes';
-import { RadioField, FormFieldType } from '../../../classes/service/formField';
+import { ServiceRadioField, ServiceField } from '../../../classes/service/formField';
 import React from 'react';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
 
 export default function RadioFormField(props: {
-  field: RadioField;
-  onChange: (field: FormFieldType) => void | undefined;
+  field: ServiceRadioField;
+  onChange: (field: ServiceField) => void | undefined;
 }) {
   function editChoice(index: number) {
     return (evt: React.ChangeEvent<HTMLInputElement>) => {
       const newChoices = [...props.field.choices];
       newChoices.splice(index, 1, evt.currentTarget.value);
-      const newField = new RadioField(props.field.prompt, newChoices);
+      const newField = new ServiceRadioField(props.field.prompt, newChoices);
       props.onChange(newField);
     };
   }
@@ -23,7 +23,7 @@ export default function RadioFormField(props: {
       `Choice ${props.field.choices.length + 1}`,
     ];
 
-    const newField = new RadioField(props.field.prompt, newChoices);
+    const newField = new ServiceRadioField(props.field.prompt, newChoices);
     props.onChange(newField);
   }
 
@@ -35,7 +35,7 @@ export default function RadioFormField(props: {
       }
       const newChoices = [...props.field.choices];
       newChoices.splice(index, 1);
-      const newField = new RadioField(props.field.prompt, newChoices);
+      const newField = new ServiceRadioField(props.field.prompt, newChoices);
       props.onChange(newField);
     };
   }

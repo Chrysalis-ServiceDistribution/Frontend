@@ -2,7 +2,7 @@ import { Text, Box, Flex, Heading, Separator, Button } from '@radix-ui/themes';
 import {
   RequestField,
   Service,
-  createFieldDefault,
+  createDefaultField,
 } from '../../classes/service/service';
 import dummyServices from '../../pages/UserServices/services';
 import { useParams } from 'react-router';
@@ -13,7 +13,7 @@ export default function SubmitTaskForm() {
   const { userID, servID } = useParams();
   const service: Service = dummyServices[0];
   const [filledFields, setFilledFields] = useState(
-    service.fields.map((field) => createFieldDefault(field)),
+    service.fields.map((field) => createDefaultField(field)),
   );
 
   function updateField(idx: number) {

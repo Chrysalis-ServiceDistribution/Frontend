@@ -27,14 +27,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -45,14 +50,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -63,14 +73,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -81,14 +96,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -99,14 +119,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -139,14 +164,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -157,14 +187,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -175,14 +210,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -193,14 +233,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -211,14 +256,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -251,14 +301,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -269,14 +324,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -287,14 +347,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -305,14 +370,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -323,14 +393,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -363,14 +438,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -381,14 +461,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -399,14 +484,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -417,14 +507,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],
@@ -435,14 +530,19 @@ const services: Service[] = [
         requestFields: [
           {
             type: 'text',
+            prompt: 'Text Prompt',
             value: 'Text Value',
           },
           {
             type: 'radio',
+            prompt: 'Radio Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: 0,
           },
           {
             type: 'checkbox',
+            prompt: 'Checkbox Prompt',
+            choices: ['Choice 1', 'Choice 2', 'Choice 3'],
             selection: [0, 1],
           },
         ],

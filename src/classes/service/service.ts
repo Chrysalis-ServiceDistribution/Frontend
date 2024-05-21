@@ -1,26 +1,39 @@
-import { FormFieldType } from './formField';
+import { ServiceField } from './formField';
 
 export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
 
-export type FilledTextField = {
+export const TaskStatuses = [
+  'rejected' as const,
+  'pending' as const,
+  'accepted' as const,
+  'inProgress' as const,
+  'done' as const,
+]
+
+export type RequestTextField = {
   type: 'text';
+  prompt: string;
   value: string;
 };
 
-export type FilledRadioField = {
+export type RequestRadioField = {
   type: 'radio';
+  prompt: string;
+  choices: string[];
   selection: number;
 };
 
-export type FilledCheckboxField = {
+export type RequestCheckboxField = {
   type: 'checkbox';
+  prompt: string;
+  choices: string[];
   selection: number[];
 };
 
 export type RequestField =
-  | FilledRadioField
-  | FilledCheckboxField
-  | FilledTextField;
+  | RequestRadioField
+  | RequestCheckboxField
+  | RequestTextField;
 
 export interface Task {
   client: string;
@@ -31,25 +44,25 @@ export interface Task {
 export interface Service {
   name: string;
   description: string;
-  fields: FormFieldType[];
+  fields: ServiceField[];
   tasks: Task[];
 }
 
-export function createFieldDefault(formField: FormFieldType): RequestField {
+export function createDefaultField(formField: ServiceField): RequestField {
   switch (formField.type) {
     case 'text':
       return {
-        type: 'text',
+        ...formField,
         value: '',
       };
     case 'radio':
       return {
-        type: 'radio',
+        ...formField,
         selection: 0,
       };
     case 'checkbox':
       return {
-        type: 'checkbox',
+        ...formField,
         selection: [],
       };
   }
