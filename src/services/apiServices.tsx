@@ -7,6 +7,7 @@ import {
   Task,
   TaskStatus,
   loadService,
+  loadTask,
 } from '../classes/service/service';
 import { api } from './api';
 
@@ -98,7 +99,7 @@ export async function updateTaskStatus(taskID: number, status: TaskStatus) {
       break;
   }
 
-  return await api.post(`/api/tasks/${taskID}`, { status: formattedStatus });
+  return await api.put(`/api/tasks/${taskID}`, { status: formattedStatus });
 }
 
 export async function deleteTask(taskID: number) {
@@ -109,6 +110,13 @@ export async function deleteService(serviceID: number) {
   return await api.delete(`/api/services/${serviceID}`);
 }
 
-export async function getUserInfo(username: string) {
-  return await api.get(`/users/${username}`);
+export async function getUserInfo(userID: number) {
+  const { data } = await api.get(`/users/${userID}/details/`);
+  return {
+    userID: data.user.id,
+    user: data.user.username,
+    profile: data.user.profile,
+    services: data.services.map(loadService),
+    tasks: data.tasks.map(loadTask),
+  }
 }
