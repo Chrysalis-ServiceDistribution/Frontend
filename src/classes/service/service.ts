@@ -64,3 +64,21 @@ export function createDefaultField(formField: ServiceField): RequestField {
       };
   }
 }
+
+export function loadService(service: any): Service {
+  return {
+    name: service.name,
+    description: service.description,
+    fields: service['form_fields'].map(loadServiceField),
+    tasks: service['tasks'].map(loadTask),
+  }
+}
+
+export function loadServiceField(field: any): ServiceField {
+}
+
+export function loadRequestField(field: any): RequestField {
+}
+
+export function loadTask(task: any): Task {
+}

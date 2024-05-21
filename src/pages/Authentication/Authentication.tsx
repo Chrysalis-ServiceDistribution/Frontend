@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Authentication() {
-  const { login, register } = useContext(AuthContext)
+  const { login, register } = useContext(AuthContext)!
   const navigate = useNavigate();
   const [signupMode, setSignupMode] = useState(false);
 

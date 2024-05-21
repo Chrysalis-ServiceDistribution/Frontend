@@ -10,10 +10,7 @@ export function AuthContextProvider(props: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   async function login(payload: { username: string; password: string }) {
-    const { data, status } = await loginUser(payload)
-    if (status !== 200) {
-      return
-    }
+    const data = await loginUser(payload)
     console.log(data)
   }
 

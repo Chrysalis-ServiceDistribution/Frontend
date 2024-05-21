@@ -1,8 +1,10 @@
-import { Service, Task, TaskStatus } from '../classes/service/service';
+import { ServiceField } from '../classes/service/formField';
+import { Service, Task, TaskStatus, loadService } from '../classes/service/service';
 import { api } from './api';
 
 export async function loginUser(payload: { username: string; password: string }) {
-  return await api.post('/api/auth/login', payload);
+  const { data } = await api.post('/api/auth/login/', payload)
+  return data
 }
 
 export async function registerUser(payload: {
@@ -10,7 +12,8 @@ export async function registerUser(payload: {
   email: string;
   password: string;
 }) {
-  return await api.post('/api/auth/register', payload);
+  const { data } = await api.post('/api/auth/register/', payload)
+  return data
 }
 
 export async function createService(service: Service) {
@@ -21,8 +24,9 @@ export async function createTask(serviceID: number, task: Task) {
   return await api.post(`/api/services/${serviceID}/task`, task);
 }
 
-export async function getUserServices(username: string) {
-  return await api.get(`/api/${username}/services/`);
+export async function getUserServices(userID: number) {
+  const { data } = await api.get(`/api/users/${userID}/services/`);
+  return data.map(loadService)
 }
 
 export async function getUserOutboundTasks(username: string) {
