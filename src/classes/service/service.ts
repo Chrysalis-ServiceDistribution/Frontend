@@ -75,9 +75,52 @@ export function loadService(service: any): Service {
 }
 
 export function loadServiceField(field: any): ServiceField {
+  switch(field.type) {
+    case 'text':
+      return {
+        type: 'text',
+        prompt: field.prompt,
+      }
+    case 'radio':
+      return {
+        type: 'radio',
+        prompt: field.prompt,
+        choices: field.choices,
+      }
+    case 'checkbox':
+      return {
+        type: 'checkbox',
+        prompt: field.prompt,
+        choices: field.choices,
+      }
+    default:
+      throw new Error('invalid type')
+  }
 }
 
 export function loadRequestField(field: any): RequestField {
+  switch(field.type) {
+    case 'text':
+      return {
+        type: 'text',
+        prompt: field.prompt,
+        value: fi
+      }
+    case 'radio':
+      return {
+        type: 'radio',
+        prompt: field.prompt,
+        choices: field.choices,
+      }
+    case 'checkbox':
+      return {
+        type: 'checkbox',
+        prompt: field.prompt,
+        choices: field.choices,
+      }
+    default:
+      throw new Error('invalid type')
+  }
 }
 
 export function loadTask(task: any): Task {
