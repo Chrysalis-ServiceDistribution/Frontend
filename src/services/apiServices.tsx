@@ -110,8 +110,14 @@ export async function deleteService(serviceID: number) {
   return await api.delete(`/api/services/${serviceID}`);
 }
 
-export async function getUserInfo(userID: number) {
-  const { data } = await api.get(`/users/${userID}/details/`);
+export async function getUserInfo(userID: number): Promise<{
+  userID: number,
+  user: string,
+  profile: Record<string, string>,
+  services: Service[],
+  tasks: Task[],
+}> {
+  const { data } = await api.get(`/api/users/${userID}/details/`);
   return {
     userID: data.user.id,
     user: data.user.username,

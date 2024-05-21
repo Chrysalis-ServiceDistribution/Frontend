@@ -36,6 +36,7 @@ export function AuthContextProvider(props: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         username,
+        loggedInUserID,
         isLoggedIn,
 
         login,

@@ -1,5 +1,6 @@
 export type AuthContextType = {
   username: string | null;
+  loggedInUserID: number | null;
   isLoggedIn: boolean;
 
   login: (payload: { username: string; password: string }) => Promise<void>;
