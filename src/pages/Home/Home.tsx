@@ -223,7 +223,7 @@ export default function Home() {
 
   return (
       <Flex direction="column" justify="center" align="stretch" gap="2">
-        <Text size="8"> Welcome, {username}! </Text>
+        <Text align='center' size="8"> Welcome, {username}! </Text>
         <Tabs.Root defaultValue="client">
           <Flex  direction='column' justify='center' gap='3'>
           <Tabs.List justify='center'>

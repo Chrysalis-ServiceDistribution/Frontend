@@ -75,7 +75,7 @@ const router = createBrowserRouter([
 
 export default function Router() {
   return (
-    <Flex direction="column" justify="center" gap="2">
+    <Flex direction="column" align='stretch' gap="2">
       <RouterProvider router={router} />
     </Flex>
   );
