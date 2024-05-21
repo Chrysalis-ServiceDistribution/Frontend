@@ -20,7 +20,7 @@ export default function Authentication() {
       .getElementsByTagName('input')[0].value;
     //TODO: pass username, email, and password to the auth context and handle the signup
     console.log('Signing up:', username, email, password);
-    register({ username, email, password });
+    register?({ username, email, password }):
 
     //On api okay, login, wait, if good and redirect to home, if not switch to login page, display error message
     //throwing this here so it is part of flow, logic required to implemnt correctly
@@ -28,7 +28,8 @@ export default function Authentication() {
     //On api error, display error message
   };
 
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (!login) { return }
     const username: string = (e.target as HTMLButtonElement)
       .parentElement!.getElementsByClassName('Username')[0]
       .getElementsByTagName('input')[0].value;
@@ -37,7 +38,7 @@ export default function Authentication() {
       .getElementsByTagName('input')[0].value;
     // TODO: pass email and password to the auth context and handle the login
     console.log('Logging in:', username, password);
-    login({ username, password });
+    await login({ username, password });
     //On api okay, login, wait, if good and redirect to home
 
     //throwing this here so it is part of flow, logic required to implemnt correctly

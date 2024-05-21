@@ -3,8 +3,11 @@ import { AuthContextType } from '../@types/authContext';
 import { loginUser, registerUser } from '../services/apiServices';
 import { setToken } from '../services/tokenService';
 
-export const AuthContext: React.Context<AuthContextType | null> =
-  createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType>({
+  username: '',
+  loggedInUserID: null,
+  isLoggedIn: false,
+});
 
 export function AuthContextProvider(props: { children: React.ReactNode }) {
   const [username, setUsername] = useState<string | null>(null);

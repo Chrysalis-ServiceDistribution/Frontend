@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
-import { Flex, Text, Button, Box, Link } from '@radix-ui/themes';
+import { Flex, Text, Button, Box } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
+import { Link } from 'react-router-dom';
 
 const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
   const { tasks } = props;
@@ -20,7 +21,7 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
     <Flex direction="column" gap="2">
       {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
       <Text size="5">Your reqests and task status'</Text>
-      <Link href="/:userID/services">
+      <Link to={`/1/services`}>
         <Button>View your services</Button>
       </Link>
       <ServiceSelect services={services} setServiceView={setServiceView} />
