@@ -20,7 +20,6 @@ export function AuthContextProvider(props: { children: React.ReactNode }) {
     setUsername(data.user.username);
     setLoggedInUserID(data.user.id);
     setIsLoggedIn(true);
-    console.log(data);
   }
 
   async function register(payload: {
@@ -28,11 +27,11 @@ export function AuthContextProvider(props: { children: React.ReactNode }) {
     email: string;
     password: string;
   }) {
-    const { data, status } = await registerUser(payload);
-    if (status !== 200) {
-      return;
-    }
-    console.log(data);
+    const data = await registerUser(payload);
+    setToken(data.access);
+    setUsername(data.user.username);
+    setLoggedInUserID(data.user.id);
+    setIsLoggedIn(true);
   }
 
   return (

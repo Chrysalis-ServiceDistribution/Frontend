@@ -25,7 +25,12 @@ export async function registerUser(payload: {
   email: string;
   password: string;
 }) {
-  const { data } = await api.post('/api/auth/register/', payload);
+  const { data } = await api.post('/api/auth/register/', {
+    ...payload,
+    profile: {
+      bio: 'User bio goes here.'
+    }
+  });
   return data;
 }
 
