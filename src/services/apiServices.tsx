@@ -34,6 +34,11 @@ export async function registerUser(payload: {
   return data;
 }
 
+export async function verifyUser() {
+  const { data } = await api.get('/api/auth/verify/');
+  return data;
+}
+
 export async function createService(service: ServiceCreationFormData) {
   const fields = service.fields.map((field, idx) => {
     switch (field.type) {
