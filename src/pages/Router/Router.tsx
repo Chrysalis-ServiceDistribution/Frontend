@@ -10,7 +10,10 @@ import Navbar from '../../components/Navbar/Navbar';
 import { Flex } from '@radix-ui/themes';
 
 const NavbarWrapper = () => (
-  <Flex direction="column" justify="center" gap="2">
+  <Flex
+  direction="column"
+  justify="center"
+  gap="4">
     <Navbar />
     <Outlet />
   </Flex>
@@ -72,7 +75,7 @@ const router = createBrowserRouter([
 
 export default function Router() {
   return (
-    <Flex direction="column" justify="center" gap="2">
+    <Flex direction="column" align='stretch' gap="2">
       <RouterProvider router={router} />
     </Flex>
   );

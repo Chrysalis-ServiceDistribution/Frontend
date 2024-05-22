@@ -26,11 +26,9 @@ export default function ServiceCard(props: { service: Service }) {
       done: [],
       rejected: [],
     };
-
     for (const task of props.service.tasks) {
       sorted[task.status].push(task);
     }
-
     return sorted;
   }, [props.service.tasks]);
 
@@ -60,7 +58,7 @@ export default function ServiceCard(props: { service: Service }) {
 
   return (
     <Card>
-      <Flex direction="column" gap="3">
+      <Flex direction="column" gap="3" justify='between'>
         <Heading as="h3" size="3">
           {props.service.name}
         </Heading>
