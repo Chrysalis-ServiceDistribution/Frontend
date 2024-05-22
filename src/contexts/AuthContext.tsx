@@ -13,7 +13,12 @@ export const AuthContext = createContext<AuthContextType>({
 
 export function AuthContextProvider(props: { children: React.ReactNode }) {
   const [storedToken, setStoredToken] = useState(() => {
-    return getToken();
+    try{
+      verifyUser();
+      return getToken();
+    }catch(e){
+      return null;
+    }
   });
   const [username, setUsername] = useState<string | null>(null);
   const [loggedInUserID, setLoggedInUserID] = useState<number | null>(null);
