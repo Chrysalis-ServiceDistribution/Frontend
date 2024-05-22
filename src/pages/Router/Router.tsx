@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Home from '../Home/Home';
+import Profile from '../Profile/Profile';
 import Authentication from '../Authentication/Authentication';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import Search from '../Search/Search';
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       // FIXME: Make profile page
       {
         path: '/:userID',
-        element: <div>Profile</div>,
+        element: <Profile />,
       },
       // FIXME: Page to show all the services
       {
