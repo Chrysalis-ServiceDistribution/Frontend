@@ -20,6 +20,8 @@ export default function Navbar() {
     dynamicText = 'Profile';
   }else if (location.pathname  === `/${userID}/services/${servID}`) {
     dynamicText = 'Service Detail';
+  }else if(location.pathname === `/${userID}/services/${servID}/submit-task`){
+    dynamicText = 'Submit a Task';
   }else{
     dynamicText = 'Add me as an elseif statement for this page';
   }

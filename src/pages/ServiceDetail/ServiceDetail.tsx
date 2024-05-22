@@ -4,7 +4,12 @@ import { useContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
-import { deleteService, deleteTask, getUserServiceById, updateTaskStatus } from '../../services/apiServices';
+import {
+  deleteService,
+  deleteTask,
+  getUserServiceById,
+  updateTaskStatus,
+} from '../../services/apiServices';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import TaskComponent from '../../components/Task/Task';
@@ -81,7 +86,7 @@ export default function ServiceDetail() {
   }, [servID]);
 
   useEffect(() => {
-    loadService()
+    loadService();
   }, [loadService]);
 
   async function handleTaskStatusChange(task: Task, status: TaskStatus) {
@@ -95,9 +100,11 @@ export default function ServiceDetail() {
   }
 
   async function handleServiceDelete() {
-    if (userID === null || service === null) { return }
+    if (userID === null || service === null) {
+      return;
+    }
     await deleteService(service.id);
-    navigate(`/${userID}/services`)
+    navigate(`/${userID}/services`);
   }
 
   const isMine = isLoggedIn && loggedInUserID === Number(userID);
@@ -107,7 +114,7 @@ export default function ServiceDetail() {
       <Heading as="h1" size="7">
         {service?.name}
       </Heading>
-      <Button onClick={handleServiceDelete}>Delete Service</Button>
+      {isMine && <Button onClick={handleServiceDelete}>Delete Service</Button>}
       <Separator size="4" />
       <Heading as="h2" size="4">
         Tasks
@@ -118,7 +125,11 @@ export default function ServiceDetail() {
           {statuses
             .filter((status) => {
               if (!isMine) {
-                if (status !== 'pending' as const && status !== 'accepted' as const && status !== 'rejected' as const) {
+                if (
+                  status !== ('pending' as const) &&
+                  status !== ('accepted' as const) &&
+                  status !== ('rejected' as const)
+                ) {
                   return status;
                 }
               } else {
@@ -131,39 +142,53 @@ export default function ServiceDetail() {
               </Tabs.Trigger>
             ))}
         </Tabs.List>
-        {(service !== null) && statuses
+        {service !== null &&
+          statuses
             .filter((status) => {
               if (isMine) {
-                if (status !== 'pending' as const && status !== 'accepted' as const && status !== 'rejected' as const) {
+                if (
+                  status !== ('pending' as const) &&
+                  status !== ('accepted' as const) &&
+                  status !== ('rejected' as const)
+                ) {
                   return status;
                 }
               } else {
                 return status;
               }
             })
-          .map((tag, idx) => {
+            .map((tag, idx) => {
               if (isMine) {
                 return (
                   <Tabs.Content key={idx} value={tag}>
                     <TaskList
-              tasks={sortedTasks[tag]}
-              service={service}
-              onTaskStatusChange={handleTaskStatusChange}
-              onTaskDelete={handleTaskDelete}
-            />
+                      tasks={sortedTasks[tag]}
+                      service={service}
+                      onTaskStatusChange={handleTaskStatusChange}
+                      onTaskDelete={handleTaskDelete}
+                    />
                   </Tabs.Content>
                 );
               } else {
                 return (
                   <Tabs.Content key={idx} value={tag}>
                     {sortedTasks[tag].map((task: Task, idx: number) => (
-                      <TaskComponent key={idx} {...task} />
+                      <TaskComponent
+                        key={idx}
+                        task={{
+                          taskID: 0,
+                          serviceID: Number(servID),
+                          client: 'N/A',
+                          requestFields: [],
+                          status: task.status,
+                        }}
+                      />
                     ))}
                   </Tabs.Content>
                 );
               }
             })}
-        </Tabs.Root>
+      </Tabs.Root>
     </Flex>
   );
 }
