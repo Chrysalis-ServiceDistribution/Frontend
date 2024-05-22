@@ -3,6 +3,7 @@ import {
   HomeIcon,
   MagnifyingGlassIcon,
   PersonIcon,
+  LockOpen1Icon,
 } from '@radix-ui/react-icons';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useContext } from 'react';
@@ -20,13 +21,15 @@ export default function Navbar() {
     dynamicText = 'Home';
   } else if (location.pathname === `/${userID}`) {
     dynamicText = 'Profile Page';
-  }else if (location.pathname  === `/${userID}/services/${servID}`) {
+  } else if (location.pathname === `/${userID}/services/${servID}`) {
     dynamicText = 'Service Detail';
-  }else if(location.pathname === `/${userID}/services/${servID}/submit-task`){
+  } else if (
+    location.pathname === `/${userID}/services/${servID}/submit-task`
+  ) {
     dynamicText = 'Submit a Task';
-  }else{
+  } else {
     dynamicText = 'Add me as an elseif statement for this page';
-  } 
+  }
 
   if (location.pathname === '/auth') {
     return null;
@@ -58,12 +61,23 @@ export default function Navbar() {
       </Flex>
       {/* Where am I text */}
       <Text size="3">{dynamicText}</Text>
-      {/* Profile */}
-      <Link to={`/${loggedInUserID}`}>
-        <IconButton>
-          <PersonIcon />
-        </IconButton>
-      </Link>
+      <Flex gap='1'>
+        {
+          !isLoggedIn && (
+            <Link to="/auth">
+              <IconButton>
+                <LockOpen1Icon />
+              </IconButton>
+            </Link>
+          )
+        }
+        {/* Profile */}
+        <Link to={`/${loggedInUserID}`}>
+          <IconButton>
+            <PersonIcon />
+          </IconButton>
+        </Link>
+      </Flex>
     </Flex>
   );
 }
