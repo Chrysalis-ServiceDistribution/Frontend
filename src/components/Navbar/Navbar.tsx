@@ -4,22 +4,25 @@ import {
   MagnifyingGlassIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 export default function Navbar() {
   const location = useLocation();
   let dynamicText: string = '';
-
+  const { userID, servID } = useParams();
   useEffect(() => {}, [location.pathname]);
-
   if (location.pathname === '/search') {
     dynamicText = 'Search';
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
   } else if (location.pathname === '/profile') {
     dynamicText = 'Profile';
-  } else {
+  }else if (location.pathname  === `/${userID}/services/${servID}`) {
+    dynamicText = 'Service Detail';
+  }else if(location.pathname === `/${userID}/services/${servID}/submit-task`){
+    dynamicText = 'Submit a Task';
+  }else{
     dynamicText = 'Add me as an elseif statement for this page';
   }
 
