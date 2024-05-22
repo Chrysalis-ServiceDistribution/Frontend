@@ -5,7 +5,6 @@ import ClientTabDashboard from '../../components/ClientTabDashboard/ClientTabDas
 import CreatorTabDashboard from '../../components/CreatorTabDashboard/CreatorTabDashboard';
 import { AuthContext } from '../../contexts/AuthContext';
 import { getUserInfo } from '../../services/apiServices';
-import { useNavigate } from 'react-router';
 
 export default function Home() {
   //TODO: get the username from the server
@@ -13,7 +12,6 @@ export default function Home() {
   const context = useContext(AuthContext);
   const [tasksClient, setTasks] = React.useState<taskInterface[]>([]);
   const [tasksCreator, setTasksCreator] = React.useState<taskInterface[]>([]);
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     const runner = async () => {
@@ -21,16 +19,15 @@ export default function Home() {
         return;
       }
       const { loggedInUserID } = context;
-      if (loggedInUserID === null) {
-        return navigate('/auth');
-      }
+      if (loggedInUserID === null) { return }
+
       const data = await getUserInfo(loggedInUserID);
 
       setTasks(data.tasks);
       setTasksCreator(data.services.flatMap((s) => s.tasks));
     };
     runner();
-  }, [context, navigate]);
+  }, [context]);
 
   return (
     <Flex direction="column" justify="center" align="stretch" gap="2">

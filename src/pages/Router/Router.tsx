@@ -9,6 +9,7 @@ import UserServices from '../UserServices/UserServices';
 import SubmitTask from '../SubmitTask/SubmitTask';
 import Navbar from '../../components/Navbar/Navbar';
 import { Flex } from '@radix-ui/themes';
+import ProtectedPage from '../ProtectedPage/ProtectedPage';
 
 const NavbarWrapper = () => (
   <Flex direction="column" justify="center" gap="4">
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />,
+        element: <ProtectedPage><Home /></ProtectedPage>
       },
       {
         path: '/auth',
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/search',
-        element: <Search />,
+        element: <ProtectedPage><Search /></ProtectedPage>,
       },
       // FIXME: Make profile page
       {
@@ -42,30 +43,30 @@ const router = createBrowserRouter([
       // FIXME: Page to show all the services
       {
         path: '/:userID/services',
-        element: <UserServices />,
+        element: <ProtectedPage><UserServices /></ProtectedPage>
       },
       // FIXME
       {
         path: '/:userID/services/create',
-        element: <CreateService />,
+        element: <ProtectedPage><CreateService /></ProtectedPage>
       },
       {
         path: '/:userID/services/:servID',
-        element: <ServiceDetail />,
+        element: <ProtectedPage><ServiceDetail /></ProtectedPage>
       },
       // FIXME
       {
         path: '/:userID/services/:servID/submit-task',
-        element: <SubmitTask />,
+        element: <ProtectedPage><SubmitTask /></ProtectedPage>
       },
       // FIXME
       {
         path: '/:userID/services/:servID/update-service',
-        element: <div>Update Service</div>,
+        element: <ProtectedPage><div>Update Service</div></ProtectedPage>
       },
       {
         path: '/:userID/tasks',
-        element: <div>User Tasks</div>,
+        element: <ProtectedPage><div>User Tasks</div></ProtectedPage>
       },
     ],
   },

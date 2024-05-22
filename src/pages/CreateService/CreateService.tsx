@@ -11,9 +11,10 @@ export default function CreateService() {
 
   useEffect(() => {
     if (!isLoggedIn || loggedInUserID === null) {
-      return navigate('/auth');
+      return
     }
-  }, [isLoggedIn, loggedInUserID, navigate]);
+  }, [isLoggedIn, loggedInUserID]);
+
   async function onCommit(serviceForm: ServiceCreationFormData) {
     await createService(serviceForm);
     navigate(`/${loggedInUserID}/services/`);
