@@ -1,10 +1,10 @@
 import { useParams } from 'react-router';
 import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
-import { getUserServiceById } from '../../services/apiServices';
+import { deleteTask, getUserServiceById, updateTaskStatus } from '../../services/apiServices';
 import { Link } from 'react-router-dom';
 
 const statuses = [
@@ -67,23 +67,26 @@ export default function ServiceDetail() {
     return res;
   }, [sortedTasks]);
 
-  useEffect(() => {
-    const runner = async () => {
-      if (servID === undefined) {
-        return;
-      }
-      const service = await getUserServiceById(Number(servID));
-      setService(service);
-    };
-    runner();
+  const loadService = useCallback(async () => {
+    if (servID === undefined) {
+      return;
+    }
+    const service = await getUserServiceById(Number(servID));
+    setService(service);
   }, [servID]);
 
+  useEffect(() => {
+    loadService()
+  }, [loadService]);
+
   async function handleTaskStatusChange(task: Task, status: TaskStatus) {
-    console.log(task);
+    await updateTaskStatus(task.taskID, status);
+    await loadService();
   }
 
   async function handleTaskDelete(task: Task) {
-    console.log(task);
+    await deleteTask(task.taskID);
+    await loadService();
   }
 
   return (

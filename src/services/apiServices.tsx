@@ -128,15 +128,15 @@ export async function updateTaskStatus(taskID: number, status: TaskStatus) {
       break;
   }
 
-  return await api.put(`/api/tasks/${taskID}`, { status: formattedStatus });
+  return await api.put(`/api/tasks/${taskID}/update_status/`, { status: formattedStatus });
 }
 
 export async function deleteTask(taskID: number) {
-  return await api.delete(`/api/tasks/${taskID}`);
+  return await api.delete(`/api/tasks/${taskID}/`);
 }
 
 export async function deleteService(serviceID: number) {
-  return await api.delete(`/api/services/${serviceID}`);
+  return await api.delete(`/api/services/${serviceID}/`);
 }
 
 export async function getUserInfo(userID: number): Promise<{
