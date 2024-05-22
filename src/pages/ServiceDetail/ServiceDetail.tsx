@@ -149,6 +149,8 @@ export default function ServiceDetail() {
           statuses
             .filter((status) => {
               if (isMine) {
+                return status;
+              } else {
                 if (
                   status !== ('pending' as const) &&
                   status !== ('accepted' as const) &&
@@ -156,8 +158,6 @@ export default function ServiceDetail() {
                 ) {
                   return status;
                 }
-              } else {
-                return status;
               }
             })
             .map((tag, idx) => {
