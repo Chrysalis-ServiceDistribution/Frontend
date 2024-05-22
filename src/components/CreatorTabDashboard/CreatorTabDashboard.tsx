@@ -23,9 +23,6 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
     <Flex direction="column" gap="2">
       {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
       <Text size="5">Your reqests and task status'</Text>
-      <Link to={`/${loggedInUserID}/services`}>
-        <Button>View your services</Button>
-      </Link>
       <Link to={`/${loggedInUserID}/services/create`}>
         <Button>Create new service</Button>
       </Link>
@@ -98,7 +95,9 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
           </Collapsible.Content>
         </Collapsible.Root>
       )}
-      <Box></Box>
+      <Link to={`/${loggedInUserID}/services`}>
+        <Button>View your services</Button>
+      </Link>
     </Flex>
   );
 };
