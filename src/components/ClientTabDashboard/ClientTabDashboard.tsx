@@ -2,7 +2,7 @@ import Task from '../Task/Task';
 import {Task as taskInterface} from '../../classes/service/service';
 import { Flex, Text, Card } from '@radix-ui/themes';
 
-const ClientTabDashboard = (props: { tasks : taskInterface[]}) => {
+const ClientTabDashboard = (props: { tasks: taskInterface[] }) => {
   const { tasks } = props;
 
   return (

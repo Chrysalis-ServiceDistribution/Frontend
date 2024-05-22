@@ -1,5 +1,8 @@
 import { Flex, TextField, Button } from '@radix-ui/themes';
-import { ServiceRadioField, ServiceField } from '../../../classes/service/formField';
+import {
+  ServiceRadioField,
+  ServiceField,
+} from '../../../classes/service/formField';
 import React from 'react';
 import NoOutlineIconButton from './NoOutlineIconButton';
 import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';

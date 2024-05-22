@@ -17,11 +17,9 @@ export default function Navbar() {
     dynamicText = 'Search';
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
-  }
-  else if (location.pathname === '/profile') {
+  } else if (location.pathname === '/profile') {
     dynamicText = 'Profile';
-  }
-  else {
+  } else {
     dynamicText = 'Add me as an elseif statement for this page';
   }
 

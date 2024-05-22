@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Service, Task } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
+import { getUserServiceById } from '../../services/apiServices';
+import { Link } from 'react-router-dom';
 
 const statuses = [
   'pending' as const,
@@ -38,7 +40,7 @@ export default function ServiceDetail() {
     }
 
     for (const task of service.tasks) {
-      sorted[task.status].push(task)
+      sorted[task.status].push(task);
     }
 
     return sorted;
@@ -67,8 +69,12 @@ export default function ServiceDetail() {
   }, [sortedTasks]);
 
   useEffect(() => {
-    const servNumber = Number(servID);
-    setService(dummyServices[servNumber]);
+    const runner = async () => {
+      if (servID === undefined) { return }
+      const service = await getUserServiceById(Number(servID));
+      setService(service);
+    }
+    runner()
   }, [servID]);
 
   return (
@@ -80,6 +86,7 @@ export default function ServiceDetail() {
       <Heading as="h2" size="4">
         Tasks
       </Heading>
+      <Link to={`/${userID}/services/${servID}/submit-task`}>Submit Task</Link>
       <Tabs.Root defaultValue="inProgress">
         <Tabs.List justify="center" m="3">
           {statuses.map((status, idx) => (

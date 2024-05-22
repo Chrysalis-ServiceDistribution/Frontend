@@ -84,7 +84,9 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new ServiceCheckboxField(`Checkbox field prompt goes here`, ['Choice 1']),
+        new ServiceCheckboxField(`Checkbox field prompt goes here`, [
+          'Choice 1',
+        ]),
       ],
     });
   }

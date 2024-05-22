@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
-import { Flex, Text, Button, IconButton, Link, Card } from '@radix-ui/themes';
+import { Flex, Text, Button, IconButton, Card } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
 
 const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
+  const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
   const { tasks } = props;
 
   const [services, setServices] = React.useState<string[]>([]);
@@ -20,6 +23,13 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
   return (
     <Flex direction="column" gap="2">
       {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
+      <Text size="5">Your reqests and task status'</Text>
+      <Link to={`/${loggedInUserID}/services`}>
+        <Button>View your services</Button>
+      </Link>
+      <Link to={`/${loggedInUserID}/services/create`}>
+        <Button>Create new service</Button>
+      </Link>
       <ServiceSelect services={services} setServiceView={setServiceView} />
       {tasks?.filter(
         (task) => task.status === 'pending' || task.status === 'rejected',
