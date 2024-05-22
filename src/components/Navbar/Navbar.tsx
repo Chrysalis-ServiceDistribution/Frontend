@@ -4,19 +4,16 @@ import {
   MagnifyingGlassIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
-import { useLocation, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Navbar() {
   const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
-  const { userID } = useParams();
   const location = useLocation();
-  let dynamicText: string = '';
   const { userID, servID } = useParams();
-  useEffect(() => {}, [location.pathname]);
+  let dynamicText = '';
+
   if (location.pathname === '/search') {
     dynamicText = 'Search';
   } else if (location.pathname === '/') {
