@@ -1,4 +1,3 @@
-import dummyServices from './services';
 import { Grid, Flex, Heading, Separator } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';

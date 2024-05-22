@@ -1,5 +1,4 @@
 import { useParams } from 'react-router';
-import dummyServices from '../UserServices/services';
 import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
 import { useEffect, useMemo, useState } from 'react';
 import { Service, Task } from '../../classes/service/service';
@@ -70,11 +69,13 @@ export default function ServiceDetail() {
 
   useEffect(() => {
     const runner = async () => {
-      if (servID === undefined) { return }
+      if (servID === undefined) {
+        return;
+      }
       const service = await getUserServiceById(Number(servID));
       setService(service);
-    }
-    runner()
+    };
+    runner();
   }, [servID]);
 
   return (
