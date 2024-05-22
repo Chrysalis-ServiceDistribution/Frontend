@@ -34,7 +34,7 @@ export default function Search() {
             .filter((service) =>
               service.name.toLowerCase().includes(searchQuery.toLowerCase()),
             )
-            .map((service,index) => (
+            .map((service, index) => (
               //TODO: change key when services are better typed
               <ServiceCard key={index} service={service} />
             ))}

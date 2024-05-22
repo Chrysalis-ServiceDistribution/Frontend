@@ -1,6 +1,11 @@
 import { ServiceField } from './formField';
 
-export type TaskStatus = 'pending' | 'accepted' | 'inProgress' | 'rejected' | 'done';
+export type TaskStatus =
+  | 'pending'
+  | 'accepted'
+  | 'inProgress'
+  | 'rejected'
+  | 'done';
 
 export const TaskStatuses = [
   'rejected' as const,
@@ -8,7 +13,7 @@ export const TaskStatuses = [
   'accepted' as const,
   'inProgress' as const,
   'done' as const,
-]
+];
 
 export type RequestTextField = {
   type: 'text';
@@ -113,9 +118,10 @@ export interface Task {
  * },
  * ],
  * };
- * 
+ *
  */
 export interface Service {
+  id: number,
   name: string;
   description: string;
   fields: ServiceField[];
@@ -140,4 +146,92 @@ export function createDefaultField(formField: ServiceField): RequestField {
         selection: [],
       };
   }
+}
+
+export function loadService(service: any): Service {
+  return {
+    id: service.id,
+    name: service.name,
+    description: service.description,
+    fields: service['form_fields'].map(loadServiceField),
+    tasks: service['tasks']?.map(loadTask) || [],
+  };
+}
+
+export function loadServiceField(field: any): ServiceField {
+  switch (field.type) {
+    case 'text':
+      return {
+        type: 'text',
+        prompt: field.prompt,
+      };
+    case 'radio':
+      return {
+        type: 'radio',
+        prompt: field.prompt,
+        choices: field.choices,
+      };
+    case 'checkbox':
+      return {
+        type: 'checkbox',
+        prompt: field.prompt,
+        choices: field.choices,
+      };
+    default:
+      throw new Error('invalid type');
+  }
+}
+
+export function loadRequestField(field: any): RequestField {
+  switch (field.type) {
+    case 'text':
+      return {
+        type: 'text',
+        prompt: field.prompt,
+        value: field.value,
+      };
+    case 'radio':
+      return {
+        type: 'radio',
+        prompt: field.prompt,
+        choices: field.choices,
+        selection: field.options,
+      };
+    case 'checkbox':
+      return {
+        type: 'checkbox',
+        prompt: field.prompt,
+        choices: field.choices,
+        selection: field.options,
+      };
+    default:
+      throw new Error('invalid type');
+  }
+}
+
+export function loadStatus(status: any): TaskStatus {
+  switch (status) {
+    case 'P':
+      return 'pending';
+    case 'A':
+      return 'accepted';
+    case 'IP':
+      return 'inProgress';
+    case 'C':
+      return 'done';
+    case 'X':
+      return 'rejected';
+    default:
+      throw new Error('invalid status');
+  }
+}
+
+export function loadTask(task: any): Task {
+  return {
+    taskID: task.id,
+    service: task.service,
+    client: task.client,
+    status: loadStatus(task.status),
+    requestFields: task['request_fields'].map(loadRequestField),
+  };
 }
