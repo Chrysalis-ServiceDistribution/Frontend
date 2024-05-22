@@ -1,9 +1,10 @@
 import { Flex } from '@radix-ui/themes';
-import { Task, TaskStatus } from '../../classes/service/service';
+import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskCard from '../TaskCard/TaskCard';
 
 export default function TaskList(props: {
   tasks: Task[];
+  service: Service;
   onTaskStatusChange: (task: Task, status: TaskStatus) => void;
   onTaskDelete: (task: Task) => void;
 }) {
@@ -25,6 +26,7 @@ export default function TaskList(props: {
         <TaskCard
           key={idx}
           task={task}
+          service={props.service}
           onStatusChange={handleTaskStatusChange(idx)}
           onDelete={handleTaskDelete(idx)}
         />

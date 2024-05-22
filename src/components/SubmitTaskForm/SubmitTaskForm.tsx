@@ -4,7 +4,7 @@ import {
   Service,
   createDefaultField,
 } from '../../classes/service/service';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import TaskFieldEditor from './TaskFieldEditor/TaskFieldEditor';
 import { useEffect, useState } from 'react';
 import { createTask, getUserServiceById } from '../../services/apiServices';
@@ -15,6 +15,7 @@ export default function SubmitTaskForm() {
   const [filledFields, setFilledFields] = useState(
     service?.fields.map((field) => createDefaultField(field)),
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     const runner = async () => {
@@ -38,11 +39,12 @@ export default function SubmitTaskForm() {
     };
   }
 
-  function commit() {
+  async function commit() {
     if (servID === undefined || filledFields === undefined) {
       return;
     }
-    createTask(Number(servID), filledFields);
+    await createTask(Number(servID), filledFields);
+    navigate(`/${userID}/services/${servID}`)
   }
 
   return (

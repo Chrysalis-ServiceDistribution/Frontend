@@ -74,14 +74,14 @@ export async function createTask(serviceID: number, fields: RequestField[]) {
         };
       case 'radio':
         return {
-          type: 'text',
+          type: 'radio',
           index: idx,
           value: '',
           options: field.selection,
         };
       case 'checkbox':
         return {
-          type: 'text',
+          type: 'checkbox',
           index: idx,
           value: '',
           options: field.selection,
@@ -90,7 +90,7 @@ export async function createTask(serviceID: number, fields: RequestField[]) {
   });
 
   return await api.post(`/api/services/${serviceID}/submit_request/`, {
-    form_fields: newFields,
+    fields: newFields,
   });
 }
 

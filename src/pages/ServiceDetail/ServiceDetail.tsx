@@ -115,10 +115,11 @@ export default function ServiceDetail() {
             </Tabs.Trigger>
           ))}
         </Tabs.List>
-        {statuses.map((tag, idx) => (
+        {(service !== null) && statuses.map((tag, idx) => (
           <Tabs.Content key={idx} value={tag}>
             <TaskList
               tasks={sortedTasks[tag]}
+              service={service}
               onTaskStatusChange={handleTaskStatusChange}
               onTaskDelete={handleTaskDelete}
             />
