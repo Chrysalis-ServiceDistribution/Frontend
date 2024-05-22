@@ -1,20 +1,21 @@
 import React from 'react';
 import { Select } from '@radix-ui/themes';
+import { Service } from '../../classes/service/service';
 
 type ServiceSelectProps = {
-  services: string[];
-  setServiceView: React.Dispatch<React.SetStateAction<string>>;
+  services: Service[];
+  setService: (sel: number | null) => void;
 };
 
 const ServiceSelect: React.FC<ServiceSelectProps> = ({
   services,
-  setServiceView,
+  setService,
 }) => {
   return (
     <Select.Root
       defaultValue="Show All"
-      onValueChange={(e: string) => {
-        setServiceView(e);
+      onValueChange={() => {
+        setService(null);
       }}
     >
       <Select.Trigger />
@@ -23,8 +24,8 @@ const ServiceSelect: React.FC<ServiceSelectProps> = ({
           <Select.Item value="Show All">Show All</Select.Item>
           {services.map((service, index) => {
             return (
-              <Select.Item key={index + 1} value={service}>
-                {service}
+              <Select.Item key={index} value={`${index}`}>
+                {service.name}
               </Select.Item>
             );
           })}

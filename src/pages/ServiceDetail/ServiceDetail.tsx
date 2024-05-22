@@ -1,10 +1,10 @@
-import { useParams } from 'react-router';
-import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { Service, Task } from '../../classes/service/service';
+import { useNavigate, useParams } from 'react-router';
+import { Button, Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
+import { useContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
-import { getUserServiceById } from '../../services/apiServices';
+import { deleteService, deleteTask, getUserServiceById, updateTaskStatus } from '../../services/apiServices';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import TaskComponent from '../../components/Task/Task';
@@ -22,6 +22,8 @@ export default function ServiceDetail() {
   const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
 
   const [service, setService] = useState<Service | null>(null);
+  const navigate = useNavigate();
+
   const sortedTasks = useMemo(() => {
     const sorted: {
       pending: Task[];
@@ -70,16 +72,33 @@ export default function ServiceDetail() {
     return res;
   }, [sortedTasks]);
 
-  useEffect(() => {
-    const runner = async () => {
-      if (servID === undefined) {
-        return;
-      }
-      const service = await getUserServiceById(Number(servID));
-      setService(service);
-    };
-    runner();
+  const loadService = useCallback(async () => {
+    if (servID === undefined) {
+      return;
+    }
+    const service = await getUserServiceById(Number(servID));
+    setService(service);
   }, [servID]);
+
+  useEffect(() => {
+    loadService()
+  }, [loadService]);
+
+  async function handleTaskStatusChange(task: Task, status: TaskStatus) {
+    await updateTaskStatus(task.taskID, status);
+    await loadService();
+  }
+
+  async function handleTaskDelete(task: Task) {
+    await deleteTask(task.taskID);
+    await loadService();
+  }
+
+  async function handleServiceDelete() {
+    if (userID === null || service === null) { return }
+    await deleteService(service.id);
+    navigate(`/${userID}/services`)
+  }
 
   const isMine = isLoggedIn && loggedInUserID === Number(userID);
 
@@ -88,6 +107,7 @@ export default function ServiceDetail() {
       <Heading as="h1" size="7">
         {service?.name}
       </Heading>
+      <Button onClick={handleServiceDelete}>Delete Service</Button>
       <Separator size="4" />
       <Heading as="h2" size="4">
         Tasks
@@ -111,7 +131,7 @@ export default function ServiceDetail() {
               </Tabs.Trigger>
             ))}
         </Tabs.List>
-        {statuses
+        {(service !== null) && statuses
             .filter((status) => {
               if (isMine) {
                 if (status !== 'pending' as const && status !== 'accepted' as const && status !== 'rejected' as const) {
@@ -125,7 +145,12 @@ export default function ServiceDetail() {
               if (isMine) {
                 return (
                   <Tabs.Content key={idx} value={tag}>
-                    <TaskList tasks={sortedTasks[tag]} />
+                    <TaskList
+              tasks={sortedTasks[tag]}
+              service={service}
+              onTaskStatusChange={handleTaskStatusChange}
+              onTaskDelete={handleTaskDelete}
+            />
                   </Tabs.Content>
                 );
               } else {

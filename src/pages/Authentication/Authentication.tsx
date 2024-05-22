@@ -24,16 +24,18 @@ export default function Authentication() {
   const handleSignUp = () => {
     //TODO: pass username, email, and password to the auth context and handle the signup
     // console.log('Signing up:', username, email, password);
-    register?({ username, email, password }):
-
-    //On api okay, login, wait, if good and redirect to home, if not switch to login page, display error message
-    //throwing this here so it is part of flow, logic required to implemnt correctly
-    navigate('/');
+    register
+      ? { username, email, password }
+      : //On api okay, login, wait, if good and redirect to home, if not switch to login page, display error message
+        //throwing this here so it is part of flow, logic required to implemnt correctly
+        navigate('/');
     //On api error, display error message
   };
 
   const handleLogin = async () => {
-    if (!login) { return }
+    if (!login) {
+      return;
+    }
     await login({ username, password });
     //On api okay, login, wait, if good and redirect to home
 
@@ -45,20 +47,40 @@ export default function Authentication() {
     <>
       <Flex direction="column" gap="5" justify="center" align="center">
         <Text size="9">Chrysalis</Text>
+        <Box>
+          <TextField.Root
+            onChange={(e) => {
+              handelUsernameChange(e);
+            }}
+            size="3"
+            placeholder="Username"
+            color="jade"
+          />
+        </Box>
         {signupMode && (
           <Box>
-            <TextField.Root onChange={(e)=>{handelUsernameChange(e)}} size="3" placeholder="Username" color="jade" />
+            <TextField.Root
+              onChange={(e) => {
+                handelEmailChange(e);
+              }}
+              size="3"
+              placeholder="Email"
+            />
           </Box>
         )}
         <Box>
-          <TextField.Root onChange={(e)=>{handelEmailChange(e)}} size="3" placeholder="Email" />
-        </Box>
-        <Box>
-          <TextField.Root onChange={(e)=>{handelPasswordChange(e)}} size="3" placeholder="Password" type="password" />
+          <TextField.Root
+            onChange={(e) => {
+              handelPasswordChange(e);
+            }}
+            size="3"
+            placeholder="Password"
+            type="password"
+          />
         </Box>
         {!signupMode && (
           <Button
-            color='jade'
+            color="jade"
             onClick={() => {
               handleLogin();
             }}
@@ -68,7 +90,7 @@ export default function Authentication() {
         )}
         {signupMode && (
           <Button
-            color='jade'
+            color="jade"
             onClick={() => {
               handleSignUp();
             }}
