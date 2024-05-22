@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Navbar() {
-  const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
+  const { loggedInUserID, isLoggedIn, username} = useContext(AuthContext);
   const location = useLocation();
   const { userID, servID } = useParams();
   let dynamicText = '';
@@ -20,7 +20,7 @@ export default function Navbar() {
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
   } else if (location.pathname === `/${userID}`) {
-    dynamicText = 'Profile Page';
+    dynamicText = `${username}'s Profile`;
   } else if (location.pathname === `/${userID}/services/${servID}`) {
     dynamicText = 'Service Detail';
   } else if (
