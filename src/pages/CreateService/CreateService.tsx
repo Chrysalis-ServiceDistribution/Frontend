@@ -7,16 +7,16 @@ import { createService } from '../../services/apiServices';
 
 export default function CreateService() {
   const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoggedIn || loggedInUserID === null) {
-      return navigate('/auth')
+      return navigate('/auth');
     }
-  },[isLoggedIn, loggedInUserID, navigate])
+  }, [isLoggedIn, loggedInUserID, navigate]);
   async function onCommit(serviceForm: ServiceCreationFormData) {
-    await createService(serviceForm); 
-    navigate(`/${loggedInUserID}/services/`)   
+    await createService(serviceForm);
+    navigate(`/${loggedInUserID}/services/`);
   }
 
   return <ServiceCreationForm onCommit={onCommit} />;

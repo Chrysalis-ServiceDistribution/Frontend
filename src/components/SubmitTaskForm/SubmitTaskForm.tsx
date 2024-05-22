@@ -39,7 +39,9 @@ export default function SubmitTaskForm() {
   }
 
   function commit() {
-    if (servID === undefined || filledFields === undefined) { return }
+    if (servID === undefined || filledFields === undefined) {
+      return;
+    }
     createTask(Number(servID), filledFields);
   }
 

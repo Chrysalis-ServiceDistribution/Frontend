@@ -8,10 +8,7 @@ import '@radix-ui/themes/styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Theme 
-    accentColor='iris'
-    appearance='dark'
-    className="background">
+    <Theme accentColor="iris" appearance="dark" className="background">
       <App />
     </Theme>
   </React.StrictMode>,
