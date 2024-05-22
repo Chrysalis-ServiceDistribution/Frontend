@@ -4,7 +4,7 @@ import StatusTab from '../StatusTab/StatusTab';
 
 export default function SetTaskStatusDropdown(props: {
   status: TaskStatus;
-  onSelect: (type: string) => void;
+  onSelect: (type: TaskStatus) => void;
 }) {
   return (
     <Select.Root value={props.status} onValueChange={props.onSelect}>

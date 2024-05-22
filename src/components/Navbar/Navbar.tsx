@@ -35,7 +35,6 @@ export default function Navbar() {
       style={{
         padding: '1rem',
         borderBottom: '1px solid rgba(255,255,255, .8)',
-      
       }}
     >
       <Flex gap="1">

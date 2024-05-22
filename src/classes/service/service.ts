@@ -121,7 +121,7 @@ export interface Task {
  *
  */
 export interface Service {
-  id: number,
+  id: number;
   name: string;
   description: string;
   fields: ServiceField[];

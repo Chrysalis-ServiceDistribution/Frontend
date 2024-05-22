@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
 import { useEffect, useMemo, useState } from 'react';
-import { Service, Task } from '../../classes/service/service';
+import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
 import { getUserServiceById } from '../../services/apiServices';
@@ -78,6 +78,14 @@ export default function ServiceDetail() {
     runner();
   }, [servID]);
 
+  async function handleTaskStatusChange(task: Task, status: TaskStatus) {
+    console.log(task);
+  }
+
+  async function handleTaskDelete(task: Task) {
+    console.log(task);
+  }
+
   return (
     <Flex p="3" gap="3" direction="column">
       <Heading as="h1" size="7">
@@ -98,7 +106,11 @@ export default function ServiceDetail() {
         </Tabs.List>
         {statuses.map((tag, idx) => (
           <Tabs.Content key={idx} value={tag}>
-            <TaskList tasks={sortedTasks[tag]} />
+            <TaskList
+              tasks={sortedTasks[tag]}
+              onTaskStatusChange={handleTaskStatusChange}
+              onTaskDelete={handleTaskDelete}
+            />
           </Tabs.Content>
         ))}
       </Tabs.Root>

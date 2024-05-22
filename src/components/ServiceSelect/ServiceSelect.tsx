@@ -4,7 +4,7 @@ import { Service } from '../../classes/service/service';
 
 type ServiceSelectProps = {
   services: Service[];
-  setService: (sel: number | null) => void
+  setService: (sel: number | null) => void;
 };
 
 const ServiceSelect: React.FC<ServiceSelectProps> = ({

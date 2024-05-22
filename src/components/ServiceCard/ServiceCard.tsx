@@ -58,7 +58,7 @@ export default function ServiceCard(props: { service: Service }) {
 
   return (
     <Card>
-      <Flex direction="column" gap="3" justify='between'>
+      <Flex direction="column" gap="3" justify="between">
         <Heading as="h3" size="3">
           {props.service.name}
         </Heading>

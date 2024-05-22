@@ -17,11 +17,13 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
 
   useEffect(() => {
     const runner = async () => {
-      if (loggedInUserID === null || !isLoggedIn) { return }
-      const userData = await getUserInfo(loggedInUserID)
+      if (loggedInUserID === null || !isLoggedIn) {
+        return;
+      }
+      const userData = await getUserInfo(loggedInUserID);
       setServices(userData.services);
-    }
-    runner()
+    };
+    runner();
   }, [isLoggedIn, loggedInUserID]);
 
   return (
@@ -46,10 +48,10 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                 {
                   // pending and rejected tasks
                   tasks
-                    .filter((task) =>
-                      (currentService === null || (
-                        task.serviceID === services[currentService].id
-                      ))
+                    .filter(
+                      (task) =>
+                        currentService === null ||
+                        task.serviceID === services[currentService].id,
                     )
                     .filter(
                       (task) =>
@@ -80,10 +82,10 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                   // other tasks
                   <Flex direction="column" gap="1">
                     {tasks
-                      .filter((task) =>
-                        (currentService === null || (
-                          task.serviceID === services[currentService].id
-                        ))
+                      .filter(
+                        (task) =>
+                          currentService === null ||
+                          task.serviceID === services[currentService].id,
                       )
                       .filter(
                         (task) =>
