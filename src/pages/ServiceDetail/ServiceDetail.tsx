@@ -115,6 +115,9 @@ export default function ServiceDetail() {
         {service?.name}
       </Heading>
       {isMine && <Button onClick={handleServiceDelete}>Delete Service</Button>}
+      <Link to={`/${userID}/services/`}>
+        <Button>Back to Services</Button>
+      </Link>
       <Separator size="4" />
       <Heading as="h2" size="4">
         Tasks
