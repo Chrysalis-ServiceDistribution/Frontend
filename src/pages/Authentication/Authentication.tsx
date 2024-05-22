@@ -45,14 +45,14 @@ export default function Authentication() {
     <>
       <Flex direction="column" gap="5" justify="center" align="center">
         <Text size="9">Chrysalis</Text>
+        <Box>
+          <TextField.Root onChange={(e)=>{handelUsernameChange(e)}} size="3" placeholder="Username" color="jade" />
+        </Box>
         {signupMode && (
           <Box>
-            <TextField.Root onChange={(e)=>{handelUsernameChange(e)}} size="3" placeholder="Username" color="jade" />
+            <TextField.Root onChange={(e)=>{handelEmailChange(e)}} size="3" placeholder="Email" />
           </Box>
         )}
-        <Box>
-          <TextField.Root onChange={(e)=>{handelEmailChange(e)}} size="3" placeholder="Email" />
-        </Box>
         <Box>
           <TextField.Root onChange={(e)=>{handelPasswordChange(e)}} size="3" placeholder="Password" type="password" />
         </Box>

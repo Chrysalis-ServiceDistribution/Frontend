@@ -14,8 +14,8 @@ const ServiceSelect: React.FC<ServiceSelectProps> = ({
   return (
     <Select.Root
       defaultValue="Show All"
-      onValueChange={(e: string) => {
-        setService(Number(e));
+      onValueChange={() => {
+        setService(null);
       }}
     >
       <Select.Trigger />
