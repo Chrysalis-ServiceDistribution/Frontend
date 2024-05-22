@@ -7,6 +7,7 @@ import StatusTab from '../../components/StatusTab/StatusTab';
 import { getUserServiceById } from '../../services/apiServices';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import TaskComponent from '../../components/Task/Task';
 
 const statuses = [
   'pending' as const,
@@ -80,7 +81,7 @@ export default function ServiceDetail() {
     runner();
   }, [servID]);
 
-  const isMine = true
+  const isMine = isLoggedIn && loggedInUserID === Number(userID);
 
   return (
     <Flex p="3" gap="3" direction="column">
@@ -112,7 +113,7 @@ export default function ServiceDetail() {
         </Tabs.List>
         {statuses
             .filter((status) => {
-              if (!isMine) {
+              if (isMine) {
                 if (status !== 'pending' as const && status !== 'accepted' as const && status !== 'rejected' as const) {
                   return status;
                 }
@@ -120,12 +121,24 @@ export default function ServiceDetail() {
                 return status;
               }
             })
-          .map((tag, idx) => (
-            <Tabs.Content key={idx} value={tag}>
-              <TaskList tasks={sortedTasks[tag]} />
-            </Tabs.Content>
-          ))}
-      </Tabs.Root>
+          .map((tag, idx) => {
+              if (isMine) {
+                return (
+                  <Tabs.Content key={idx} value={tag}>
+                    <TaskList tasks={sortedTasks[tag]} />
+                  </Tabs.Content>
+                );
+              } else {
+                return (
+                  <Tabs.Content key={idx} value={tag}>
+                    {sortedTasks[tag].map((task: Task, idx: number) => (
+                      <TaskComponent key={idx} {...task} />
+                    ))}
+                  </Tabs.Content>
+                );
+              }
+            })}
+        </Tabs.Root>
     </Flex>
   );
 }
