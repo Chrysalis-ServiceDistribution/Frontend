@@ -93,8 +93,11 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                           task.status !== 'rejected',
                       )
                       .map((task) => {
-                        return <Task key={task.taskID} task={task} />;
-                      })}
+                        return (
+                          <Link to={`/${loggedInUserID}/tasks/${task.taskID}`}>
+                            <Task key={task.taskID} task={task} />
+                          </Link>
+                      )})}
                   </Flex>
                 }
               </Flex>
