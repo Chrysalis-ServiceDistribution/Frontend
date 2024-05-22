@@ -6,8 +6,13 @@ import {
 } from '@radix-ui/react-icons';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+
 export default function Navbar() {
+  const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
+  const { userID } = useParams();
   const location = useLocation();
   let dynamicText: string = '';
 
@@ -17,11 +22,11 @@ export default function Navbar() {
     dynamicText = 'Search';
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
-  } else if (location.pathname === '/profile') {
-    dynamicText = 'Profile';
+  } else if (location.pathname === `/${userID}`) {
+    dynamicText = 'Profile Page';
   } else {
     dynamicText = 'Add me as an elseif statement for this page';
-  }
+  } 
 
   if (location.pathname === '/auth') {
     return null;
@@ -54,7 +59,7 @@ export default function Navbar() {
       {/* Where am I text */}
       <Text size="3">{dynamicText}</Text>
       {/* Profile */}
-      <Link to="/profile">
+      <Link to={`/${loggedInUserID}`}>
         <IconButton>
           <PersonIcon />
         </IconButton>
