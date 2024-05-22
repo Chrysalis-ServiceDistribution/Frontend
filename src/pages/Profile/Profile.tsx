@@ -44,7 +44,7 @@ export default function Profile() {
     return (
       <Flex direction="column" gap="1">
         <Text>Profile</Text>
-        <Link to={`${userID}/services`}>View your services</Link>
+        <Link to={`/${userID}/services`}>View your services</Link>
       </Flex>
     );
   }
