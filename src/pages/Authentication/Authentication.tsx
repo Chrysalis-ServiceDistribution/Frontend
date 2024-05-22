@@ -8,18 +8,22 @@ export default function Authentication() {
   const navigate = useNavigate();
   const [signupMode, setSignupMode] = useState(false);
 
-  const handleSignUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const username: string = (e.target as HTMLButtonElement)
-      .parentElement!.getElementsByClassName('Username')[0]
-      .getElementsByTagName('input')[0].value;
-    const email: string = (e.target as HTMLButtonElement)
-      .parentElement!.getElementsByClassName('Email')[0]
-      .getElementsByTagName('input')[0].value;
-    const password: string = (e.target as HTMLButtonElement)
-      .parentElement!.getElementsByClassName('Password')[0]
-      .getElementsByTagName('input')[0].value;
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handelUsernameChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setUsername((e.target as HTMLInputElement).value);
+  };
+  const handelEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setEmail((e.target as HTMLInputElement).value);
+  };
+  const handelPasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setPassword((e.target as HTMLInputElement).value);
+  };
+  const handleSignUp = () => {
     //TODO: pass username, email, and password to the auth context and handle the signup
-    console.log('Signing up:', username, email, password);
+    // console.log('Signing up:', username, email, password);
     register?({ username, email, password }):
 
     //On api okay, login, wait, if good and redirect to home, if not switch to login page, display error message
@@ -28,16 +32,8 @@ export default function Authentication() {
     //On api error, display error message
   };
 
-  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleLogin = async () => {
     if (!login) { return }
-    const username: string = (e.target as HTMLButtonElement)
-      .parentElement!.getElementsByClassName('Username')[0]
-      .getElementsByTagName('input')[0].value;
-    const password: string = (e.target as HTMLButtonElement)
-      .parentElement!.getElementsByClassName('Password')[0]
-      .getElementsByTagName('input')[0].value;
-    // TODO: pass email and password to the auth context and handle the login
-    console.log('Logging in:', username, password);
     await login({ username, password });
     //On api okay, login, wait, if good and redirect to home
 
@@ -51,20 +47,20 @@ export default function Authentication() {
         <Text size="9">Chrysalis</Text>
         {signupMode && (
           <Box>
-            <TextField.Root size="3" placeholder="Username" color="jade" />
+            <TextField.Root onChange={(e)=>{handelUsernameChange(e)}} size="3" placeholder="Username" color="jade" />
           </Box>
         )}
         <Box>
-          <TextField.Root size="3" placeholder="Email" />
+          <TextField.Root onChange={(e)=>{handelEmailChange(e)}} size="3" placeholder="Email" />
         </Box>
         <Box>
-          <TextField.Root size="3" placeholder="Password" type="password" />
+          <TextField.Root onChange={(e)=>{handelPasswordChange(e)}} size="3" placeholder="Password" type="password" />
         </Box>
         {!signupMode && (
           <Button
             color='jade'
-            onClick={(e) => {
-              handleLogin(e);
+            onClick={() => {
+              handleLogin();
             }}
           >
             Log-In
@@ -73,8 +69,8 @@ export default function Authentication() {
         {signupMode && (
           <Button
             color='jade'
-            onClick={(e) => {
-              handleSignUp(e);
+            onClick={() => {
+              handleSignUp();
             }}
           >
             Sign-Up
