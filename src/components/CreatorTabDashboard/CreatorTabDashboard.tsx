@@ -1,23 +1,28 @@
-import React, { useContext, useEffect } from 'react';
-import { Task as taskInterface } from '../../classes/service/service';
+import React, { useContext, useEffect, useState } from 'react';
+import { Service, Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
 import { Flex, Text, Button, Box } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import { getUserInfo } from '../../services/apiServices';
 
 const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
   const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
   const { tasks } = props;
 
-  const [services, setServices] = React.useState<string[]>([]);
-  const [serviceView, setServiceView] = React.useState<string>('Show All');
+  const [services, setServices] = useState<Service[]>([]);
+  const [currentService, setCurrentService] = useState<number | null>(null);
 
   useEffect(() => {
-    //TODO: Change this to get the services from the user context
-    setServices([...new Set(tasks.map((task) => task.service))]);
-  }, [tasks]);
+    const runner = async () => {
+      if (loggedInUserID === null || !isLoggedIn) { return }
+      const userData = await getUserInfo(loggedInUserID)
+      setServices(userData.services);
+    }
+    runner()
+  }, [isLoggedIn, loggedInUserID]);
 
   return (
     <Flex direction="column" gap="2">
@@ -26,7 +31,7 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
       <Link to={`/${loggedInUserID}/services/create`}>
         <Button>Create new service</Button>
       </Link>
-      <ServiceSelect services={services} setServiceView={setServiceView} />
+      <ServiceSelect services={services} setService={setCurrentService} />
       {tasks?.filter(
         (task) => task.status === 'pending' || task.status === 'rejected',
       ).length > 0 && (
@@ -42,16 +47,16 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                   // pending and rejected tasks
                   tasks
                     .filter((task) =>
-                      serviceView !== 'Show All'
-                        ? task.service === serviceView
-                        : task,
+                      (currentService === null || (
+                        task.serviceID === services[currentService].id
+                      ))
                     )
                     .filter(
                       (task) =>
                         task.status === 'pending' || task.status === 'rejected',
                     )
                     .map((task) => {
-                      return <Task key={task.taskID} {...task} />;
+                      return <Task key={task.taskID} task={task} />;
                     })
                 }
               </Flex>
@@ -76,9 +81,9 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                   <Flex direction="column" gap="1">
                     {tasks
                       .filter((task) =>
-                        serviceView !== 'Show All'
-                          ? task.service === serviceView
-                          : task,
+                        (currentService === null || (
+                          task.serviceID === services[currentService].id
+                        ))
                       )
                       .filter(
                         (task) =>
@@ -86,7 +91,7 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                           task.status !== 'rejected',
                       )
                       .map((task) => {
-                        return <Task key={task.taskID} {...task} />;
+                        return <Task key={task.taskID} task={task} />;
                       })}
                   </Flex>
                 }

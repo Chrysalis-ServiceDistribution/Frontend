@@ -42,7 +42,7 @@ export type RequestField =
 
 export interface Task {
   taskID: number;
-  service: string;
+  serviceID: number;
   client: string;
   requestFields: RequestField[];
   status: TaskStatus;
@@ -229,7 +229,7 @@ export function loadStatus(status: any): TaskStatus {
 export function loadTask(task: any): Task {
   return {
     taskID: task.id,
-    service: task.service,
+    serviceID: task.service,
     client: task.client,
     status: loadStatus(task.status),
     requestFields: task['request_fields'].map(loadRequestField),

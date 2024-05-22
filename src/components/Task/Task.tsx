@@ -1,8 +1,10 @@
 import React from 'react';
-import { Task as taskInterface } from '../../classes/service/service';
+import { Service, Task as taskInterface } from '../../classes/service/service';
 import { Badge, Card, Flex, Text } from '@radix-ui/themes';
 
-const Task: React.FC<taskInterface> = (task) => {
+function Task(props: {
+  task: taskInterface,
+}) {
   //TODO: I want to work on making a good set of contrasts for this. Looks bad rn
   // Define the color of the task based on the status
   const statusToColorKey: { [key: string]: string } = {
@@ -28,15 +30,15 @@ const Task: React.FC<taskInterface> = (task) => {
       justify="between"
       align="center">
         <Flex direction="column" justify="between" style={{ padding: '5' }}>
-          <Text size="2">{task.service}</Text>
-          <Text size="1">{task.client}</Text>
+          <Text size="2">{props.task.serviceID}</Text>
+          <Text size="1">{props.task.client}</Text>
         </Flex>
         <Text size="1">
-          <Badge color={statusToBadge[task.status]}>{task.status}</Badge>
+          <Badge color={statusToBadge[props.task.status]}>{props.task.status}</Badge>
         </Text>
     </Flex>
     </Card>
   );
-};
+}
 
 export default Task;

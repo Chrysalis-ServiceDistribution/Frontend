@@ -19,7 +19,7 @@ const ClientTabDashboard = (props: { tasks: taskInterface[] }) => {
           direction="column"
           gap="1">
             {tasks.map((task) => {
-              return <Task key={task.taskID} {...task} />;
+              return <Task key={task.taskID} task={task} />;
             }, 0)}
           </Flex>
       )}
