@@ -1,10 +1,10 @@
-import { useParams } from 'react-router';
-import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
+import { useNavigate, useParams } from 'react-router';
+import { Button, Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
-import { deleteTask, getUserServiceById, updateTaskStatus } from '../../services/apiServices';
+import { deleteService, deleteTask, getUserServiceById, updateTaskStatus } from '../../services/apiServices';
 import { Link } from 'react-router-dom';
 
 const statuses = [
@@ -18,6 +18,7 @@ const statuses = [
 export default function ServiceDetail() {
   const { userID, servID } = useParams();
   const [service, setService] = useState<Service | null>(null);
+  const navigate = useNavigate();
 
   const sortedTasks = useMemo(() => {
     const sorted: {
@@ -89,11 +90,18 @@ export default function ServiceDetail() {
     await loadService();
   }
 
+  async function handleServiceDelete() {
+    if (userID === null || service === null) { return }
+    await deleteService(service.id);
+    navigate(`/${userID}/services`)
+  }
+
   return (
     <Flex p="3" gap="3" direction="column">
       <Heading as="h1" size="7">
         {service?.name}
       </Heading>
+      <Button onClick={handleServiceDelete}>Delete Service</Button>
       <Separator size="4" />
       <Heading as="h2" size="4">
         Tasks
