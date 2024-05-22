@@ -1,10 +1,11 @@
 import { useParams } from 'react-router';
 import { Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { Service, Task } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
 import { getUserServiceById } from '../../services/apiServices';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 const statuses = [
@@ -17,8 +18,9 @@ const statuses = [
 
 export default function ServiceDetail() {
   const { userID, servID } = useParams();
-  const [service, setService] = useState<Service | null>(null);
+  const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
 
+  const [service, setService] = useState<Service | null>(null);
   const sortedTasks = useMemo(() => {
     const sorted: {
       pending: Task[];
@@ -78,6 +80,8 @@ export default function ServiceDetail() {
     runner();
   }, [servID]);
 
+  const isMine = true
+
   return (
     <Flex p="3" gap="3" direction="column">
       <Heading as="h1" size="7">
@@ -90,17 +94,37 @@ export default function ServiceDetail() {
       <Link to={`/${userID}/services/${servID}/submit-task`}>Submit Task</Link>
       <Tabs.Root defaultValue="inProgress">
         <Tabs.List justify="center" m="3">
-          {statuses.map((status, idx) => (
-            <Tabs.Trigger key={idx} value={status}>
-              <StatusTab status={status} />
-            </Tabs.Trigger>
-          ))}
+          {statuses
+            .filter((status) => {
+              if (!isMine) {
+                if (status !== 'pending' as const && status !== 'accepted' as const && status !== 'rejected' as const) {
+                  return status;
+                }
+              } else {
+                return status;
+              }
+            })
+            .map((status, idx) => (
+              <Tabs.Trigger key={idx} value={status}>
+                <StatusTab status={status} />
+              </Tabs.Trigger>
+            ))}
         </Tabs.List>
-        {statuses.map((tag, idx) => (
-          <Tabs.Content key={idx} value={tag}>
-            <TaskList tasks={sortedTasks[tag]} />
-          </Tabs.Content>
-        ))}
+        {statuses
+            .filter((status) => {
+              if (!isMine) {
+                if (status !== 'pending' as const && status !== 'accepted' as const && status !== 'rejected' as const) {
+                  return status;
+                }
+              } else {
+                return status;
+              }
+            })
+          .map((tag, idx) => (
+            <Tabs.Content key={idx} value={tag}>
+              <TaskList tasks={sortedTasks[tag]} />
+            </Tabs.Content>
+          ))}
       </Tabs.Root>
     </Flex>
   );
