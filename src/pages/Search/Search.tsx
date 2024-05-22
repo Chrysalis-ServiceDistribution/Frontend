@@ -1,6 +1,5 @@
 import { TextField, Flex, ScrollArea } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import dummyData from '../UserServices/services.ts';
 import { Service } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import { useState, useEffect } from 'react';
@@ -11,7 +10,7 @@ export default function Search() {
   //get all services on pageload
   useEffect(() => {
     //TODO: fetch services from the server
-    setServices(dummyData);
+    setServices([]);
   }, []);
 
   const handelSearchChange = (e: React.FormEvent<HTMLInputElement>) => {

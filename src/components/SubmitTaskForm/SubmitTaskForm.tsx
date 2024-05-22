@@ -4,7 +4,6 @@ import {
   Service,
   createDefaultField,
 } from '../../classes/service/service';
-import dummyServices from '../../pages/UserServices/services';
 import { useParams } from 'react-router';
 import TaskFieldEditor from './TaskFieldEditor/TaskFieldEditor';
 import { useEffect, useState } from 'react';
