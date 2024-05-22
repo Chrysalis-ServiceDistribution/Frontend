@@ -26,11 +26,9 @@ export default function ServiceCard(props: { service: Service }) {
       done: [],
       rejected: [],
     };
-
     for (const task of props.service.tasks) {
       sorted[task.status].push(task);
     }
-
     return sorted;
   }, [props.service.tasks]);
 

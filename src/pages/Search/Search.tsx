@@ -35,7 +35,6 @@ export default function Search() {
               service.name.toLowerCase().includes(searchQuery.toLowerCase()),
             )
             .map((service,index) => (
-              //TODO: change key when services are better typed
               <ServiceCard key={index} service={service} />
             ))}
         </Flex>

@@ -106,6 +106,7 @@ const exampleClientTasks: taskInterface[] = [
     status: 'inProgress',
   },
 ];
+
 const exampleCreatorTasks: taskInterface[] = [
   {
     taskID: 1,
@@ -232,11 +233,9 @@ export default function Home() {
             <Tabs.Trigger value="creator"><Text size='5'>Creator</Text></Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="client">
-            {/* //TODO: change filter to only pass in tasks by the user */}
             <ClientTabDashboard tasks={tasksClient.filter((task) => task)} />
           </Tabs.Content>
           <Tabs.Content value="creator">
-            {/* //TODO: change filter to only pass in tasks from the user */}
             <CreatorTabDashboard tasks={tasksCreator.filter((task) => task)} />
           </Tabs.Content>
           </Flex>
