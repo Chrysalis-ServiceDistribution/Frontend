@@ -23,7 +23,7 @@ export default function RadioFormField(props: {
   function newChoice() {
     const newChoices = [
       ...props.field.choices,
-      `Choice ${props.field.choices.length + 1}`,
+      ``,
     ];
 
     const newField = new ServiceRadioField(props.field.prompt, newChoices);
@@ -53,7 +53,7 @@ export default function RadioFormField(props: {
             </NoOutlineIconButton>
             <TextField.Root
               style={{ width: '100%' }}
-              placeholder="Choice text..."
+              placeholder={`Choice ${idx + 1}`}
               value={choice}
               onChange={editChoice(idx)}
             ></TextField.Root>
