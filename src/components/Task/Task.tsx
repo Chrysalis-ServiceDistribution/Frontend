@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Service, Task as taskInterface } from '../../classes/service/service';
 import { Badge, Card, Flex, Text } from '@radix-ui/themes';
+import { getUserServiceById } from '../../services/apiServices';
 
-function Task(props: { task: taskInterface }) {
-  //TODO: I want to work on making a good set of contrasts for this. Looks bad rn
   // Define the color of the task based on the status
   const statusToColorKey: { [key: string]: string } = {
     pending: 'rgba(255, 255, 255, 0.3)', //grey
@@ -22,11 +21,26 @@ function Task(props: { task: taskInterface }) {
     rejected: 'red' as const,
   };
 
+
+function Task(props: { task: taskInterface }) {
+  //TODO: I want to work on making a good set of contrasts for this. Looks bad rn
+
+  const [service, setService] = React.useState<Service>({} as Service);
+  useEffect(() => {
+    const runner = async () => {
+      const service = await getUserServiceById(props.task.serviceID);
+      console.log(service);
+      setService(service);
+    }
+    runner();
+  },[props.task])
+
+
   return (
     <Card>
       <Flex justify="between" align="center">
         <Flex direction="column" justify="between" style={{ padding: '5' }}>
-          <Text size="2">{props.task.serviceID}</Text>
+          <Text size="2">{service.name}</Text>
           <Text size="1">{props.task.client}</Text>
         </Flex>
         <Text size="1">
