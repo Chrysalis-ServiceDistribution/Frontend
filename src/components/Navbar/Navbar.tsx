@@ -10,31 +10,31 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Navbar() {
-  const { loggedInUserID, isLoggedIn, username} = useContext(AuthContext);
+  const { loggedInUserID, isLoggedIn, username } = useContext(AuthContext);
   const location = useLocation();
   const { userID, servID } = useParams();
   let dynamicText = '';
 
-  if (location.pathname === '/search') {
+  if (location.pathname === '/auth') {
+    return null;
+  } else if (location.pathname === '/search') {
     dynamicText = 'Search';
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
-  }else if (location.pathname === `/${userID}`) {
+  } else if (location.pathname === `/${userID}`) {
     dynamicText = `${username}'s Profile`;
-  } else if(location.pathname === `/${userID}/services`){
-    dynamicText = 'Services'
+  } else if (location.pathname === `/${userID}/services`) {
+    dynamicText = 'Services';
   } else if (location.pathname === `/${userID}/services/${servID}`) {
     dynamicText = 'Service Detail';
   } else if (
     location.pathname === `/${userID}/services/${servID}/submit-task`
   ) {
     dynamicText = 'Submit a Task';
+  } else if (location.pathname === `/${userID}/services/create`) {
+    dynamicText = 'Create a Service';
   } else {
     dynamicText = 'Add me as an elseif statement for this page';
-  }
-
-  if (location.pathname === '/auth') {
-    return null;
   }
 
   return (
@@ -63,16 +63,14 @@ export default function Navbar() {
       </Flex>
       {/* Where am I text */}
       <Text size="3">{dynamicText}</Text>
-      <Flex gap='1'>
-        {
-          !isLoggedIn && (
-            <Link to="/auth">
-              <IconButton>
-                <LockOpen1Icon />
-              </IconButton>
-            </Link>
-          )
-        }
+      <Flex gap="1">
+        {!isLoggedIn && (
+          <Link to="/auth">
+            <IconButton>
+              <LockOpen1Icon />
+            </IconButton>
+          </Link>
+        )}
         {/* Profile */}
         <Link to={`/${loggedInUserID}`}>
           <IconButton>
