@@ -19,8 +19,10 @@ export default function Navbar() {
     dynamicText = 'Search';
   } else if (location.pathname === '/') {
     dynamicText = 'Home';
-  } else if (location.pathname === `/${userID}`) {
+  }else if (location.pathname === `/${userID}`) {
     dynamicText = `${username}'s Profile`;
+  } else if(location.pathname === `/${userID}/services`){
+    dynamicText = 'Services'
   } else if (location.pathname === `/${userID}/services/${servID}`) {
     dynamicText = 'Service Detail';
   } else if (
