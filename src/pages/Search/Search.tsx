@@ -1,19 +1,21 @@
-import { TextField, Flex, ScrollArea } from '@radix-ui/themes';
+import { TextField, Flex, ScrollArea, Box} from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Service } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getAllServices } from '../../services/apiServices';
-
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 export default function Search() {
+  const { loggedInUserID } = useContext(AuthContext);
   const [services, setServices] = useState<Service[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   useEffect(() => {
     const runner = async () => {
-      const services = await getAllServices()
+      const services = await getAllServices();
       setServices(services);
-    }
-    runner()
+    };
+    runner();
   }, []);
 
   const handelSearchChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -30,17 +32,21 @@ export default function Search() {
           <MagnifyingGlassIcon height="16" width="16" />
         </TextField.Slot>
       </TextField.Root>
-      <ScrollArea style={{ width: '100%', height: '100%' }}>
-        <Flex direction="column" gap="6" justify="center">
-          {services
-            .filter((service) =>
-              service.name.toLowerCase().includes(searchQuery.toLowerCase()),
-            )
-            .map((service, index) => (
-              //TODO: change key when services are better typed
-              <ServiceCard key={index} service={service} />
-            ))}
-        </Flex>
+      <ScrollArea type="always" scrollbars="vertical" style={{ height : 750 }}>
+        <Box>
+          <Flex direction="column" gap="4" justify="center">
+            {services
+              .filter((service) => service.user.id !== loggedInUserID)
+              .filter((service) =>
+                service.name.toLowerCase().includes(searchQuery.toLowerCase()),
+              )
+              .map((service, index) => (
+                <Link to={`/${service.user.id}/services`} key={index}>
+                  <ServiceCard service={service} />
+                </Link>
+              ))}
+          </Flex>
+        </Box>
       </ScrollArea>
     </Flex>
   );

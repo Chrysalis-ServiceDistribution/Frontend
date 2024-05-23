@@ -66,7 +66,7 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new ServiceTextField(`Text field prompt goes here`),
+        new ServiceTextField(``),
       ],
     });
   }
@@ -76,7 +76,7 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new ServiceRadioField(`Radio field prompt goes here`, ['Choice 1']),
+        new ServiceRadioField(``, ['']),
       ],
     });
   }
@@ -86,8 +86,8 @@ export default function ServiceFormEditor(props: {
       ...formData,
       fields: [
         ...formData.fields,
-        new ServiceCheckboxField(`Checkbox field prompt goes here`, [
-          'Choice 1',
+        new ServiceCheckboxField(``, [
+          '',
         ]),
       ],
     });
@@ -151,10 +151,10 @@ export default function ServiceFormEditor(props: {
           newField = new ServiceTextField(oldField.prompt);
           break;
         case 'radio':
-          newField = new ServiceRadioField(oldField.prompt, ['Choice 1']);
+          newField = new ServiceRadioField(oldField.prompt, ['']);
           break;
         case 'checkbox':
-          newField = new ServiceCheckboxField(oldField.prompt, ['Choice 1']);
+          newField = new ServiceCheckboxField(oldField.prompt, ['']);
           break;
         default:
           return;
@@ -217,12 +217,13 @@ export default function ServiceFormEditor(props: {
             onReplace={replaceField(idx)}
           />
         ))}
-        <Flex gap="2">
+        <Flex gap="2" justify='center' wrap='wrap'>
           <Button onClick={createTextField}>Create Text Field</Button>
           <Button onClick={createRadioField}>Create Radio Field</Button>
           <Button onClick={createCheckboxField}>Create Checkbox Field</Button>
         </Flex>
-        <Flex gap="2">
+        <Separator size="4" />
+        <Flex gap="2" justify='center' align='center'>
           <Link to={`/${userID}/services/`}>
             <Button>Back to Services</Button>
           </Link>
