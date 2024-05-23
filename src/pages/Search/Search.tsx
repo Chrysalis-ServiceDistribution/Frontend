@@ -4,6 +4,7 @@ import { Service } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import { useState, useEffect } from 'react';
 import { getAllServices } from '../../services/apiServices';
+import { Link } from 'react-router-dom';
 
 export default function Search() {
   const [services, setServices] = useState<Service[]>([]);
@@ -37,8 +38,9 @@ export default function Search() {
               service.name.toLowerCase().includes(searchQuery.toLowerCase()),
             )
             .map((service, index) => (
-              //TODO: change key when services are better typed
-              <ServiceCard key={index} service={service} />
+              <Link to={`/${service.user.id}/services`} key={index}>
+                <ServiceCard service={service} />
+              </Link>
             ))}
         </Flex>
       </ScrollArea>

@@ -122,6 +122,10 @@ export interface Task {
  */
 export interface Service {
   id: number;
+  user: {
+    id: number;
+    username: string;
+  };
   name: string;
   description: string;
   fields: ServiceField[];
@@ -151,6 +155,7 @@ export function createDefaultField(formField: ServiceField): RequestField {
 export function loadService(service: any): Service {
   return {
     id: service.id,
+    user: {id: service.user.id, username: service.user.username},
     name: service.name,
     description: service.description,
     fields: service['form_fields'].map(loadServiceField),
