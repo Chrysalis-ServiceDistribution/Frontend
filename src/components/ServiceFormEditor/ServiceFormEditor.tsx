@@ -217,12 +217,13 @@ export default function ServiceFormEditor(props: {
             onReplace={replaceField(idx)}
           />
         ))}
-        <Flex gap="2">
+        <Flex gap="2" justify='center' wrap='wrap'>
           <Button onClick={createTextField}>Create Text Field</Button>
           <Button onClick={createRadioField}>Create Radio Field</Button>
           <Button onClick={createCheckboxField}>Create Checkbox Field</Button>
         </Flex>
-        <Flex gap="2">
+        <Separator size="4" />
+        <Flex gap="2" justify='center' align='center'>
           <Link to={`/${userID}/services/`}>
             <Button>Back to Services</Button>
           </Link>
