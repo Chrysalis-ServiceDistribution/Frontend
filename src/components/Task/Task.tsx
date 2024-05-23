@@ -4,13 +4,13 @@ import { Badge, Card, Flex, Text } from '@radix-ui/themes';
 import { getUserServiceById } from '../../services/apiServices';
 
   // Define the color of the task based on the status
-  const statusToColorKey: { [key: string]: string } = {
-    pending: 'rgba(255, 255, 255, 0.3)', //grey
-    accepted: 'rgba(0, 0, 255, 0.7)', //blue
-    inProgress: 'rgba(255, 165, 0, 0.7)', //orange
-    done: 'rgba(0, 128, 0, 0.5)', //green
-    rejected: 'rgba(255, 0, 0, 0.5)', //red
-  };
+  // const statusToColorKey: { [key: string]: string } = {
+  //   pending: 'rgba(255, 255, 255, 0.3)', //grey
+  //   accepted: 'rgba(0, 0, 255, 0.7)', //blue
+  //   inProgress: 'rgba(255, 165, 0, 0.7)', //orange
+  //   done: 'rgba(0, 128, 0, 0.5)', //green
+  //   rejected: 'rgba(255, 0, 0, 0.5)', //red
+  // };
 
   // Define the badge color based on the status
   const statusToBadge = {
