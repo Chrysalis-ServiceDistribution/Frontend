@@ -1,26 +1,52 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { AuthContextType } from '../@types/authContext';
-import { loginUser, registerUser } from '../services/apiServices';
-import { setToken } from '../services/tokenService';
+import { loginUser, registerUser, verifyUser } from '../services/apiServices';
+import { getToken, setToken } from '../services/tokenService';
 
 export const AuthContext = createContext<AuthContextType>({
+  storedToken: null,
   username: '',
   loggedInUserID: null,
   isLoggedIn: false,
+  loaded: false,
 });
 
 export function AuthContextProvider(props: { children: React.ReactNode }) {
+  const [storedToken, setStoredToken] = useState(() => {
+    try{
+      verifyUser();
+      return getToken();
+    }catch(e){
+      return null;
+    }
+  });
   const [username, setUsername] = useState<string | null>(null);
   const [loggedInUserID, setLoggedInUserID] = useState<number | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const runner = async () => {
+      const token = getToken();
+      if (token === null) { return }
+      const data = await verifyUser();
+      setToken(data.access);
+      setStoredToken(data.access);
+      setUsername(data.user.username);
+      setLoggedInUserID(data.user.id);
+      setIsLoggedIn(true);
+    }
+    setLoaded(true);
+    runner()
+  }, [])
 
   async function login(payload: { username: string; password: string }) {
     const data = await loginUser(payload);
     setToken(data.access);
+    setStoredToken(data.access);
     setUsername(data.user.username);
     setLoggedInUserID(data.user.id);
     setIsLoggedIn(true);
-    console.log(data);
   }
 
   async function register(payload: {
@@ -28,19 +54,22 @@ export function AuthContextProvider(props: { children: React.ReactNode }) {
     email: string;
     password: string;
   }) {
-    const { data, status } = await registerUser(payload);
-    if (status !== 200) {
-      return;
-    }
-    console.log(data);
+    const data = await registerUser(payload);
+    setToken(data.access);
+    setStoredToken(data.access);
+    setUsername(data.user.username);
+    setLoggedInUserID(data.user.id);
+    setIsLoggedIn(true);
   }
 
   return (
     <AuthContext.Provider
       value={{
+        storedToken,
         username,
         loggedInUserID,
         isLoggedIn,
+        loaded,
 
         login,
         register,

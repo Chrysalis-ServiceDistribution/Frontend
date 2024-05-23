@@ -19,10 +19,12 @@ import {
   TextArea,
 } from '@radix-ui/themes';
 import FieldEditor from './FieldEditor/FieldEditor';
+import { Link, useParams } from 'react-router-dom';
 
 export default function ServiceFormEditor(props: {
   onCommit: (service: ServiceCreationFormData) => void;
 }) {
+  const { userID } = useParams();
   const [formData, setFormData] = useState<ServiceCreationFormData>({
     name: '',
     description: '',
@@ -215,10 +217,17 @@ export default function ServiceFormEditor(props: {
             onReplace={replaceField(idx)}
           />
         ))}
-        <Button onClick={createTextField}>Create Text Field</Button>
-        <Button onClick={createRadioField}>Create Radio Field</Button>
-        <Button onClick={createCheckboxField}>Create Checkbox Field</Button>
-        <Button onClick={onSubmit}>Create Service</Button>
+        <Flex gap="2">
+          <Button onClick={createTextField}>Create Text Field</Button>
+          <Button onClick={createRadioField}>Create Radio Field</Button>
+          <Button onClick={createCheckboxField}>Create Checkbox Field</Button>
+        </Flex>
+        <Flex gap="2">
+          <Link to={`/${userID}/services/`}>
+            <Button>Back to Services</Button>
+          </Link>
+          <Button onClick={onSubmit}>Create Service</Button>
+        </Flex>
       </Flex>
       <Dialog.Root open={showFormErrors}>
         <Dialog.Content>

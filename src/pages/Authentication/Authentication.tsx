@@ -21,14 +21,13 @@ export default function Authentication() {
   const handelPasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
     setPassword((e.target as HTMLInputElement).value);
   };
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
+    if (!register) { return }
     //TODO: pass username, email, and password to the auth context and handle the signup
     // console.log('Signing up:', username, email, password);
-    register
-      ? { username, email, password }
-      : //On api okay, login, wait, if good and redirect to home, if not switch to login page, display error message
-        //throwing this here so it is part of flow, logic required to implemnt correctly
-        navigate('/');
+    await register({ username, email, password })
+
+    navigate('/');
     //On api error, display error message
   };
 

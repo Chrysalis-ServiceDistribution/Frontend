@@ -25,7 +25,17 @@ export async function registerUser(payload: {
   email: string;
   password: string;
 }) {
-  const { data } = await api.post('/api/auth/register/', payload);
+  const { data } = await api.post('/api/auth/register/', {
+    ...payload,
+    profile: {
+      bio: 'User bio goes here.'
+    }
+  });
+  return data;
+}
+
+export async function verifyUser() {
+  const { data } = await api.get('/api/auth/verify/');
   return data;
 }
 
@@ -74,14 +84,14 @@ export async function createTask(serviceID: number, fields: RequestField[]) {
         };
       case 'radio':
         return {
-          type: 'text',
+          type: 'radio',
           index: idx,
           value: '',
           options: field.selection,
         };
       case 'checkbox':
         return {
-          type: 'text',
+          type: 'checkbox',
           index: idx,
           value: '',
           options: field.selection,
@@ -90,8 +100,13 @@ export async function createTask(serviceID: number, fields: RequestField[]) {
   });
 
   return await api.post(`/api/services/${serviceID}/submit_request/`, {
-    form_fields: newFields,
+    fields: newFields,
   });
+}
+
+export async function getAllServices() {
+  const { data } = await api.get(`/api/services/`);
+  return data.map(loadService);
 }
 
 export async function getUserServices(userID: number) {

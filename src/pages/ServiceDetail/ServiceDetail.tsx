@@ -1,11 +1,18 @@
 import { useNavigate, useParams } from 'react-router';
 import { Button, Flex, Heading, Separator, Tabs } from '@radix-ui/themes';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { Service, Task, TaskStatus } from '../../classes/service/service';
 import TaskList from '../../components/TaskList/TaskList';
 import StatusTab from '../../components/StatusTab/StatusTab';
-import { deleteService, deleteTask, getUserServiceById, updateTaskStatus } from '../../services/apiServices';
+import {
+  deleteService,
+  deleteTask,
+  getUserServiceById,
+  updateTaskStatus,
+} from '../../services/apiServices';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import TaskComponent from '../../components/Task/Task';
 
 const statuses = [
   'pending' as const,
@@ -17,6 +24,8 @@ const statuses = [
 
 export default function ServiceDetail() {
   const { userID, servID } = useParams();
+  const { loggedInUserID, isLoggedIn } = useContext(AuthContext);
+
   const [service, setService] = useState<Service | null>(null);
   const navigate = useNavigate();
 
@@ -77,7 +86,7 @@ export default function ServiceDetail() {
   }, [servID]);
 
   useEffect(() => {
-    loadService()
+    loadService();
   }, [loadService]);
 
   async function handleTaskStatusChange(task: Task, status: TaskStatus) {
@@ -91,17 +100,24 @@ export default function ServiceDetail() {
   }
 
   async function handleServiceDelete() {
-    if (userID === null || service === null) { return }
+    if (userID === null || service === null) {
+      return;
+    }
     await deleteService(service.id);
-    navigate(`/${userID}/services`)
+    navigate(`/${userID}/services`);
   }
+
+  const isMine = isLoggedIn && loggedInUserID === Number(userID);
 
   return (
     <Flex p="3" gap="3" direction="column">
       <Heading as="h1" size="7">
         {service?.name}
       </Heading>
-      <Button onClick={handleServiceDelete}>Delete Service</Button>
+      {isMine && <Button onClick={handleServiceDelete}>Delete Service</Button>}
+      <Link to={`/${userID}/services/`}>
+        <Button>Back to Services</Button>
+      </Link>
       <Separator size="4" />
       <Heading as="h2" size="4">
         Tasks
@@ -109,21 +125,72 @@ export default function ServiceDetail() {
       <Link to={`/${userID}/services/${servID}/submit-task`}>Submit Task</Link>
       <Tabs.Root defaultValue="inProgress">
         <Tabs.List justify="center" m="3">
-          {statuses.map((status, idx) => (
-            <Tabs.Trigger key={idx} value={status}>
-              <StatusTab status={status} />
-            </Tabs.Trigger>
-          ))}
+          {statuses
+            .filter((status) => {
+              if (!isMine) {
+                if (
+                  status !== ('pending' as const) &&
+                  status !== ('accepted' as const) &&
+                  status !== ('rejected' as const)
+                ) {
+                  return status;
+                }
+              } else {
+                return status;
+              }
+            })
+            .map((status, idx) => (
+              <Tabs.Trigger key={idx} value={status}>
+                <StatusTab status={status} />
+              </Tabs.Trigger>
+            ))}
         </Tabs.List>
-        {statuses.map((tag, idx) => (
-          <Tabs.Content key={idx} value={tag}>
-            <TaskList
-              tasks={sortedTasks[tag]}
-              onTaskStatusChange={handleTaskStatusChange}
-              onTaskDelete={handleTaskDelete}
-            />
-          </Tabs.Content>
-        ))}
+        {service !== null &&
+          statuses
+            .filter((status) => {
+              if (isMine) {
+                return status;
+              } else {
+                if (
+                  status !== ('pending' as const) &&
+                  status !== ('accepted' as const) &&
+                  status !== ('rejected' as const)
+                ) {
+                  return status;
+                }
+              }
+            })
+            .map((tag, idx) => {
+              if (isMine) {
+                return (
+                  <Tabs.Content key={idx} value={tag}>
+                    <TaskList
+                      tasks={sortedTasks[tag]}
+                      service={service}
+                      onTaskStatusChange={handleTaskStatusChange}
+                      onTaskDelete={handleTaskDelete}
+                    />
+                  </Tabs.Content>
+                );
+              } else {
+                return (
+                  <Tabs.Content key={idx} value={tag}>
+                    {sortedTasks[tag].map((task: Task, idx: number) => (
+                      <TaskComponent
+                        key={idx}
+                        task={{
+                          taskID: 0,
+                          serviceID: Number(servID),
+                          client: 'N/A',
+                          requestFields: [],
+                          status: task.status,
+                        }}
+                      />
+                    ))}
+                  </Tabs.Content>
+                );
+              }
+            })}
       </Tabs.Root>
     </Flex>
   );
