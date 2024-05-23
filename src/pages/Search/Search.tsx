@@ -3,14 +3,17 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Service } from '../../classes/service/service';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import { useState, useEffect } from 'react';
+import { getAllServices } from '../../services/apiServices';
 
 export default function Search() {
   const [services, setServices] = useState<Service[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  //get all services on pageload
   useEffect(() => {
-    //TODO: fetch services from the server
-    setServices([]);
+    const runner = async () => {
+      const services = await getAllServices()
+      setServices(services);
+    }
+    runner()
   }, []);
 
   const handelSearchChange = (e: React.FormEvent<HTMLInputElement>) => {

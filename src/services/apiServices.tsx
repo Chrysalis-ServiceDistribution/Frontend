@@ -104,6 +104,11 @@ export async function createTask(serviceID: number, fields: RequestField[]) {
   });
 }
 
+export async function getAllServices() {
+  const { data } = await api.get(`/api/services/`);
+  return data.map(loadService);
+}
+
 export async function getUserServices(userID: number) {
   const { data } = await api.get(`/api/users/${userID}/services/`);
   return data.map(loadService);
