@@ -8,8 +8,8 @@ import { getUserInfo } from '../../services/apiServices';
 
 export default function Home() {
   //TODO: get the username from the server
-  const username = 'User';
   const context = useContext(AuthContext);
+  const [username, setUsername] = React.useState<string>('');
   const [tasksClient, setTasks] = React.useState<taskInterface[]>([]);
   const [tasksCreator, setTasksCreator] = React.useState<taskInterface[]>([]);
 
@@ -19,10 +19,12 @@ export default function Home() {
         return;
       }
       const { loggedInUserID } = context;
-      if (loggedInUserID === null) { return }
+      if (loggedInUserID === null) {
+        return;
+      }
 
       const data = await getUserInfo(loggedInUserID);
-
+      setUsername(data.user);
       setTasks(data.tasks);
       setTasksCreator(data.services.flatMap((s) => s.tasks));
     };
