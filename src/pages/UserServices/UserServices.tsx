@@ -21,7 +21,7 @@ export default function UserServices() {
   }, [userID]);
 
   return (
-    <Flex p="3" gap="3" direction="column" align='centerx`'>
+    <Flex p="3" gap="3" direction="column" align='center'>
       <Heading as="h2" size="4">
         Services
       </Heading>
