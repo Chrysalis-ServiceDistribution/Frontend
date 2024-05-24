@@ -34,7 +34,7 @@ export default function Navbar() {
   } else if (location.pathname === `/${userID}/services/create`) {
     dynamicText = 'Create a Service';
   } else {
-    dynamicText = 'Add me as an elseif statement for this page';
+    dynamicText = '';
   }
 
   return (

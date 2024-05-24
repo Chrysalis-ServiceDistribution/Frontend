@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Service, Task as taskInterface } from '../../classes/service/service';
 import ServiceSelect from '../ServiceSelect/ServiceSelect';
 import Task from '../Task/Task';
-import { Flex, Text, Button, Box } from '@radix-ui/themes';
+import { Flex, Text, Button } from '@radix-ui/themes';
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -58,7 +58,13 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                         task.status === 'pending' || task.status === 'rejected',
                     )
                     .map((task) => {
-                      return <Task key={task.taskID} task={task} />;
+                      return (
+                        <Link
+                          to={`/${loggedInUserID}/services/${task.serviceID}`}
+                        >
+                          <Task key={task.taskID} task={task} />
+                        </Link>
+                      );
                     })
                 }
               </Flex>
@@ -94,10 +100,13 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
                       )
                       .map((task) => {
                         return (
-                          <Link to={`/${loggedInUserID}/tasks/${task.taskID}`}>
+                          <Link
+                            to={`/${loggedInUserID}/services/${task.serviceID}`}
+                          >
                             <Task key={task.taskID} task={task} />
                           </Link>
-                      )})}
+                        );
+                      })}
                   </Flex>
                 }
               </Flex>
