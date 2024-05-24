@@ -31,7 +31,6 @@ export default function CheckboxFieldEditor(props: {
 
   function deleteChoice(index: number) {
     return () => {
-      // If there is only one choice, do not delete it
       if (props.field.choices.length === 1) {
         return;
       }

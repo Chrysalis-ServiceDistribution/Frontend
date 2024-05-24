@@ -13,10 +13,7 @@ import { getUserServiceById } from '../../services/apiServices';
 
 
 function Task(props: { task: taskInterface }) {
-  //TODO: I want to work on making a good set of contrasts for this. Looks bad rn
-
   const [service, setService] = React.useState<Service>({} as Service);
-;
   useEffect(() => {
     const runner = async () => {
       const service = await getUserServiceById(props.task.serviceID);

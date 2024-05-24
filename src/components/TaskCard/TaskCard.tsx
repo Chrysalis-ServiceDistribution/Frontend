@@ -3,9 +3,9 @@ import { Service, Task, TaskStatus } from '../../classes/service/service';
 import NoOutlineIconButton from '../ServiceFormEditor/FieldEditor/NoOutlineIconButton';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import SetTaskStatusDropdown from './SetTaskStatusDropdown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TaskDetail from '../TaskDetail/TaskDetail';
-
+import { getUserInfo } from '../../services/apiServices';
 export default function TaskCard(props: {
   task: Task;
   service: Service;
@@ -13,6 +13,14 @@ export default function TaskCard(props: {
   onDelete: () => void;
 }) {
   const [dialogActive, setDialogActive] = useState(false);
+  const [clientName, setClientName] = useState<string>('');
+  useEffect( () => {
+    const runner = async () => {
+      const userData = await getUserInfo(Number(props.task.client));
+      setClientName(userData.user);
+    };
+    runner();
+  },[props, clientName]);
   return (
     <>
     <Card>
@@ -25,7 +33,7 @@ export default function TaskCard(props: {
         <Flex direction="column" gap="2" justify="center">
           <Flex direction="row" gap="3" align="center">
             <Heading as="h4" size="3">
-              client name
+              {clientName}
             </Heading>
             <Button onClick={() => setDialogActive(true)}>Details</Button>
           </Flex>
@@ -48,7 +56,7 @@ export default function TaskCard(props: {
         <TaskDetail
           task={props.task}
           service={props.service}
-          clientName={"client name"}
+          clientName={props.task.client}
           changeTaskStatus={props.onStatusChange}
           deleteTask={props.onDelete}
         />

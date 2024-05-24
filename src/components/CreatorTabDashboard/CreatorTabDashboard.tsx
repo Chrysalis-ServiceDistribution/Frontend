@@ -27,8 +27,7 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
   }, [isLoggedIn, loggedInUserID]);
 
   return (
-    <Flex direction="column" gap="2">
-      {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
+    <Flex direction="column" gap="2" align='stretch' justify='center'>
       <Text size="5">Your reqests and task status'</Text>
       <Link to={`/${loggedInUserID}/services/create`}>
         <Button>Create new service</Button>
@@ -46,7 +45,6 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
             {
               <Flex direction="column" gap="1">
                 {
-                  // pending and rejected tasks
                   tasks
                     .filter(
                       (task) =>
@@ -72,7 +70,6 @@ const CreatorTabDashboard = (props: { tasks: taskInterface[] }) => {
           </Collapsible.Content>
         </Collapsible.Root>
       )}
-      {/* //TODO: Change button to be icon, text needs to be dynamic, hide if there is nothing to show */}
       {tasks.filter(
         (task) => task.status !== 'pending' && task.status !== 'rejected',
       ).length > 0 && (
