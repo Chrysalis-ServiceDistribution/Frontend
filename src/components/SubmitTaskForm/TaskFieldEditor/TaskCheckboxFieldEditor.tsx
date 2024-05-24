@@ -24,6 +24,7 @@ export default function TaskCheckboxFieldEditor(props: {
     >
       {props.field.choices.map((choice, idx) => (
         <CheckboxGroup.Item key={idx} value={`${idx}`}>
+          {choice}
         </CheckboxGroup.Item>
       ))}
     </CheckboxGroup.Root>

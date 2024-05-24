@@ -26,6 +26,7 @@ export default function TaskRadioFieldEditor(props: {
     >
       {props.field.choices.map((choice, idx) => (
         <RadioGroup.Item key={idx} value={`${idx}`}>
+          {choice}
         </RadioGroup.Item>
       ))}
     </RadioGroup.Root>

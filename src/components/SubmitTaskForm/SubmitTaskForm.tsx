@@ -56,9 +56,6 @@ export default function SubmitTaskForm() {
         <Heading as="h2" size="7">
           {service.name}
         </Heading>
-        <Heading as="h4" size="3">
-          {userID}
-        </Heading>
         <Text as="p">{service.description}</Text>
       </Box>
       <Separator size="4" />

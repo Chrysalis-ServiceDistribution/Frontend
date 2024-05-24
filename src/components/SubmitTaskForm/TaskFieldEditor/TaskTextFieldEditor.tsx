@@ -23,7 +23,7 @@ export default function TaskTextFieldEditor(props: {
         placeholder="Type response here..."
         value={props.currentRequestField.value}
         onChange={handleChange}
-      ></TextArea>
+      >{props.currentRequestField.value}</TextArea>
     </>
   );
 }
