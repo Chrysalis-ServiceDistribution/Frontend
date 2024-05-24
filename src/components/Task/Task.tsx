@@ -26,11 +26,13 @@ function Task(props: { task: taskInterface }) {
   //TODO: I want to work on making a good set of contrasts for this. Looks bad rn
 
   const [service, setService] = React.useState<Service>({} as Service);
+  const [client, setClient] = React.useState<Service>({} as Service);
   useEffect(() => {
     const runner = async () => {
       const service = await getUserServiceById(props.task.serviceID);
-      console.log(service);
+      const client = await getUserServiceById(Number(props.task.client));
       setService(service);
+      setClient(client);
     }
     runner();
   },[props.task])
@@ -41,7 +43,7 @@ function Task(props: { task: taskInterface }) {
       <Flex justify="between" align="center">
         <Flex direction="column" justify="between" style={{ padding: '5' }}>
           <Text size="2">{service.name}</Text>
-          <Text size="1">{props.task.client}</Text>
+          <Text size="1">{client.name}</Text>
         </Flex>
         <Text size="1">
           <Badge color={statusToBadge[props.task.status]}>
